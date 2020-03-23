@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "esModuleInterop": true,
+    "strict": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "exclude": ["node_modules"]
+}
