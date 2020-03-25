@@ -12,7 +12,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
-    "antd": "^3.26.14",
+    "antd": "^4.0.4",
     "cross-env": "^7.0.2",
     "eslint": "^6.8.0",
     "react": "^16.13.1",
