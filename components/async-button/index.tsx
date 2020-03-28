@@ -1,5 +1,6 @@
 import React, { FC, useState, MouseEvent } from 'react'
 import { Button } from 'antd'
+import 'antd/lib/button/style'
 import { ButtonProps } from 'antd/lib/button'
 
 export interface AsyncButtonProps extends ButtonProps {
@@ -23,9 +24,9 @@ const AsyncButton: FC<AsyncButtonProps> = ({
       setLoading(true)
       await buttonOnClick(e)
     } catch (error) {
-      throw new Error(error)
+      Promise.reject(error)
     } finally {
-      setLoading(true)
+      setLoading(false)
     }
   }
 

@@ -27,6 +27,8 @@ module.exports = {
     ],
     'react/jsx-props-no-spreading': 0,
     'react/prop-types': 0,
+    'react/jsx-filename-extension': 0,
+    '@typescript-eslint/explicit-function-return-type': 0,
     'prettier/prettier': [
       'error',
       {

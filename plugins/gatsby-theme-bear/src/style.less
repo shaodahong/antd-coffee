@@ -1,0 +1,61 @@
+@import '~antd/dist/antd.less';
+
+@primary-color: #912dbc;
+@name: bear;
+
+@header-height: 60px;
+
+body {
+  padding-top: @header-height;
+}
+
+.@{name} {
+  // Header
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 1px solid #f3f3f3;
+    height: @header-height;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #fff;
+    z-index: 10;
+    &-logo {
+      font-size: 1.5em;
+      margin-bottom: 0;
+    }
+    &-menu {
+      border: none;
+    }
+  }
+
+  &-contianer {
+    height: 100%;
+    overflow-x: hidden;
+  }
+
+  &-content {
+    margin-left: 240px;
+    padding: 10px 40px;
+    overflow: auto;
+  }
+
+  // Siderbar
+  &-siderbar {
+    position: fixed;
+    padding: 20px;
+    top: @header-height;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 240px;
+    background-color: #fff;
+    border-right: 1px solid #f3f3f3;
+    &-menu {
+      border: none;
+    }
+  }
+}
