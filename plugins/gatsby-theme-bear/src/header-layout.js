@@ -3,7 +3,7 @@ import React from 'react'
 import './style.less'
 import { Menu } from 'antd'
 import { GithubOutlined } from '@ant-design/icons'
-import { Link } from '@reach/router'
+import { Link } from 'gatsby'
 
 function HeaderLayout() {
   return (

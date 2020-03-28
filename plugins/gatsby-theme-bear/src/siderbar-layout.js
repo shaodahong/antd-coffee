@@ -1,8 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql, Link, useStaticQuery } from 'gatsby'
 import Menu from 'antd/lib/menu'
-import { Link, useLocation } from '@reach/router'
+import { useLocation } from '@reach/router'
 
 export default function SiderbarLayout(props) {
   const data = useStaticQuery(graphql`
