@@ -15,10 +15,10 @@ export default ({ data, children, ...parentProps }) => {
     <MDXProvider
       components={{
         // Map HTML element tag to React component
-        h1: (props) => <Title level={1} {...props} />,
-        h2: (props) => <Title level={2} {...props} />,
-        h3: (props) => <Title level={3} {...props} />,
-        h4: (props) => <Title level={4} {...props} />,
+        h1: (props) => <Title className="bear-title" level={1} {...props} />,
+        h2: (props) => <Title className="bear-title" level={2} {...props} />,
+        h3: (props) => <Title className="bear-title" level={3} {...props} />,
+        h4: (props) => <Title className="bear-title" level={4} {...props} />,
         p: (props) => <Paragraph {...props} />,
         strong: (props) => <Text strong {...props} />,
         delete: (props) => <Text delete {...props} />,

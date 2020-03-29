@@ -22,7 +22,16 @@ module.exports = {
         defaultLayouts: {
           default: require.resolve('./src/component-layout.js'),
         },
-        gatsbyRemarkPlugins: ['gatsby-remark-prismjs'],
+        gatsbyRemarkPlugins: [
+          {
+            resolve: 'gatsby-remark-autolink-headers',
+            options: {
+              offsetY: 100,
+              className: 'bear-title-anchor',
+            },
+          },
+          'gatsby-remark-prismjs',
+        ],
       },
     },
     'gatsby-plugin-typescript',

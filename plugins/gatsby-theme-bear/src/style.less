@@ -10,6 +10,28 @@ body {
 }
 
 .@{name} {
+  // Title anchor
+  &-title {
+    cursor: pointer;
+    &-anchor {
+      opacity: 0;
+      padding: 0 5px;
+      position: absolute;
+      left: -25px;
+      > svg {
+        fill: lighten(@primary-color, 10%);
+      }
+      &:hover {
+        opacity: 1;
+      }
+    }
+    &:hover {
+      .@{name}-title-anchor {
+        opacity: 1;
+      }
+    }
+  }
+
   // Header
   &-header {
     display: flex;
