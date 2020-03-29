@@ -22,7 +22,7 @@ module.exports = {
         defaultLayouts: {
           default: require.resolve('./src/component-layout.js'),
         },
-        gatsbyRemarkPlugins: [`gatsby-remark-prismjs`]
+        gatsbyRemarkPlugins: ['gatsby-remark-prismjs'],
       },
     },
     'gatsby-plugin-typescript',

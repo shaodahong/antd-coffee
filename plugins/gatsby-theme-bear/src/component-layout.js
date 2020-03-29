@@ -3,22 +3,38 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import Typography from 'antd/lib/typography'
+import Divider from 'antd/lib/divider'
 import HeaderLayout from './header-layout'
 import SiderbarLayout from './siderbar-layout'
+import { MDXProvider } from '@mdx-js/react'
 
-const { Title, Paragraph } = Typography
+const { Title, Paragraph, Text } = Typography
 
 export default ({ data, children, ...parentProps }) => {
   return (
-    <div>
-      <HeaderLayout />
-      <main className="bear-contianer">
-        <SiderbarLayout />
-        <div className="bear-content">
-          {children ? children : <MDXRenderer>{data.mdx.body}</MDXRenderer>}
-        </div>
-      </main>
-    </div>
+    <MDXProvider
+      components={{
+        // Map HTML element tag to React component
+        h1: (props) => <Title level={1} {...props} />,
+        h2: (props) => <Title level={2} {...props} />,
+        h3: (props) => <Title level={3} {...props} />,
+        h4: (props) => <Title level={4} {...props} />,
+        p: (props) => <Paragraph {...props} />,
+        strong: (props) => <Text strong {...props} />,
+        delete: (props) => <Text delete {...props} />,
+        hr: Divider,
+      }}
+    >
+      <div>
+        <HeaderLayout />
+        <main className="bear-contianer">
+          <SiderbarLayout />
+          <div className="bear-content">
+            {children ? children : <MDXRenderer>{data.mdx.body}</MDXRenderer>}
+          </div>
+        </main>
+      </div>
+    </MDXProvider>
   )
 }
 

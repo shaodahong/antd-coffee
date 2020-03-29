@@ -1,56 +1,27 @@
-import Form from './index.tsx'
-import {DatePicker, Switch, Button} from 'antd'
+## Form
 
-# Form
+> 对 Form 扩展，支持 `items` 模式，方便增删改查。
 
-对 Form 扩展，支持 `items` 模式，方便增删改查。
+### 使用
 
-## 使用
+#### 默认模式
 
-### 默认模式
+import BaseDemo from './demo/base.tsx'
 
-<Form
-  items={[
-    { name: 'name', label: '姓名', required: true },
-    {
-      name: 'age',
-      label: '年龄',
-      rules: [{ required: true, message: '请输入年龄' }],
-    },
-    { name: 'birthday', label: '出生年月', render: () => <DatePicker /> },
-    { name: 'hasJob', label: '已就业', render: () => <Switch /> },
-  ]}
->
-  <Button type="primary" htmlType="submit">
-    提交
-  </Button>
-</Form>
+<BaseDemo />
 
-### 只读模式
+```jsx
+const a = 123
+```
 
-<Form
-  isView
-  initialValues={{ name: 'Ant Design Admin', age: 8, birthday: '2010-01-01', hasJob: 1 }}
-  items={[
-    { name: 'name', label: '姓名' },
-    { name: 'age', label: '年龄' },
-    { name: 'birthday', label: '出生年月', render: () => <DatePicker /> },
-    { name: 'hasJob', label: '已就业', render: () => <Switch /> },
-  ]}
-/>
+#### 只读模式
 
-### 混合模式
+import ViewModeDemo from './demo/viewDemo.tsx'
 
-<Form
-  initialValues={{name: 'Ant Design Admin', age: 8 }}
-  items={[
-    { name: 'name', label: '姓名', isView: true },
-    { name: 'age', label: '年龄', isView: true },
-    { name: 'birthday', label: '出生年月', render: () => <DatePicker /> },
-    { name: 'hasJob', label: '已就业', render: () => <Switch /> },
-  ]}
->
-  <Button type="primary" htmlType="submit">
-    提交
-  </Button>
-</Form>
+<ViewModeDemo />
+
+#### 混合模式
+
+import MultipleModeDemo from './demo/multipleModeDemo.tsx'
+
+<MultipleModeDemo />
