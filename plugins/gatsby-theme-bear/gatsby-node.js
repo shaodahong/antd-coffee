@@ -1,4 +1,4 @@
-const replacePath = (path) => (path === `/` ? path : path.replace(/\/$/, ``))
+/* eslint-disable import/no-extraneous-dependencies,@typescript-eslint/no-var-requires */
 const path = require('path')
 const { createFilePath } = require('gatsby-source-filesystem')
 
@@ -6,11 +6,18 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
 
   if (node.internal.type === 'Mdx') {
-    const value = createFilePath({ node, getNode }).replace(/\/$/, '')
+    const value = createFilePath({ node, getNode, trailingSlash: false })
+    const isComponents = /\/components\//.test(node.fileAbsolutePath)
+    const route = isComponents ? '/components' : ''
     createNodeField({
       node,
-      name: `slug`,
+      name: 'slug',
       value,
+    })
+    createNodeField({
+      node,
+      name: 'route',
+      value: route,
     })
   }
 }
@@ -25,11 +32,13 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           edges {
             node {
               id
+              fileAbsolutePath
               frontmatter {
                 title
               }
               fields {
                 slug
+                route
               }
             }
           }
@@ -39,7 +48,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   )
 
   if (result.errors) {
-    reporter.panicOnBuild(`Error while running GraphQL query.`)
+    reporter.panicOnBuild('Error while running GraphQL query.')
     return
   }
 
@@ -52,9 +61,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     'plugins/gatsby-theme-bear/src/component-layout.js'
   )
 
-  data.forEach(({ node }, index) => {
+  data.forEach(({ node }) => {
     createPage({
-      path: `components${node.fields.slug}`,
+      path: `${node.fields.route}${node.fields.slug}`,
       component: blogPostTemplate,
       context: {
         id: node.id,
@@ -63,31 +72,5 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         // used a back link in SourceLayout
       },
     })
-  })
-
-  // result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-  //   const path = 'component'
-  //   createPage({
-  //     path,
-  //     component: blogPostTemplate,
-  //     // In your blog post template's graphql query, you can use pagePath
-  //     // as a GraphQL variable to query for data from the markdown file.
-  //     context: {
-  //       pagePath: path,
-  //     },
-  //   })
-  // })
-}
-
-exports.onCreatePage = ({ page, actions }) => {
-  const { createPage, deletePage } = actions
-  deletePage(page)
-  // You can access the variable "house" in your page queries now
-  createPage({
-    ...page,
-    context: {
-      ...page.context,
-      house: `Gryffindor`,
-    },
   })
 }

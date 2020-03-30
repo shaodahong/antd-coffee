@@ -1,3 +1,5 @@
+const remarkTypescript = require('remark-typescript')
+
 module.exports = {
   plugins: [
     {
@@ -7,13 +9,20 @@ module.exports = {
         path: `${process.cwd()}/components`,
       },
     },
-    // {
-    //   resolve: 'gatsby-plugin-page-creator',
-    //   options: {
-    //     path: `${process.cwd()}/components`,
-    //     ignore: [`index.md`],
-    //   },
-    // },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'index',
+        path: `${process.cwd()}/README.md`,
+      },
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'docs',
+        path: `${process.cwd()}/docs`,
+      },
+    },
     'gatsby-transformer-sharp',
     {
       resolve: 'gatsby-plugin-mdx',
@@ -42,17 +51,5 @@ module.exports = {
         javascriptEnabled: true,
       },
     },
-    // {
-    //   resolve: 'gatsby-transformer-remark',
-    //   options: {
-    //     plugins: [
-    //       {
-    //         resolve: 'gatsby-remark-prismjs',
-    //         options: {
-    //         },
-    //       },
-    //     ],
-    //   },
-    // },
   ],
 }

@@ -12,6 +12,7 @@ module.exports = {
     'airbnb',
     'plugin:@typescript-eslint/recommended',
     'plugin:import/typescript',
+    'prettier',
     'prettier/@typescript-eslint',
     'prettier/react',
   ],
@@ -29,12 +30,7 @@ module.exports = {
     'react/prop-types': 0,
     'react/jsx-filename-extension': 0,
     '@typescript-eslint/explicit-function-return-type': 0,
-    'prettier/prettier': [
-      'error',
-      {
-        singleQuote: true,
-        semi: false,
-      },
-    ],
+    'import/extensions': 0,
+    'prettier/prettier': 'error',
   },
 }

@@ -1,28 +1,43 @@
-import React, { ReactElement, FC, ReactNode, useEffect, useState } from 'react'
+import React, { ReactElement, FC, ReactNode, useEffect } from 'react'
 import AntdForm, {
   FormProps as AntdFormProps,
   FormItemProps as AntdFormItemProps,
-  FormInstance,
 } from 'antd/lib/form'
 import Input from 'antd/lib/input'
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { StoreValue, Store } from 'rc-field-form/lib/interface'
+import get from 'lodash/get'
+import set from 'lodash/set'
 import { isFunc } from '../utils/is'
 import useForceUpdate from '../hooks/useForceUpdate'
+
+export type OutputPipeline = (fieldValue: StoreValue) => StoreValue
+export type InputPipeline = (fieldValue: StoreValue) => StoreValue
 
 export interface FormItemProps extends AntdFormItemProps {
   /**
    * @default () => <Input />
    */
-  render?: () => ReactElement
+  render?: (fieldValue: StoreValue, fieldsValue: Store) => ReactElement
   /**
    * @default () => Fileds[name]
    */
-  renderView?: () => ReactNode
+  renderView?: (fieldValue: StoreValue, fieldsValue: Store) => ReactNode
   /**
    * Priority is greater than Form isView
    * @default false
    */
   isView?: boolean
-  children?: null
+  /**
+   * Todo: InputPipeline
+   * Format initial or onFinish value
+   * Like Switch component value onFinish maybe Number(true | false)
+   */
+  pipeline?: OutputPipeline | [InputPipeline, OutputPipeline]
+  /**
+   * Hide Form item by condition
+   */
+  isHidden?: (fieldValue: StoreValue, fieldsValue: Store) => boolean
 }
 
 export interface FormProps extends AntdFormProps {
@@ -44,15 +59,27 @@ const Form: FC<FormProps> = ({
   form,
   ...props
 }) => {
-  const [formInsatce] = useForm()
+  const [formInsatce] = useForm(form)
   const forceUpdate = useForceUpdate()
 
   if (!items || items.length === 0) {
     return null
   }
 
-  const onFinish = (values) => {
-    antdOnFinish && antdOnFinish(values)
+  const onFinish = (values: any) => {
+    Object.values(items).forEach(({ name, pipeline }) => {
+      const outputer = isFunc(pipeline)
+        ? pipeline
+        : Array.isArray(pipeline) && pipeline[1]
+
+      if (isFunc(outputer)) {
+        const value = get(values, name as string)
+        set(values, name as string, (outputer as OutputPipeline)(value))
+      }
+    })
+    if (antdOnFinish) {
+      antdOnFinish(values)
+    }
   }
 
   const labelCol = {
@@ -63,20 +90,30 @@ const Form: FC<FormProps> = ({
     render,
     renderView,
     isView: isItemView = isView,
+    pipeline,
+    isHidden,
     ...itemProps
   }: FormItemProps) => {
     let Comp
     const { name } = itemProps
     const { getFieldsValue } = formInsatce
+    const fieldsValue = getFieldsValue()
+    const fieldValue = get(fieldsValue, name as string)
+
+    if (isFunc(isHidden) && (isHidden as Function)(fieldValue, fieldsValue)) {
+      return null
+    }
+
     const key = `form-item-${name?.toString()}`
 
-    const fieldsValue = getFieldsValue()
-    const fieldValue = fieldsValue[name]
-
     if (isItemView) {
-      Comp = isFunc(renderView) ? renderView() : fieldValue
+      Comp =
+        renderView && isFunc(renderView)
+          ? renderView(fieldValue, fieldsValue)
+          : fieldValue
     } else {
-      Comp = isFunc(render) ? render() : <Input />
+      Comp =
+        render && isFunc(render) ? render(fieldValue, fieldsValue) : <Input />
     }
 
     return (
@@ -97,6 +134,7 @@ const Form: FC<FormProps> = ({
       form={formInsatce}
       labelCol={labelCol}
       onFinish={onFinish}
+      onValuesChange={forceUpdate}
       {...props}
     >
       {items.map((item) => renderItem(item))}

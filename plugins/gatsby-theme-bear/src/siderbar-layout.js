@@ -4,7 +4,17 @@ import { graphql, Link, useStaticQuery } from 'gatsby'
 import Menu from 'antd/lib/menu'
 import { useLocation } from '@reach/router'
 
-export default function SiderbarLayout(props) {
+function transformToName(slug) {
+  const slashedSlug = slug.replace(/\//g, '')
+  if (!slashedSlug) {
+    return '介绍'
+  }
+  return slashedSlug.replace(/(-|^)([a-z])/gi, (match, $1, $2) =>
+    $2.toUpperCase()
+  )
+}
+
+export default function SiderbarLayout() {
   const data = useStaticQuery(graphql`
     {
       allMdx(sort: { fields: fields___slug }) {
@@ -12,6 +22,7 @@ export default function SiderbarLayout(props) {
           node {
             fields {
               slug
+              route
             }
           }
         }
@@ -24,16 +35,11 @@ export default function SiderbarLayout(props) {
     <div className="bear-siderbar">
       <Menu selectedKeys={[pathname]} className="bear-siderbar-menu">
         {data.allMdx.edges.map((edge) => {
-          const path = `/components${edge.node.fields.slug}`
+          const { slug, route } = edge.node.fields
+          const path = `${route}${slug}`
           return (
             <Menu.Item key={path}>
-              <Link to={path}>
-                {edge.node.fields.slug
-                  .replace(/\//g, '')
-                  .replace(/(\-|^)([a-z])/gi, (match, $1, $2) =>
-                    $2.toUpperCase()
-                  )}
-              </Link>
+              <Link to={path}>{transformToName(slug)}</Link>
             </Menu.Item>
           )
         })}
