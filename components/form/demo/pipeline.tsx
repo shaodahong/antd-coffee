@@ -1,6 +1,5 @@
 import React from 'react'
 import { DatePicker, Switch, Button } from 'antd'
-// @ts-ignore
 import Form from '../index.tsx'
 
 export default function PipelineDemo() {
@@ -10,7 +9,7 @@ export default function PipelineDemo() {
       label: '出生年月',
       rules: [{ required: true }],
       render: () => <DatePicker />,
-      pipeline: (date) => date.format('YYYY-MM-DD HH:mm:ss'),
+      pipeline: (date: any) => date.format('YYYY-MM-DD HH:mm:ss'),
     },
   ]
 

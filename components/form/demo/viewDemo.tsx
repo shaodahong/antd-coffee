@@ -1,13 +1,23 @@
 import React from 'react'
-import { DatePicker, Switch } from 'antd'
-import Form from '../index.tsx'
+// eslint-disable-next-line import/no-extraneous-dependencies
+import moment from 'moment'
+import { Switch } from 'antd'
+import Form from '../index'
 
 export default function ViewModeDemo() {
   const viewModeItems = [
     { name: 'name', label: '姓名' },
     { name: 'age', label: '年龄' },
-    { name: 'birthday', label: '出生年月', render: () => <DatePicker /> },
-    { name: 'hasJob', label: '已就业', render: () => <Switch /> },
+    {
+      name: 'birthday',
+      label: '出生年月',
+      renderView: (date: moment.Moment) => date?.format('YYYY-MM-DD HH:mm:ss'),
+    },
+    {
+      name: 'hasJob',
+      label: '已就业',
+      renderView: (value: number) => (value ? '是' : '否'),
+    },
   ]
 
   return (
@@ -16,7 +26,7 @@ export default function ViewModeDemo() {
       initialValues={{
         name: 'Ant Design Admin',
         age: 8,
-        birthday: '2010-01-01',
+        birthday: moment(),
         hasJob: 1,
       }}
       isView

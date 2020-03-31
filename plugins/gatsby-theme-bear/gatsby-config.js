@@ -2,6 +2,7 @@ const remarkTypescript = require('remark-typescript')
 
 module.exports = {
   plugins: [
+    'gatsby-transformer-sharp',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -23,7 +24,6 @@ module.exports = {
         path: `${process.cwd()}/docs`,
       },
     },
-    'gatsby-transformer-sharp',
     {
       resolve: 'gatsby-plugin-mdx',
       options: {

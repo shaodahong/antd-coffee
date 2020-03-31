@@ -4,6 +4,8 @@ import AntdForm, {
   FormItemProps as AntdFormItemProps,
 } from 'antd/lib/form'
 import Input from 'antd/lib/input'
+import Row from 'antd/lib/row'
+import Col, { ColProps } from 'antd/lib/col'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { StoreValue, Store } from 'rc-field-form/lib/interface'
 import get from 'lodash/get'
@@ -14,13 +16,13 @@ import useForceUpdate from '../hooks/useForceUpdate'
 export type OutputPipeline = (fieldValue: StoreValue) => StoreValue
 export type InputPipeline = (fieldValue: StoreValue) => StoreValue
 
-export interface FormItemProps extends AntdFormItemProps {
+export interface FormItemProps extends Omit<AntdFormItemProps, 'children'> {
   /**
-   * @default () => <Input />
+   * @example () => <Input />
    */
   render?: (fieldValue: StoreValue, fieldsValue: Store) => ReactElement
   /**
-   * @default () => Fileds[name]
+   * @example (fieldValue) => fieldValue + 1
    */
   renderView?: (fieldValue: StoreValue, fieldsValue: Store) => ReactNode
   /**
@@ -32,12 +34,21 @@ export interface FormItemProps extends AntdFormItemProps {
    * Todo: InputPipeline
    * Format initial or onFinish value
    * Like Switch component value onFinish maybe Number(true | false)
+   * @example (date) => date.format()
    */
   pipeline?: OutputPipeline | [InputPipeline, OutputPipeline]
   /**
    * Hide Form item by condition
+   * @example (fieldValue) => fieldValue === 1
    */
   isHidden?: (fieldValue: StoreValue, fieldsValue: Store) => boolean
+  /**
+   * Set form item layout
+   * Priority is greater than Form layoutCol
+   * @default { span: 24 }
+   * @see https://ant.design/components/grid/#Col
+   */
+  layoutCol?: ColProps
 }
 
 export interface FormProps extends AntdFormProps {
@@ -47,6 +58,12 @@ export interface FormProps extends AntdFormProps {
    * @default false
    */
   isView?: boolean
+  /**
+   * Set form item layout
+   * @default { span: 24 }
+   * @see https://ant.design/components/grid/#Col
+   */
+  layoutCol?: ColProps
 }
 
 const { Item, useForm } = AntdForm
@@ -57,6 +74,7 @@ const Form: FC<FormProps> = ({
   onFinish: antdOnFinish,
   isView = false,
   form,
+  layoutCol = { span: 24 },
   ...props
 }) => {
   const [formInsatce] = useForm(form)
@@ -82,16 +100,13 @@ const Form: FC<FormProps> = ({
     }
   }
 
-  const labelCol = {
-    span: 4,
-  }
-
-  const renderItem = ({
+  const renderItems = ({
     render,
     renderView,
     isView: isItemView = isView,
     pipeline,
     isHidden,
+    layoutCol: itemLlayoutCol = layoutCol,
     ...itemProps
   }: FormItemProps) => {
     let Comp
@@ -117,9 +132,11 @@ const Form: FC<FormProps> = ({
     }
 
     return (
-      <Item key={key} {...itemProps}>
-        {Comp}
-      </Item>
+      <Col {...itemLlayoutCol}>
+        <Item key={key} {...itemProps}>
+          {Comp}
+        </Item>
+      </Col>
     )
   }
 
@@ -132,17 +149,24 @@ const Form: FC<FormProps> = ({
   return (
     <AntdForm
       form={formInsatce}
-      labelCol={labelCol}
       onFinish={onFinish}
       onValuesChange={forceUpdate}
       {...props}
     >
-      {items.map((item) => renderItem(item))}
-      {children && (
-        <Item label={<span />} colon={false}>
-          {children as ReactElement}
-        </Item>
-      )}
+      <Row gutter={24}>
+        {items.map((item) => renderItems(item))}
+        {children && (
+          <Col
+            style={{
+              flex: '1',
+            }}
+          >
+            <Item label={<span />} colon={false}>
+              {children as ReactElement}
+            </Item>
+          </Col>
+        )}
+      </Row>
     </AntdForm>
   )
 }

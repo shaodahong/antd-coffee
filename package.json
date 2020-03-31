@@ -14,17 +14,20 @@
     "lint:eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:tsc": "tsc --noEmit"
   },
-  "dependencies": {
+  "peerDependencies": {
+    "react": ">=16.9.0",
+    "react-dom": ">=16.9.0",
+    "antd": ">=4.0.0"
+  },
+  "devDependencies": {
     "@ant-design/icons": "^4.0.3",
-    "antd": "^4.0.4",
+    "antd": "^4.1.0",
     "cross-env": "^7.0.2",
     "eslint": "^6.8.0",
     "lodash": "^4.17.15",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-route": "^1.0.3"
-  },
-  "devDependencies": {
+    "react-route": "^1.0.3",
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
@@ -35,13 +38,10 @@
     "@types/lodash": "^4.14.149",
     "@types/react": "^16.9.25",
     "@types/react-dom": "^16.9.5",
-    "@types/webpack-env": "^1.15.1",
     "@typescript-eslint/eslint-plugin": "^2.24.0",
     "@typescript-eslint/parser": "^2.24.0",
     "babel-loader": "^8.1.0",
     "babel-preset-gatsby": "^0.3.1",
-    "clean-webpack-plugin": "^3.0.0",
-    "css-loader": "^3.4.2",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-import": "^2.20.1",
@@ -64,17 +64,12 @@
     "gatsby-source-filesystem": "^2.2.2",
     "gatsby-transformer-remark": "^2.7.1",
     "gatsby-transformer-sharp": "^2.4.2",
-    "html-webpack-plugin": "^4.0.0",
     "less": "^3.11.1",
+    "moment": "^2.24.0",
     "prettier": "^2.0.1",
     "prismjs": "^1.19.0",
     "remark-typescript": "^0.3.1",
-    "style-loader": "^1.1.3",
     "ts-loader": "^6.2.2",
-    "typescript": "^3.8.3",
-    "webpack": "^4.42.0",
-    "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.10.3",
-    "webpack-merge": "^4.2.2"
+    "typescript": "^3.8.3"
   }
 }
