@@ -10,9 +10,13 @@
     "start": "gatsby develop",
     "deploy": "gatsby build --prefix-paths",
     "build": "cross-env NODE_ENV=production webpack",
+    "clean": "gatsby clean",
     "lint": "yarn lint:eslint & yarn lint:tsc",
     "lint:eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:tsc": "tsc --noEmit"
+  },
+  "dependencies": {
+    "lodash": "^4.17.15"
   },
   "peerDependencies": {
     "react": ">=16.9.0",
@@ -24,7 +28,6 @@
     "antd": "^4.1.0",
     "cross-env": "^7.0.2",
     "eslint": "^6.8.0",
-    "lodash": "^4.17.15",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-route": "^1.0.3",
