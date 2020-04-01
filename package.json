@@ -13,7 +13,8 @@
     "clean": "gatsby clean",
     "lint": "yarn lint:eslint & yarn lint:tsc",
     "lint:eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:tsc": "tsc --noEmit"
+    "lint:tsc": "tsc --noEmit",
+    "now-build": "npm run deploy"
   },
   "dependencies": {
     "lodash": "^4.17.15"
