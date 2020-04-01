@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "start": "gatsby develop",
-    "deploy": "gatsby build --prefix-paths",
+    "deploy": "gatsby build",
     "build": "cross-env NODE_ENV=production webpack",
     "clean": "gatsby clean",
     "lint": "yarn lint:eslint & yarn lint:tsc",
