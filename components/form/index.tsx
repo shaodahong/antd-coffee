@@ -12,6 +12,7 @@ import get from 'lodash/get'
 import set from 'lodash/set'
 import { isFunc } from '../utils/is'
 import useForceUpdate from '../hooks/useForceUpdate'
+import { Func } from '../utils/type'
 
 export type OutputPipeline = (fieldValue: StoreValue) => StoreValue
 export type InputPipeline = (fieldValue: StoreValue) => StoreValue
@@ -115,7 +116,7 @@ const Form: FC<FormProps> = ({
     const fieldsValue = getFieldsValue()
     const fieldValue = get(fieldsValue, name as string)
 
-    if (isFunc(isHidden) && (isHidden as Function)(fieldValue, fieldsValue)) {
+    if (isFunc(isHidden) && (isHidden as Func)(fieldValue, fieldsValue)) {
       return null
     }
 

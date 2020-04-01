@@ -31,6 +31,7 @@ module.exports = {
     'react/jsx-filename-extension': 0,
     '@typescript-eslint/explicit-function-return-type': 0,
     'import/extensions': 0,
+    'consistent-return': 0,
     'prettier/prettier': 'error',
   },
 }
