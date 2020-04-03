@@ -50,6 +50,7 @@ export interface FormItemProps extends Omit<AntdFormItemProps, 'children'> {
    * @see https://ant.design/components/grid/#Col
    */
   layoutCol?: ColProps
+  onFinish?: (fieldsValue: Store) => Promise<any> | void
 }
 
 export interface FormProps extends AntdFormProps {
@@ -85,7 +86,7 @@ const Form: FC<FormProps> = ({
     return null
   }
 
-  const onFinish = (values: any) => {
+  const onFinish = (values: Store) => {
     Object.values(items).forEach(({ name, pipeline }) => {
       const outputer = isFunc(pipeline)
         ? pipeline

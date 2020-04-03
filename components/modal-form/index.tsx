@@ -12,11 +12,14 @@ export interface ModalFormProps extends ModalProps {
 const ModalForm: FC<ModalFormProps> = ({ formProps, onOk, ...props }) => {
   const [form] = useForm()
 
-  const onModalOk: MouseEventHandler = async (e) => {
+  const onModalOk: MouseEventHandler = () => {
+    form.submit()
+  }
+
+  const onModalFormFinish = async () => {
     try {
-      await form.submit()
       if (isFunc(onOk)) {
-        await (onOk as Func)(e)
+        await (onOk as Func)()
       }
       console.log(1)
     } catch (error) {
@@ -26,11 +29,7 @@ const ModalForm: FC<ModalFormProps> = ({ formProps, onOk, ...props }) => {
 
   return (
     <Modal onOk={onModalOk} {...props}>
-      <Form
-        form={form}
-        {...formProps}
-        onFinish={() => new Promise((resolve) => setTimeout(resolve, 2000))}
-      />
+      <Form form={form} {...formProps} onFinish={onModalFormFinish} />
     </Modal>
   )
 }

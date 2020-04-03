@@ -20,18 +20,12 @@
     "lodash": "^4.17.15"
   },
   "peerDependencies": {
+    "antd": ">=4.0.0",
     "react": ">=16.9.0",
-    "react-dom": ">=16.9.0",
-    "antd": ">=4.0.0"
+    "react-dom": ">=16.9.0"
   },
   "devDependencies": {
     "@ant-design/icons": "^4.0.3",
-    "antd": "^4.1.0",
-    "cross-env": "^7.0.2",
-    "eslint": "^6.8.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-route": "^1.0.3",
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
@@ -44,8 +38,11 @@
     "@types/react-dom": "^16.9.5",
     "@typescript-eslint/eslint-plugin": "^2.24.0",
     "@typescript-eslint/parser": "^2.24.0",
+    "antd": "^4.1.0",
     "babel-loader": "^8.1.0",
     "babel-preset-gatsby": "^0.3.1",
+    "cross-env": "^7.0.2",
+    "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-import": "^2.20.1",
@@ -70,8 +67,12 @@
     "gatsby-transformer-sharp": "^2.4.2",
     "less": "^3.11.1",
     "moment": "^2.24.0",
+    "pngquant-bin": "^5.0.2",
     "prettier": "^2.0.1",
     "prismjs": "^1.19.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-route": "^1.0.3",
     "remark-typescript": "^0.3.1",
     "ts-loader": "^6.2.2",
     "typescript": "^3.8.3"

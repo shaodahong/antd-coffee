@@ -26,6 +26,8 @@ export default function ModalFormDemo() {
         title="Modal Form Demo"
         formProps={{
           items: baseItems,
+          onFinish: () =>
+            new Promise((resolve) => setTimeout(() => resolve, 2000)),
         }}
         visible={isShow}
         onCancel={onSetShow}
