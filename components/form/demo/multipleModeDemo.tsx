@@ -1,6 +1,6 @@
 import React from 'react'
 import { DatePicker, Switch, Button } from 'antd'
-import Form from '../index.tsx'
+import { Form } from 'ant-design-admin'
 
 export default function MultipleModeDemo() {
   const multipleModeItems = [

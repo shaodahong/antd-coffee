@@ -14,7 +14,7 @@ export interface TableProps<RecordType> extends AntdTableProps<RecordType> {
   searchProps?: TableSearchProps
 }
 
-function Table<RecordType extends object>({
+export default function Table<RecordType extends object>({
   searchProps,
   ...props
 }: TableProps<RecordType>) {
@@ -42,5 +42,3 @@ function Table<RecordType extends object>({
     </div>
   )
 }
-
-export default Table

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Button, DatePicker, Switch } from 'antd'
-import ModalForm from '..'
+import { ModalForm } from 'ant-design-admin'
 
 export default function ModalFormDemo() {
   const [isShow, setShow] = useState(false)

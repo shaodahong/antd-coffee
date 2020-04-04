@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { DatePicker, Switch, Button, Radio, Space } from 'antd'
 import { RadioChangeEvent } from 'antd/lib/radio'
 import { FormLayout } from 'antd/lib/form/Form'
-import Form from '../index.tsx'
+import { Form } from 'ant-design-admin'
 
 export default function LayoutColDemo() {
   const [mode, setMode] = useState(1)

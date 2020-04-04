@@ -1,6 +1,6 @@
 import React from 'react'
 import { ColumnsType } from 'antd/lib/table'
-import Table from '..'
+import { Table } from 'ant-design-admin'
 
 interface User {
   key: number

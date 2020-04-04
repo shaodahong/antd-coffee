@@ -1,5 +1,5 @@
 import React from 'react'
-import AsyncButton from '../index.tsx'
+import { AsyncButton } from 'ant-design-admin'
 
 export default function Base() {
   return (

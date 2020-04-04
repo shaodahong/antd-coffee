@@ -2,7 +2,7 @@ import React from 'react'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import moment from 'moment'
 import { Switch } from 'antd'
-import Form from '../index'
+import { Form } from 'ant-design-admin'
 
 export default function ViewModeDemo() {
   const viewModeItems = [

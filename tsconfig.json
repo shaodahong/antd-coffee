@@ -1,10 +1,26 @@
 {
   "compilerOptions": {
-    "jsx": "preserve",
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "jsx": "react",
     "esModuleInterop": true,
+    "sourceMap": true,
+    "baseUrl": "./",
     "strict": true,
-    "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true
+    "paths": {
+      "ant-design-admin": ["components/index.tsx"]
+    },
+    "allowSyntheticDefaultImports": true
   },
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    "lib",
+    "es",
+    "dist",
+    "typings",
+    "**/__test__",
+    "test"
+  ]
 }
