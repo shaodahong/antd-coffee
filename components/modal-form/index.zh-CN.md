@@ -2,6 +2,4 @@
 
 ### 使用
 
-import ModalFormDemo from './demo/base.tsx'
-
-<ModalFormDemo />
+<code src="./demo/base.tsx" />

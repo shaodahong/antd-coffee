@@ -2,6 +2,4 @@
 
 ### 使用
 
-import BaseDemo from './demo/base.tsx'
-
-<BaseDemo />
+<code src="./demo/base.tsx" />

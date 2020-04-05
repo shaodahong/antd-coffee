@@ -7,3 +7,23 @@
 #### 默认模式
 
 <code src="./demo/base.tsx" />
+
+#### 只读模式
+
+<code src="./demo/viewDemo.tsx" />
+
+#### 混合模式
+
+<code src="./demo/multipleModeDemo.tsx" />
+
+#### 格式化输入输出
+
+<code src="./demo/pipeline.tsx" />
+
+#### 条件隐藏
+
+<code src="./demo/isHidden.tsx" />
+
+#### 多种布局
+
+<code src="./demo/layoutCol.tsx" />

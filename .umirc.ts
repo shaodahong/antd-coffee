@@ -15,4 +15,7 @@ export default defineConfig({
     ['en-US', 'English'],
   ],
   outputPath: 'site',
+  theme: {
+    '@primary-color': '#912dbc',
+  },
 })

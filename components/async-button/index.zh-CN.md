@@ -4,6 +4,4 @@
 
 ## 使用
 
-import Base from './demo/base.tsx'
-
-<Base />
+<code src="./demo/base.tsx" >
