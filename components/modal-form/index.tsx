@@ -21,7 +21,6 @@ const ModalForm: FC<ModalFormProps> = ({ formProps, onOk, ...props }) => {
       if (isFunc(onOk)) {
         await (onOk as Func)()
       }
-      console.log(1)
     } catch (error) {
       return Promise.reject(error)
     }

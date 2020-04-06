@@ -1,1 +1,6 @@
+---
+group:
+  title: Components
+---
+
 # ModalTable

@@ -1,3 +1,8 @@
+---
+group:
+  title: Components
+---
+
 ## Table
 
 ### 使用

@@ -36,5 +36,12 @@ export default defineConfig({
   ],
   theme: {
     '@primary-color': '#912dbc',
+    // '@c-primary': '#912dbc',
+    // '@c-heading': '#912dbc',
+    // '@c-text': '#912dbc',
+    // '@c-secondary': '#717484',
+    // '@c-link': '@c-primary',
+    // '@c-border': '#ebedf1',
+    // '@c-light-bg': '#f9fafb',
   },
 })

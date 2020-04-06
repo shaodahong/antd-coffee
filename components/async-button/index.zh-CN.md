@@ -1,3 +1,8 @@
+---
+group:
+  title: Components
+---
+
 # AsyncButton
 
 简化异步操作的 `loading` 处理， `onClick` 返回 Promise
