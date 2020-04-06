@@ -28,10 +28,6 @@
     "react-dom": ">=16.9.0"
   },
   "devDependencies": {
-    "@umijs/preset-react": "1.x",
-    "@umijs/test": "^3.0.5",
-    "dumi": "^1.0.13",
-    "father-build": "^1.17.2",
     "@ant-design/icons": "^4.0.3",
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.9.0",
@@ -43,9 +39,12 @@
     "@types/react-dom": "^16.9.5",
     "@typescript-eslint/eslint-plugin": "^2.24.0",
     "@typescript-eslint/parser": "^2.24.0",
+    "@umijs/preset-react": "1.x",
+    "@umijs/test": "^3.0.5",
     "antd": "^4.1.0",
     "babel-loader": "^8.1.0",
     "cross-env": "^7.0.2",
+    "dumi": "^1.0.13",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-config-prettier": "^6.10.1",
@@ -54,6 +53,7 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^2.5.1",
+    "father-build": "^1.17.2",
     "less": "^3.11.1",
     "moment": "^2.24.0",
     "prettier": "^2.0.1",
@@ -61,5 +61,8 @@
     "react-dom": "^16.13.1",
     "react-route": "^1.0.3",
     "typescript": "^3.8.3"
+  },
+  "resolutions": {
+    "remark": "12"
   }
 }

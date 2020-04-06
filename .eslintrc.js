@@ -32,6 +32,7 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 0,
     'import/extensions': 0,
     'consistent-return': 0,
+    'import/no-unresolved': [2, { ignore: ['ant-design-admin'] }],
     'prettier/prettier': 'error',
   },
 }
