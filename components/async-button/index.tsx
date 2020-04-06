@@ -1,7 +1,5 @@
 import React, { FC, useState, MouseEvent } from 'react'
-import { Button } from 'antd'
-import 'antd/lib/button/style'
-import { ButtonProps } from 'antd/lib/button'
+import Button, { ButtonProps } from 'antd/lib/button'
 
 export interface AsyncButtonProps extends ButtonProps {
   loading?: boolean

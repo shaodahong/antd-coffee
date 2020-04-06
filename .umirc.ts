@@ -4,6 +4,7 @@ import path from 'path'
 // more config: https://d.umijs.org/config
 export default defineConfig({
   title: 'Ant Design Admin',
+  outputPath: 'site',
   resolve: {
     includes: ['components'],
   },
@@ -14,7 +15,25 @@ export default defineConfig({
     ['zh-CN', '中文'],
     ['en-US', 'English'],
   ],
-  outputPath: 'site',
+  extraBabelPlugins: [
+    [
+      'babel-plugin-import',
+      {
+        libraryName: 'antd',
+        libraryDirectory: 'es',
+        style: true,
+      },
+      'antd',
+    ],
+    [
+      'babel-plugin-import',
+      {
+        libraryName: 'ant-design-admin',
+        libraryDirectory: '',
+        style: true,
+      },
+    ],
+  ],
   theme: {
     '@primary-color': '#912dbc',
   },
