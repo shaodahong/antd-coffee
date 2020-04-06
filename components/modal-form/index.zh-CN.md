@@ -1,6 +1,7 @@
 ---
 group:
   title: Components
+  path: /components
 ---
 
 # ModalForm
