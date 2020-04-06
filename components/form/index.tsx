@@ -1,4 +1,4 @@
-import React, { ReactElement, FC, ReactNode, useEffect } from 'react'
+import React, { ReactElement, FC, ReactNode, useEffect, useState } from 'react'
 import AntdForm, {
   FormProps as AntdFormProps,
   FormItemProps as AntdFormItemProps,
@@ -6,6 +6,7 @@ import AntdForm, {
 import Input from 'antd/lib/input'
 import Row from 'antd/lib/row'
 import Col, { ColProps } from 'antd/lib/col'
+import Skeleton from 'antd/lib/skeleton'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { StoreValue, Store } from 'rc-field-form/lib/interface'
 import get from 'lodash/get'
@@ -13,6 +14,7 @@ import set from 'lodash/set'
 import { isFunc } from '../utils/is'
 import useForceUpdate from '../hooks/useForceUpdate'
 import { Func } from '../utils/type'
+import useStates from '../hooks/useStates'
 
 export type OutputPipeline = (fieldValue: StoreValue) => StoreValue
 export type InputPipeline = (fieldValue: StoreValue) => StoreValue
@@ -50,7 +52,8 @@ export interface FormItemProps extends Omit<AntdFormItemProps, 'children'> {
    * @see https://ant.design/components/grid/#Col
    */
   layoutCol?: ColProps
-  onFinish?: (fieldsValue: Store) => Promise<any> | void
+  /** Enhance initialValues, but only trigger once  */
+  onFinish?: (fieldsValue: Store) => Promise<Store> | void
 }
 
 export interface FormProps extends AntdFormProps {
@@ -66,6 +69,7 @@ export interface FormProps extends AntdFormProps {
    * @see https://ant.design/components/grid/#Col
    */
   layoutCol?: ColProps
+  initialValues?: Store | (() => Promise<Store>)
 }
 
 const { Item, useForm } = AntdForm
@@ -77,13 +81,58 @@ const Form: FC<FormProps> = ({
   isView = false,
   form,
   layoutCol = { span: 24 },
+  initialValues: formInitialValues,
   ...props
 }) => {
   const [formInsatce] = useForm(form)
   const forceUpdate = useForceUpdate()
+  const isLoadinginitialValues = isFunc(formInitialValues)
+  const [initialStates, setInitialStates] = useStates<{
+    isLoadinginitialValues: boolean
+    initialValues?: Store
+  }>({
+    isLoadinginitialValues,
+    initialValues: isLoadinginitialValues ? {} : formInitialValues,
+  })
+
+  console.log('isLoadinginitialValues', initialStates.isLoadinginitialValues)
 
   if (!items || items.length === 0) {
     return null
+  }
+
+  const getInitialValues = async () => {
+    let values: Store = {}
+    try {
+      values = await (formInitialValues as () => Promise<Store>)()
+    } catch (error) {
+      return Promise.reject(error)
+    } finally {
+      setInitialStates({
+        isLoadinginitialValues: false,
+        initialValues: values,
+      })
+    }
+  }
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
+    if (initialStates.isLoadinginitialValues) {
+      getInitialValues()
+    } else {
+      // Todo: Initial value cannot get when first mount
+      forceUpdate()
+    }
+  }, [])
+
+  // If initialValues update need rerenader?
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
+    forceUpdate()
+  }, [initialStates])
+
+  if (initialStates.isLoadinginitialValues) {
+    return <Skeleton />
   }
 
   const onFinish = (values: Store) => {
@@ -142,17 +191,12 @@ const Form: FC<FormProps> = ({
     )
   }
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  useEffect(() => {
-    // Todo: Initial value cannot get when first mount
-    forceUpdate()
-  }, [])
-
   return (
     <AntdForm
       form={formInsatce}
       onFinish={onFinish}
       onValuesChange={forceUpdate}
+      initialValues={initialStates.initialValues}
       {...props}
     >
       <Row gutter={24}>

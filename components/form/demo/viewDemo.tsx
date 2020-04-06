@@ -1,8 +1,8 @@
 import React from 'react'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import moment from 'moment'
-import { Switch } from 'antd'
 import { Form } from 'ant-design-admin'
+import { Button } from 'antd'
 
 export default function ViewModeDemo() {
   const viewModeItems = [
@@ -23,12 +23,18 @@ export default function ViewModeDemo() {
   return (
     <Form
       items={viewModeItems}
-      initialValues={{
-        name: 'Ant Design Admin',
-        age: 8,
-        birthday: moment(),
-        hasJob: 1,
-      }}
+      initialValues={() =>
+        new Promise((resolve) =>
+          setTimeout(() => {
+            resolve({
+              name: 'Ant Design Admin',
+              age: 8,
+              birthday: moment(),
+              hasJob: 1,
+            })
+          }, 3000)
+        )
+      }
       isView
     />
   )
