@@ -1,4 +1,4 @@
-import React, { ReactElement, FC, ReactNode, useEffect, useState } from 'react'
+import React, { ReactElement, FC, ReactNode, useEffect } from 'react'
 import AntdForm, {
   FormProps as AntdFormProps,
   FormItemProps as AntdFormItemProps,
@@ -94,8 +94,6 @@ const Form: FC<FormProps> = ({
     isLoadinginitialValues,
     initialValues: isLoadinginitialValues ? {} : formInitialValues,
   })
-
-  console.log('isLoadinginitialValues', initialStates.isLoadinginitialValues)
 
   if (!items || items.length === 0) {
     return null

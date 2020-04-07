@@ -16,8 +16,11 @@ const ModalForm: FC<ModalFormProps> = ({ formProps, onOk, ...props }) => {
     form.submit()
   }
 
-  const onModalFormFinish = async () => {
+  const onModalFormFinish = async (values: any) => {
     try {
+      if (isFunc(formProps.onFinish)) {
+        await (formProps.onFinish as Func)(values)
+      }
       if (isFunc(onOk)) {
         await (onOk as Func)()
       }
