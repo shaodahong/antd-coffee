@@ -177,7 +177,11 @@ const Form: FC<FormProps> = ({
           : fieldValue
     } else {
       Comp =
-        render && isFunc(render) ? render(fieldValue, fieldsValue) : <Input />
+        render && isFunc(render) ? (
+          render(fieldValue, fieldsValue)
+        ) : (
+          <Input allowClear />
+        )
     }
 
     return (

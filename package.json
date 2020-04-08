@@ -14,15 +14,22 @@
     "lint:tsc": "tsc --noEmit",
     "now-build": "npm run deploy",
     "test": "umi-test",
-    "test:coverage": "umi-test --coverage"
+    "test:coverage": "umi-test --coverage",
+    "prettier": "prettier '**/*' -c --write"
   },
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "typings": "dist/index.d.ts",
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint && yarn prettier"
+    }
+  },
   "dependencies": {
     "lodash": "^4.17.15"
   },
   "peerDependencies": {
+    "@ant-design/icons": ">=4.0.0",
     "antd": ">=4.0.0",
     "react": ">=16.9.0",
     "react-dom": ">=16.9.0"
@@ -41,7 +48,7 @@
     "@typescript-eslint/parser": "^2.24.0",
     "@umijs/preset-react": "1.x",
     "@umijs/test": "^3.0.5",
-    "antd": "^4.1.0",
+    "antd": "^4.1.1",
     "babel-loader": "^8.1.0",
     "cross-env": "^7.0.2",
     "dumi": "^1.0.13",
@@ -54,7 +61,9 @@
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^2.5.1",
     "father-build": "^1.17.2",
+    "husky": "^4.2.3",
     "less": "^3.11.1",
+    "lint-staged": "^10.1.2",
     "moment": "^2.24.0",
     "prettier": "^2.0.1",
     "react": "^16.13.1",

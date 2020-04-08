@@ -1,0 +1,10 @@
+.cache
+.umi
+*.jpg
+*.png
+*.ico
+*.log
+*.lock
+.editorconfig
+.gitignore
+.prettierignore

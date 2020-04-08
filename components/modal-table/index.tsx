@@ -11,7 +11,7 @@ export default function ModalTable<RecordType extends object>({
   ...props
 }: ModalTablePorps<RecordType>) {
   return (
-    <Modal {...props}>
+    <Modal footer={null} {...props}>
       <Table<RecordType> {...tableProps} />
     </Modal>
   )

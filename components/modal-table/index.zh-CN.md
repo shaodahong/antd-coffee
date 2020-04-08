@@ -5,3 +5,5 @@ group:
 ---
 
 # ModalTable
+
+<code src="./demo/base.tsx" />

@@ -4,6 +4,8 @@ import path from 'path'
 // more config: https://d.umijs.org/config
 export default defineConfig({
   title: 'Ant Design Admin',
+  logo: '/logo.png',
+  favicon: '/favicon.ico',
   outputPath: 'site',
   resolve: {
     includes: ['components'],

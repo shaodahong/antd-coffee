@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Button, DatePicker, Switch } from 'antd'
+import { ModalForm } from 'ant-design-admin'
 import { ColumnsType } from 'antd/lib/table'
-import { Table } from 'ant-design-admin'
-import { DatePicker } from 'antd'
+import ModalTable from '..'
 
 interface User {
   key: number
@@ -12,7 +13,9 @@ interface User {
   grade: string
 }
 
-export default function BaseDemo() {
+export default function ModalFormDemo() {
+  const [isShow, setShow] = useState(false)
+
   const columns: ColumnsType<User> = [
     {
       title: '姓名',
@@ -55,27 +58,21 @@ export default function BaseDemo() {
     },
   ]
 
-  const items = [
-    { name: 'name', label: '姓名' },
-    { name: 'age', label: '年龄' },
-    { name: 'birthday', label: '生日', render: () => <DatePicker /> },
-    { name: 'hobby', label: '爱好' },
-    { name: 'grade', label: '年级' },
-  ]
-
+  const onSetShow = () => {
+    setShow((value) => !value)
+  }
   return (
-    <Table<User>
-      columns={columns}
-      onSearch={() =>
-        new Promise((resolve) =>
-          setTimeout(() => {
-            resolve({ data })
-          }, 1000)
-        )
-      }
-      searchProps={{
-        items,
-      }}
-    />
+    <>
+      <Button onClick={onSetShow}>Show Modal</Button>
+      <ModalTable
+        title="Modal Table Demo"
+        tableProps={{
+          columns,
+          onSearch: () => ({ data }),
+        }}
+        visible={isShow}
+        onCancel={onSetShow}
+      />
+    </>
   )
 }
