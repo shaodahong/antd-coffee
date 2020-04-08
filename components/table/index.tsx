@@ -50,7 +50,10 @@ export default function Table<RecordType extends object>({
     return onSearch()
   }
 
-  const onTableReset = () => form.resetFields()
+  const onTableReset = () => {
+    form.resetFields()
+    return onSearch()
+  }
 
   useEffect(() => {
     onSearch()
