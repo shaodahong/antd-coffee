@@ -63,7 +63,6 @@
     "father-build": "^1.17.2",
     "husky": "^4.2.3",
     "less": "^3.11.1",
-    "lint-staged": "^10.1.2",
     "moment": "^2.24.0",
     "prettier": "^2.0.1",
     "react": "^16.13.1",
