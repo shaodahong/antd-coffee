@@ -15,6 +15,11 @@ interface User {
 export default function BaseDemo() {
   const columns: ColumnsType<User> = [
     {
+      title: '序号',
+      dataIndex: 'index',
+      render: (text, record, index) => index + 1,
+    },
+    {
       title: '姓名',
       dataIndex: 'name',
     },

@@ -5,17 +5,36 @@ import Col from 'antd/lib/col'
 import Space from 'antd/lib/space'
 import Divider from 'antd/lib/divider'
 import SearchOutlined from '@ant-design/icons/SearchOutlined'
+import get from 'lodash/get'
 import { useForm } from 'antd/lib/form/util'
 import Form, { FormProps } from '../form'
 import AsyncButton from '../async-button'
 
 // export interface TableSearchProps extends FormProps {}
 
-export interface TableData<RecordType> {
-  data: RecordType[]
+interface TablePaginationName {
+  /**
+   * @default total
+   */
+  totalName?: string
+  /**
+   * @default pageSize
+   */
+  pageSizeName?: string
+  /**
+   * @default pageNum
+   */
+  pageNumName?: string
 }
 
-export interface TableProps<RecordType> extends AntdTableProps<RecordType> {
+export interface TableData<RecordType> {
+  data: RecordType[]
+  [key: string]: any
+}
+
+export interface TableProps<RecordType>
+  extends AntdTableProps<RecordType>,
+    TablePaginationName {
   searchProps?: FormProps
   onSearch: (
     params: any
@@ -26,6 +45,9 @@ export default function Table<RecordType extends object>({
   searchProps,
   onSearch: onTableSearch,
   pagination,
+  totalName = 'total',
+  pageSizeName = 'pageSize',
+  pageNumName = 'pageNum',
   ...props
 }: TableProps<RecordType>) {
   const [form] = useForm()
@@ -89,6 +111,9 @@ export default function Table<RecordType extends object>({
           hideOnSinglePage: true,
           showQuickJumper: true,
           showTotal: (total) => `共 ${total} 条`,
+          total: get(data, totalName),
+          current: get(data, pageNumName),
+          pageSize: get(data, pageSizeName, 10),
           ...pagination,
         }}
       />
