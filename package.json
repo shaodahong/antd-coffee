@@ -61,7 +61,7 @@
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^2.5.1",
     "father-build": "^1.17.2",
-    "husky": "^4.2.3",
+    "husky": "^4.2.5",
     "less": "^3.11.1",
     "moment": "^2.24.0",
     "prettier": "^2.0.1",
