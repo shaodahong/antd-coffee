@@ -43,7 +43,7 @@
     "@babel/preset-typescript": "^7.9.0",
     "@types/lodash": "^4.14.149",
     "@types/react": "^16.9.34",
-    "@types/react-dom": "^16.9.5",
+    "@types/react-dom": "^16.9.6",
     "@typescript-eslint/eslint-plugin": "^2.24.0",
     "@typescript-eslint/parser": "^2.24.0",
     "@umijs/preset-react": "1.x",
