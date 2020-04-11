@@ -6,6 +6,8 @@ module.exports = {
   },
   env: {
     browser: true,
+    node: true,
+    jest: true,
   },
   plugins: ['@typescript-eslint', 'react-hooks', 'prettier'],
   extends: [
