@@ -1,7 +1,7 @@
 import React from 'react'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import moment from 'moment'
-import { Form } from 'ant-design-admin'
+import { Form } from 'antd-coffee'
 import { Button } from 'antd'
 
 export default function ViewModeDemo() {

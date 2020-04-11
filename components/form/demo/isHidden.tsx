@@ -1,6 +1,6 @@
 import React from 'react'
 import { DatePicker, Switch, Button, Select } from 'antd'
-import { Form } from 'ant-design-admin'
+import { Form } from 'antd-coffee'
 
 export default function IsHiddenDemo() {
   const baseItems = [

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Button, DatePicker, Switch } from 'antd'
-import { ModalForm } from 'ant-design-admin'
+import { ModalForm } from 'antd-coffee'
 import { ColumnsType } from 'antd/lib/table'
 import ModalTable from '..'
 

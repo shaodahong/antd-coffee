@@ -10,7 +10,7 @@
     "baseUrl": "./",
     "strict": true,
     "paths": {
-      "ant-design-admin": ["components/index.tsx"]
+      "antd-coffee": ["components/index.tsx"]
     },
     "allowSyntheticDefaultImports": true
   },

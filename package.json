@@ -1,8 +1,8 @@
 {
-  "name": "ant-design-admin",
+  "name": "antd-coffee",
   "version": "0.0.1",
   "description": "Ant Design Admin",
-  "repository": "git@github.com:shaodahong/ant-design-admin.git",
+  "repository": "git@github.com:shaodahong/antd-coffee.git",
   "author": "shaodahong <darryshaw@gmail.com>",
   "license": "MIT",
   "scripts": {

@@ -1,6 +1,6 @@
 import React from 'react'
 import Modal, { ModalProps } from 'antd/lib/modal'
-import { Table, TableProps } from 'ant-design-admin'
+import { Table, TableProps } from 'antd-coffee'
 
 export interface ModalTablePorps<RecordType> extends ModalProps {
   tableProps: TableProps<RecordType>

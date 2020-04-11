@@ -3,7 +3,7 @@ import path from 'path'
 
 // more config: https://d.umijs.org/config
 export default defineConfig({
-  title: 'Ant Design Admin',
+  title: 'Antd Coffee',
   logo: '/logo.png',
   favicon: '/favicon.ico',
   outputPath: 'site',
@@ -11,7 +11,7 @@ export default defineConfig({
     includes: ['components'],
   },
   alias: {
-    'ant-design-admin': path.resolve(__dirname, './components'),
+    'antd-coffee': path.resolve(__dirname, './components'),
   },
   locales: [
     ['zh-CN', '中文'],
@@ -30,7 +30,7 @@ export default defineConfig({
     [
       'babel-plugin-import',
       {
-        libraryName: 'ant-design-admin',
+        libraryName: 'antd-coffee',
         libraryDirectory: '',
         style: true,
       },

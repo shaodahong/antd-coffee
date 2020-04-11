@@ -1,5 +1,5 @@
 import React from 'react'
-import { AsyncButton } from 'ant-design-admin'
+import { AsyncButton } from 'antd-coffee'
 
 export default function Base() {
   return (
