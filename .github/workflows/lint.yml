@@ -1,36 +1,73 @@
-name: Lint
+name: CI
 
 on: push
 
-jobs:
-  setup:
-    name: Setup
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Install
-        run: |
-          yarn
+env:
+  PRIMARY_NODE_VERSION: 12
 
-  Lint:
+jobs:
+  Linter:
     name: Run linter
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ env.PRIMARY_NODE_VERSION }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.PRIMARY_NODE_VERSION }}
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - uses: actions/cache@v1
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install
+        run: |
+          yarn --ignore-engines --frozen-lockfile
+
       - name: Lint
         run: |
           yarn lint
         env:
           CI: true
-    needs: setup
 
-  Test:
-    name: Run Test Suite
+  Tester:
+    name: Run Tester
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ env.PRIMARY_NODE_VERSION }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.PRIMARY_NODE_VERSION }}
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - uses: actions/cache@v1
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install
+        run: |
+          yarn --ignore-engines --frozen-lockfile
+
       - name: Test
         run: |
           yarn test
-    needs: setup
+        env:
+          CI: true
