@@ -45,7 +45,7 @@
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.5",
     "@typescript-eslint/eslint-plugin": "^2.24.0",
-    "@typescript-eslint/parser": "^2.24.0",
+    "@typescript-eslint/parser": "^2.27.0",
     "@umijs/preset-react": "1.x",
     "@umijs/test": "^3.0.5",
     "antd": "^4.1.2",
