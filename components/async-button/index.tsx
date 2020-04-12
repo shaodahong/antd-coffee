@@ -21,8 +21,6 @@ const AsyncButton: FC<AsyncButtonProps> = ({
 
       setLoading(true)
       await buttonOnClick(e)
-    } catch (error) {
-      Promise.reject(error)
     } finally {
       setLoading(false)
     }
