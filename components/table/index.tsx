@@ -27,6 +27,10 @@ interface TablePaginationName {
    * @default pageNum
    */
   pageNumName?: string
+  /**
+   * @default data
+   */
+  dataName?: string
 }
 
 export interface TableData<RecordType> {
@@ -50,6 +54,7 @@ export default function Table<RecordType extends object>({
   totalName = 'total',
   pageSizeName = 'pageSize',
   pageNumName = 'pageNum',
+  dataName = 'data',
   onChange: onTableChange,
   ...props
 }: TableProps<RecordType>) {
@@ -115,16 +120,21 @@ export default function Table<RecordType extends object>({
         {...props}
         onChange={onChange}
         loading={loading}
-        dataSource={data?.data}
-        pagination={{
-          // Hide if single page
-          hideOnSinglePage: true,
-          showTotal: (total) => `共 ${total} 条`,
-          total: get(data, totalName),
-          defaultCurrent: get(data, pageNumName, 1),
-          pageSize: get(data, pageSizeName, 10),
-          ...pagination,
-        }}
+        dataSource={get(data, dataName)}
+        pagination={
+          pagination === false
+            ? pagination
+            : {
+                // Hide if single page
+                hideOnSinglePage: true,
+                showTotal: (total) => `共 ${total} 条`,
+                total: get(data, totalName),
+                defaultCurrent: get(data, pageNumName, 1),
+                // Default 20 show better
+                pageSize: get(data, pageSizeName, 20),
+                ...pagination,
+              }
+        }
       />
     </div>
   )
