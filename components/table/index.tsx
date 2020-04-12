@@ -7,6 +7,8 @@ import Divider from 'antd/lib/divider'
 import SearchOutlined from '@ant-design/icons/SearchOutlined'
 import get from 'lodash/get'
 import { useForm } from 'antd/lib/form/util'
+import { PaginationConfig } from 'antd/lib/pagination'
+import { Store } from 'antd/lib/form/interface'
 import Form, { FormProps } from '../form'
 import AsyncButton from '../async-button'
 
@@ -48,6 +50,7 @@ export default function Table<RecordType extends object>({
   totalName = 'total',
   pageSizeName = 'pageSize',
   pageNumName = 'pageNum',
+  onChange: onTableChange,
   ...props
 }: TableProps<RecordType>) {
   const [form] = useForm()
@@ -55,26 +58,32 @@ export default function Table<RecordType extends object>({
   const [data, setData] = useState<TableData<RecordType>>()
 
   // get data source
-  const onSearch = async () => {
+  const onSearch = async (params?: Store) => {
     try {
       setLoading(true)
-      const params = await form.getFieldsValue()
-      const result = await onTableSearch(params)
+      const searchValues = form.getFieldsValue()
+      const result = await onTableSearch({ ...params, ...searchValues })
       setData(result)
-    } catch (error) {
-      return Promise.reject(error)
     } finally {
       setLoading(false)
     }
   }
 
   const onClickSearch = () => {
-    return onSearch()
+    return onSearch({
+      [pageNumName]: 1,
+    })
   }
 
   const onTableReset = () => {
     form.resetFields()
     return onSearch()
+  }
+
+  const onChange = (paginationConfig: PaginationConfig) => {
+    return onSearch({
+      [pageNumName]: paginationConfig.current,
+    })
   }
 
   useEffect(() => {
@@ -104,6 +113,7 @@ export default function Table<RecordType extends object>({
       )}
       <AntdTable<RecordType>
         {...props}
+        onChange={onChange}
         loading={loading}
         dataSource={data?.data}
         pagination={{
@@ -112,7 +122,7 @@ export default function Table<RecordType extends object>({
           showQuickJumper: true,
           showTotal: (total) => `共 ${total} 条`,
           total: get(data, totalName),
-          current: get(data, pageNumName),
+          defaultCurrent: get(data, pageNumName, 1),
           pageSize: get(data, pageSizeName, 10),
           ...pagination,
         }}

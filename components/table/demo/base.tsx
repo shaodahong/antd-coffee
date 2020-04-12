@@ -2,6 +2,8 @@ import React from 'react'
 import { ColumnsType } from 'antd/lib/table'
 import { Table } from 'antd-coffee'
 import { DatePicker } from 'antd'
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { mock } from 'mockjs'
 
 interface User {
   key: number
@@ -41,24 +43,35 @@ export default function BaseDemo() {
     },
   ]
 
-  const data: User[] = [
-    {
-      key: 0,
-      name: 'Jack',
-      age: 12,
-      birthday: '2010-10',
-      hobby: '篮球',
-      grade: '初一',
+  console.log(
+    mock({
+      'array|1-10': [
+        {
+          'name|+1': ['Jack', 'Bob'],
+          'age|10-30': 10,
+          'birthday|1-10': '*',
+          'hobby|1-10': '篮球',
+          'grade|+1': ['初一', '初二', '初三'],
+        },
+      ],
+    })
+  )
+
+  const data = mock({
+    'data|10-100': [
+      {
+        name: '@first',
+        age: '@integer(10, 30)',
+        birthday: '@date',
+        'hobby|+1': ['篮球', '乒乓球'],
+        'grade|+1': ['初一', '初二', '初三'],
+      },
+    ],
+    total() {
+      // eslint-disable-next-line react/no-this-in-sfc
+      return this.data.length
     },
-    {
-      key: 1,
-      name: 'Bob',
-      age: 18,
-      birthday: '2011-10',
-      hobby: '跳舞',
-      grade: '初二',
-    },
-  ]
+  })
 
   const items = [
     { name: 'name', label: '姓名' },
@@ -74,7 +87,7 @@ export default function BaseDemo() {
       onSearch={() =>
         new Promise((resolve) =>
           setTimeout(() => {
-            resolve({ data })
+            resolve(data)
           }, 1000)
         )
       }
