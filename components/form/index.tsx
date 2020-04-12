@@ -3,12 +3,11 @@ import AntdForm, {
   FormProps as AntdFormProps,
   FormItemProps as AntdFormItemProps,
 } from 'antd/lib/form'
+import { StoreValue, Store } from 'antd/lib/form/interface'
 import Input from 'antd/lib/input'
 import Row from 'antd/lib/row'
 import Col, { ColProps } from 'antd/lib/col'
 import Skeleton from 'antd/lib/skeleton'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { StoreValue, Store } from 'rc-field-form/lib/interface'
 import get from 'lodash/get'
 import set from 'lodash/set'
 import { isFunc } from '../utils/is'
