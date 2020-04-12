@@ -2761,10 +2761,10 @@
   resolved "https://registry.yarnpkg.com/@umijs/plugin-access/-/plugin-access-2.3.0.tgz#3d7c5781fe0c482a0caf86ab9e50984a3a2d69a4"
   integrity sha512-es0s8p+eOk//hEpnduNbidLwoictVenNXvDRy6YzfxFhnlFDtA+hn5j4+B7c6JrlcyXhGZYoKDBMz4E9Uk+33A==
 
-"@umijs/plugin-analytics@0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@umijs/plugin-analytics/-/plugin-analytics-0.2.0.tgz#446098e79eb9ea6d9b168b6a302fc4921a776b08"
-  integrity sha512-M0TWE/9pYIarxTs5RFoRCQrhG1x6MyURLMBTQoEVuVcJVgmeXP2P6khdoCcKXvGHdDRU48mec3ejJNShv6pGgw==
+"@umijs/plugin-analytics@0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@umijs/plugin-analytics/-/plugin-analytics-0.2.1.tgz#9d4d61bcbce0a30dca7d7529d23c1902f878ab30"
+  integrity sha512-zb6ue2jxwa+bkUk70lEz0whvCvasuP2N1ZsjRNPBYMH8PFU1Xw/vc+DYzSjUoVCDhEPPT42olVLMCbjSK8cIag==
 
 "@umijs/plugin-antd@0.4.3":
   version "0.4.3"
@@ -2911,12 +2911,12 @@
     unist-util-visit-parents "^3.0.1"
 
 "@umijs/preset-react@1.x":
-  version "1.4.12"
-  resolved "https://registry.yarnpkg.com/@umijs/preset-react/-/preset-react-1.4.12.tgz#0cc0a239e869a09f649e2c8d04d1549238ade3ab"
-  integrity sha512-oTMXUwMyVcKwhmlwhcBW40SOH3FWkNWOPJzwQAfLYoPEznFrnltBQ40HftgY3IZSUvfVAhoz4zuPd7KwJjnqrw==
+  version "1.4.13"
+  resolved "https://registry.yarnpkg.com/@umijs/preset-react/-/preset-react-1.4.13.tgz#15e681662ca6de85ab1f2bb7f2d5e09e88dcfa2a"
+  integrity sha512-gpYO6f0oyDBhn6lhX2lbX2rhVocdEUPSMqGHZPcccvv7TZYdkf8OLtEyhrXpM0GiWegOe0TYXzGlU3tuCT68gQ==
   dependencies:
     "@umijs/plugin-access" "2.3.0"
-    "@umijs/plugin-analytics" "0.2.0"
+    "@umijs/plugin-analytics" "0.2.1"
     "@umijs/plugin-antd" "0.4.3"
     "@umijs/plugin-crossorigin" "1.1.0"
     "@umijs/plugin-dva" "0.6.5"
