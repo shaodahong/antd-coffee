@@ -119,7 +119,6 @@ export default function Table<RecordType extends object>({
         pagination={{
           // Hide if single page
           hideOnSinglePage: true,
-          showQuickJumper: true,
           showTotal: (total) => `共 ${total} 条`,
           total: get(data, totalName),
           defaultCurrent: get(data, pageNumName, 1),
