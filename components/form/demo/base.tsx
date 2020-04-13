@@ -1,10 +1,17 @@
 import React from 'react'
-import { DatePicker, Switch, Button } from 'antd'
+import { DatePicker, Switch, Button, Input } from 'antd'
 import { Form } from 'antd-coffee'
+import { useForm } from 'antd/lib/form/util'
+import { Store } from 'antd/lib/form/interface'
 
 export default function BaseDemo() {
+  const [form] = useForm()
   const baseItems = [
-    { name: 'name', label: '姓名', required: true },
+    {
+      name: 'name',
+      label: '姓名',
+      render: () => <Input />,
+    },
     {
       name: 'age',
       label: '年龄',
@@ -15,7 +22,11 @@ export default function BaseDemo() {
   ]
 
   return (
-    <Form items={baseItems}>
+    <Form
+      items={baseItems}
+      form={form}
+      onFinish={(values: Store) => console.log('BaseDemo', values)}
+    >
       <Button type="primary" htmlType="submit">
         提交
       </Button>

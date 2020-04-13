@@ -35,6 +35,7 @@ module.exports = {
     'import/extensions': 0,
     'consistent-return': 0,
     'import/no-unresolved': [2, { ignore: ['antd-coffee'] }],
+    'no-unused-expressions': [2, { allowShortCircuit: true }],
     'prettier/prettier': 'error',
   },
 }

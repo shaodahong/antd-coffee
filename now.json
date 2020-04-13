@@ -7,5 +7,9 @@
       "use": "@now/static-build",
       "config": { "distDir": "site" }
     }
+  ],
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/.*", "dest": "/index.html" }
   ]
 }

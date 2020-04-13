@@ -9,11 +9,11 @@ import Row from 'antd/lib/row'
 import Col, { ColProps } from 'antd/lib/col'
 import Skeleton from 'antd/lib/skeleton'
 import get from 'lodash/get'
-import set from 'lodash/set'
+import update from 'lodash/update'
 import { isFunc } from '../utils/is'
 import useForceUpdate from '../hooks/useForceUpdate'
-import { Func } from '../utils/type'
 import useStates from '../hooks/useStates'
+import { Func } from '../utils/type'
 
 export type OutputPipeline = (fieldValue: StoreValue) => StoreValue
 export type InputPipeline = (fieldValue: StoreValue) => StoreValue
@@ -102,6 +102,14 @@ const Form: FC<FormProps> = ({
     let values: Store = {}
     try {
       values = await (formInitialValues as () => Promise<Store>)()
+      items
+        .filter(
+          ({ pipeline }) => Array.isArray(pipeline) && pipeline.length === 2
+        )
+        .forEach(({ pipeline, name }) => {
+          const inputer = (pipeline as [InputPipeline, OutputPipeline])[0]
+          update(values, name as string, inputer)
+        })
     } catch (error) {
       return Promise.reject(error)
     } finally {
@@ -133,30 +141,34 @@ const Form: FC<FormProps> = ({
   }
 
   const onFinish = (values: Store) => {
-    Object.values(items).forEach(({ name, pipeline }) => {
-      const outputer = isFunc(pipeline)
-        ? pipeline
-        : Array.isArray(pipeline) && pipeline[1]
+    items
+      .filter(
+        ({ pipeline }) =>
+          isFunc(pipeline) || (Array.isArray(pipeline) && pipeline.length === 2)
+      )
+      .forEach(({ pipeline, name }) => {
+        const outputer = isFunc(pipeline)
+          ? pipeline
+          : (pipeline as [InputPipeline, OutputPipeline])[1]
 
-      if (isFunc(outputer)) {
-        const value = get(values, name as string)
-        set(values, name as string, (outputer as OutputPipeline)(value))
-      }
-    })
+        update(values, name as string, outputer as OutputPipeline)
+      })
     if (antdOnFinish) {
       antdOnFinish(values)
     }
   }
 
-  const renderItems = ({
-    render,
-    renderView,
-    isView: isItemView = isView,
-    pipeline,
-    isHidden,
-    layoutCol: itemLlayoutCol = layoutCol,
-    ...itemProps
-  }: FormItemProps) => {
+  const renderItems = (
+    {
+      render,
+      renderView,
+      isView: isItemView = isView,
+      isHidden,
+      layoutCol: itemLlayoutCol = layoutCol,
+      ...itemProps
+    }: FormItemProps,
+    index: number
+  ) => {
     let Comp
     const { name } = itemProps
     const { getFieldsValue } = formInsatce
@@ -167,7 +179,7 @@ const Form: FC<FormProps> = ({
       return null
     }
 
-    const key = `form-item-${name?.toString()}`
+    const key = `form-item-${(name || index).toString()}`
 
     if (isItemView) {
       Comp =
@@ -201,7 +213,7 @@ const Form: FC<FormProps> = ({
       {...props}
     >
       <Row gutter={24}>
-        {items.map((item) => renderItems(item))}
+        {items.map((item, index) => renderItems(item, index))}
         {children && (
           <Col
             style={{
