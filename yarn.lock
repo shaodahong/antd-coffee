@@ -2761,17 +2761,17 @@
   resolved "https://registry.yarnpkg.com/@umijs/plugin-access/-/plugin-access-2.3.0.tgz#3d7c5781fe0c482a0caf86ab9e50984a3a2d69a4"
   integrity sha512-es0s8p+eOk//hEpnduNbidLwoictVenNXvDRy6YzfxFhnlFDtA+hn5j4+B7c6JrlcyXhGZYoKDBMz4E9Uk+33A==
 
-"@umijs/plugin-analytics@0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@umijs/plugin-analytics/-/plugin-analytics-0.2.1.tgz#9d4d61bcbce0a30dca7d7529d23c1902f878ab30"
-  integrity sha512-zb6ue2jxwa+bkUk70lEz0whvCvasuP2N1ZsjRNPBYMH8PFU1Xw/vc+DYzSjUoVCDhEPPT42olVLMCbjSK8cIag==
+"@umijs/plugin-analytics@0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@umijs/plugin-analytics/-/plugin-analytics-0.2.2.tgz#575fd231d4327ea13413217aa1b5fc6bdd89465e"
+  integrity sha512-dVDzUfgIdEwdCC6a5IsMYpIPI+bEZjBEqIhAvw9dic6Vk77w9RxQxyRfW11dDmdXLAwWphp22NntQNt1ejZPtg==
 
-"@umijs/plugin-antd@0.4.3":
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/@umijs/plugin-antd/-/plugin-antd-0.4.3.tgz#961515fbd764fa43903d052b6eee71a918f6aee0"
-  integrity sha512-Q60i5K1Ivvc66kgvz0mgyrB3fa7jz4cofdabafIVeJLNVDkF+a5NW7S0Xq7tT4yedtiF9cWBoHCf7SAL2MODPQ==
+"@umijs/plugin-antd@0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@umijs/plugin-antd/-/plugin-antd-0.5.0.tgz#958538c510a8945edba79973e822e943d33b3118"
+  integrity sha512-t1zrJnzawO2pAbnCa5CqwOlToOEl2JCu4nlYGA9L/Ciey6t5WNQSX+Yod0k1nOX0l0C7fYH5Aqtndnj9+7EwGg==
   dependencies:
-    antd "^4.0.0"
+    antd "^4.1.2"
     antd-mobile "^2.3.1"
 
 "@umijs/plugin-crossorigin@1.1.0":
@@ -2794,14 +2794,14 @@
   resolved "https://registry.yarnpkg.com/@umijs/plugin-initial-state/-/plugin-initial-state-2.2.0.tgz#fbd21df6d9f1ad9ed9d351871aa9ebe74f29c4a8"
   integrity sha512-pSr24pfxUXNqNLxaxhELmXoMajEgqPmAjbo1MRhcSj+smvQL0aI4BJwV6LRBxNef/+TZxS303PiSKNl3IhUMtQ==
 
-"@umijs/plugin-layout@0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@umijs/plugin-layout/-/plugin-layout-0.7.0.tgz#7ff6186fc5517d4c29cfbc49bee70d69aeb8c1a5"
-  integrity sha512-MtownaI/L464uPBhUmo8CRVw7jM0q/OEuI6ykIevl2WVWXq50nmVhapC6/7jtRgensZvh7NA+feR/3dnqvuglw==
+"@umijs/plugin-layout@0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@umijs/plugin-layout/-/plugin-layout-0.8.0.tgz#93d490383e8851e1457b9631de65662aa7b3ccf6"
+  integrity sha512-GKRcVIGukG0GtkQS2f0ROmqEkimlXoqvx4C/DB34PPeEgqKe6dZ4BqxXOlSBJW0SO6huJNjIZVIJCrOPzLBKSA==
   dependencies:
     "@ant-design/icons" "^4.0.0"
     "@ant-design/pro-layout" "^5.0.0"
-    antd "^4.0.0-rc.4"
+    antd "^4.1.2"
     lodash "^4.17.15"
     memoize-one "^5.1.1"
     path-to-regexp "1.x"
@@ -2911,17 +2911,17 @@
     unist-util-visit-parents "^3.0.1"
 
 "@umijs/preset-react@1.x":
-  version "1.4.13"
-  resolved "https://registry.yarnpkg.com/@umijs/preset-react/-/preset-react-1.4.13.tgz#15e681662ca6de85ab1f2bb7f2d5e09e88dcfa2a"
-  integrity sha512-gpYO6f0oyDBhn6lhX2lbX2rhVocdEUPSMqGHZPcccvv7TZYdkf8OLtEyhrXpM0GiWegOe0TYXzGlU3tuCT68gQ==
+  version "1.4.14"
+  resolved "https://registry.yarnpkg.com/@umijs/preset-react/-/preset-react-1.4.14.tgz#cc23cec44cc5228b6b081102a8ebe8b76d461ca4"
+  integrity sha512-jVQlkcW4yDFmfjl5JmdiHi82u+n8eauc5SRZuXCK+ZDEH/N1bcdR3lAn/GlrmQmUbkmVLe9lI3dGtV759cp/+A==
   dependencies:
     "@umijs/plugin-access" "2.3.0"
-    "@umijs/plugin-analytics" "0.2.1"
-    "@umijs/plugin-antd" "0.4.3"
+    "@umijs/plugin-analytics" "0.2.2"
+    "@umijs/plugin-antd" "0.5.0"
     "@umijs/plugin-crossorigin" "1.1.0"
     "@umijs/plugin-dva" "0.6.5"
     "@umijs/plugin-initial-state" "2.2.0"
-    "@umijs/plugin-layout" "0.7.0"
+    "@umijs/plugin-layout" "0.8.0"
     "@umijs/plugin-locale" "0.4.4"
     "@umijs/plugin-model" "2.2.0"
     "@umijs/plugin-request" "2.3.2"
@@ -3475,7 +3475,7 @@ antd-mobile@^2.3.1:
     rmc-tabs "~1.2.0"
     rmc-tooltip "~1.0.0"
 
-antd@^4.0.0, antd@^4.0.0-rc.4, antd@^4.1.2:
+antd@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/antd/-/antd-4.1.2.tgz#3d8caea84547aaee8f29a05cedc5f8d6be2da123"
   integrity sha512-YWR4UlbiyjfoDTom/HaB+HqbgMIDoMuV0t+hlAJ+29xBv5WWrJzAbzLUQ4EByomtPzdg0ZlbXx0ETtLpaRU86w==
