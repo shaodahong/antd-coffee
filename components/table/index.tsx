@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import AntdTable, { TableProps as AntdTableProps } from 'antd/lib/table'
 import Row from 'antd/lib/row'
-import Col from 'antd/lib/col'
 import Space from 'antd/lib/space'
 import Divider from 'antd/lib/divider'
 import SearchOutlined from '@ant-design/icons/SearchOutlined'
@@ -9,8 +8,14 @@ import get from 'lodash/get'
 import { useForm } from 'antd/lib/form/util'
 import { PaginationConfig } from 'antd/lib/pagination'
 import { Store } from 'antd/lib/form/interface'
+import {
+  SorterResult,
+  TableCurrentDataSource,
+  Key,
+} from 'antd/lib/table/interface'
 import Form, { FormProps } from '../form'
 import AsyncButton from '../async-button'
+import { isFunc } from '../utils/is'
 
 // export interface TableSearchProps extends FormProps {}
 
@@ -82,13 +87,22 @@ export default function Table<RecordType extends object>({
 
   const onTableReset = () => {
     form.resetFields()
-    return onSearch()
+    onSearch()
   }
 
-  const onChange = (paginationConfig: PaginationConfig) => {
-    return onSearch({
+  const onChange = (
+    paginationConfig: PaginationConfig,
+    filters: Record<string, Key[] | null>,
+    sorter: SorterResult<RecordType> | SorterResult<RecordType>[],
+    extra: TableCurrentDataSource<RecordType>
+  ) => {
+    onSearch({
       [pageNumName]: paginationConfig.current,
     })
+
+    if (isFunc(onTableChange)) {
+      onTableChange(paginationConfig, filters, sorter, extra)
+    }
   }
 
   useEffect(() => {

@@ -4,6 +4,8 @@ import AntdForm, {
   FormItemProps as AntdFormItemProps,
 } from 'antd/lib/form'
 import { StoreValue, Store } from 'antd/lib/form/interface'
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { NamePath } from 'rc-field-form/lib/interface'
 import Input from 'antd/lib/input'
 import Row from 'antd/lib/row'
 import Col, { ColProps } from 'antd/lib/col'
@@ -13,7 +15,7 @@ import update from 'lodash/update'
 import { isFunc } from '../utils/is'
 import useForceUpdate from '../hooks/useForceUpdate'
 import useStates from '../hooks/useStates'
-import { Func } from '../utils/type'
+import useFormRegister from './useFormRegister'
 
 export type OutputPipeline = (fieldValue: StoreValue) => StoreValue
 export type InputPipeline = (fieldValue: StoreValue) => StoreValue
@@ -33,7 +35,6 @@ export interface FormItemProps extends Omit<AntdFormItemProps, 'children'> {
    */
   isView?: boolean
   /**
-   * Todo: InputPipeline
    * Format initial or onFinish value
    * Like Switch component value onFinish maybe Number(true | false)
    * @example (date) => date.format()
@@ -41,7 +42,7 @@ export interface FormItemProps extends Omit<AntdFormItemProps, 'children'> {
   pipeline?: OutputPipeline | [InputPipeline, OutputPipeline]
   /**
    * Hide Form item by condition
-   * @example (fieldValue) => fieldValue === 1
+   * @example (fieldValue) => !!fieldValue
    */
   isHidden?: (fieldValue: StoreValue, fieldsValue: Store) => boolean
   /**
@@ -51,8 +52,8 @@ export interface FormItemProps extends Omit<AntdFormItemProps, 'children'> {
    * @see https://ant.design/components/grid/#Col
    */
   layoutCol?: ColProps
-  /** Enhance initialValues, but only trigger once  */
-  onFinish?: (fieldsValue: Store) => Promise<Store> | void
+  /** Extra names, only registered to form store  */
+  extraNames?: NamePath[]
 }
 
 export interface FormProps extends AntdFormProps {
@@ -68,6 +69,7 @@ export interface FormProps extends AntdFormProps {
    * @see https://ant.design/components/grid/#Col
    */
   layoutCol?: ColProps
+  /** Enhance initialValues, but only trigger once  */
   initialValues?: Store | (() => Promise<Store>)
 }
 
@@ -93,6 +95,26 @@ const Form: FC<FormProps> = ({
     isLoadinginitialValues,
     initialValues: isLoadinginitialValues ? {} : formInitialValues,
   })
+
+  /**
+   * ======== Start ==========
+   * Collect extraNames
+   */
+  const extraNames = items
+    .filter((item) => item.extraNames)
+    .reduce(
+      (prev: NamePath[], curr) => prev.concat(curr.extraNames as NamePath[]),
+      []
+    )
+    .map((item) => {
+      if (Array.isArray(item)) {
+        return item
+      }
+      return [item]
+    })
+
+  useFormRegister(formInsatce, extraNames)
+  // ======== End ==========
 
   if (!items || items.length === 0) {
     return null
@@ -175,7 +197,7 @@ const Form: FC<FormProps> = ({
     const fieldsValue = getFieldsValue()
     const fieldValue = get(fieldsValue, name as string)
 
-    if (isFunc(isHidden) && (isHidden as Func)(fieldValue, fieldsValue)) {
+    if (isFunc(isHidden) && isHidden(fieldValue, fieldsValue)) {
       return null
     }
 

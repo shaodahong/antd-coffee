@@ -14,6 +14,7 @@ export interface ModalFormProps extends ModalProps {
    */
   isKeepAlive?: boolean
   onOk?: (values: Store) => Promise<any> | false | void
+  onCancel?: () => void
 }
 
 const ModalForm: FC<ModalFormProps> = ({
@@ -37,15 +38,15 @@ const ModalForm: FC<ModalFormProps> = ({
       let isNeedCloseWhenOnFinish = true
       const { onCancel } = props
       if (isFunc(formProps.onFinish)) {
-        await (formProps.onFinish as Func)(values)
+        await formProps.onFinish(values)
       }
       if (isFunc(onOk)) {
-        const result = await (onOk as Func)(values)
+        const result = await onOk(values)
         result === false && (isNeedCloseWhenOnFinish = result)
       }
 
       if (isNeedCloseWhenOnFinish && isFunc(onCancel)) {
-        ;(onCancel as Func)()
+        onCancel()
       }
     } finally {
       setLoading(false)
