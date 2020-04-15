@@ -8,6 +8,8 @@
 .editorconfig
 .gitignore
 .prettierignore
+.DS_Stor
+.eslintignore
 /lib
 /es
 /dist
