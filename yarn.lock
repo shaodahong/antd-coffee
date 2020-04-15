@@ -3022,10 +3022,10 @@
     umi-webpack-bundle-analyzer "3.5.0"
     zlib "1.0.5"
 
-"@umijs/preset-dumi@1.0.15":
-  version "1.0.15"
-  resolved "https://registry.yarnpkg.com/@umijs/preset-dumi/-/preset-dumi-1.0.15.tgz#60b95cfa2954bea57e47e70a7061e98297b985d9"
-  integrity sha512-d1ZaCIn71l5bWmZjiBvXzKahoAQ/9aGnzkM3N2OOd79563D7spK4k4hv0l0I+Jp39lsDI9O1tqK/W1Hc43y33Q==
+"@umijs/preset-dumi@1.0.16":
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/@umijs/preset-dumi/-/preset-dumi-1.0.16.tgz#7931eb7858567bdbf76f2b87517007142af7ef38"
+  integrity sha512-q9SKLkVvEUWdjYQ4ai3cbIeABozH/HpKjuj/4MRyday/P4RI38ghaJBcWYPN3cvTQu6ylEDjkZmOlsUD9ArEpQ==
   dependencies:
     "@babel/core" "^7.7.2"
     "@babel/generator" "^7.7.2"
@@ -5931,12 +5931,12 @@ dotenv@8.2.0:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
   integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
 
-dumi@^1.0.15:
-  version "1.0.15"
-  resolved "https://registry.yarnpkg.com/dumi/-/dumi-1.0.15.tgz#5e2ca0371385f656d1c9cf8f01c0f8910f844d2c"
-  integrity sha512-Hukgt7gxnsnAi57eC1KU8Z0dySiNgFsEKBY43pGb0AOzg09s8FtdfrOp3icB0n1nDqhQHHsW6TThkbgZBwXaxQ==
+dumi@^1.0.16:
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/dumi/-/dumi-1.0.16.tgz#d938181a7955c4fc17a2f43071d5065a87d4eff9"
+  integrity sha512-m+JI3/sD1t+IFc9IvWWkZykZ4nvdT0Nn7d85FEvomPbw8sRiw154cyxPsnPcgbbIQNBjtApAffjfeFpm+x2XAA==
   dependencies:
-    "@umijs/preset-dumi" "1.0.15"
+    "@umijs/preset-dumi" "1.0.16"
     umi "^3.0.0"
 
 duplexer3@^0.1.4:
@@ -9785,11 +9785,6 @@ locate-path@^5.0.0:
   integrity sha512-t7hw9pI+WvuwNJXwk5zVHpyhIqzg2qTlklJOf0mVxGSbe3Fp2VieZcduNYjaLDoy6p9uGpQEGWG87WpMKlNq8g==
   dependencies:
     p-locate "^4.1.0"
-
-lodash-es@^4.17.15:
-  version "4.17.15"
-  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.15.tgz#21bd96839354412f23d7a10340e5eac6ee455d78"
-  integrity sha512-rlrc3yU3+JNOpZ9zj5pQtxnx2THmvRykwL4Xlxoa8I9lHBlVbbyPhgyPMioxVZ4NqyxaVVtaJnzsyOidQIhyyQ==
 
 lodash._reinterpolate@^3.0.0:
   version "3.0.0"
