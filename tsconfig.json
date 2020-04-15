@@ -20,7 +20,5 @@
     "es",
     "dist",
     "typings",
-    "**/__test__",
-    "test"
   ]
 }

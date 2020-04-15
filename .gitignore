@@ -20,3 +20,6 @@
 /.env.local
 
 /site
+/es
+/lib
+/stats.html

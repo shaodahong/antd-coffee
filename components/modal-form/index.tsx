@@ -1,10 +1,11 @@
 import React, { FC, MouseEventHandler, useState, useEffect } from 'react'
-import Modal, { ModalProps } from 'antd/lib/modal'
-import { useForm } from 'antd/lib/form/util'
+import { Modal, Form as AntdForm } from 'antd'
+import { ModalProps } from 'antd/lib/modal'
 import { Store } from 'antd/lib/form/interface'
 import Form, { FormProps } from '../form'
 import { isFunc } from '../utils/is'
-import { Func } from '../utils/type'
+
+const { useForm } = AntdForm
 
 export interface ModalFormProps extends ModalProps {
   formProps: FormProps

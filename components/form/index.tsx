@@ -1,16 +1,16 @@
 import React, { ReactElement, FC, ReactNode, useEffect } from 'react'
-import AntdForm, {
+import { Form as AntdForm, Input, Row, Col, Skeleton, Popover } from 'antd'
+import {
   FormProps as AntdFormProps,
   FormItemProps as AntdFormItemProps,
+  FormInstance,
 } from 'antd/lib/form'
 import { StoreValue, Store } from 'antd/lib/form/interface'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { NamePath } from 'rc-field-form/lib/interface'
-import Input from 'antd/lib/input'
-import Row from 'antd/lib/row'
-import Col, { ColProps } from 'antd/lib/col'
-import Skeleton from 'antd/lib/skeleton'
+import { ColProps } from 'antd/lib/col'
 import get from 'lodash/get'
+import QuestionCircleOutlined from '@ant-design/icons/QuestionCircleOutlined'
 import update from 'lodash/update'
 import { isFunc } from '../utils/is'
 import useForceUpdate from '../hooks/useForceUpdate'
@@ -24,11 +24,19 @@ export interface FormItemProps extends Omit<AntdFormItemProps, 'children'> {
   /**
    * @example () => <Input />
    */
-  render?: (fieldValue: StoreValue, fieldsValue: Store) => ReactElement
+  render?: (
+    fieldValue: StoreValue,
+    fieldsValue: Store,
+    form: FormInstance
+  ) => ReactElement
   /**
    * @example (fieldValue) => fieldValue + 1
    */
-  renderView?: (fieldValue: StoreValue, fieldsValue: Store) => ReactNode
+  renderView?: (
+    fieldValue: StoreValue,
+    fieldsValue: Store,
+    form: FormInstance
+  ) => ReactNode
   /**
    * Priority is greater than Form isView
    * @default false
@@ -54,6 +62,13 @@ export interface FormItemProps extends Omit<AntdFormItemProps, 'children'> {
   layoutCol?: ColProps
   /** Extra names, only registered to form store  */
   extraNames?: NamePath[]
+  tip?:
+    | ReactNode
+    | ((
+        fieldValue: StoreValue,
+        fieldsValue: Store,
+        form: FormInstance
+      ) => ReactNode)
 }
 
 export interface FormProps extends AntdFormProps {
@@ -187,6 +202,8 @@ const Form: FC<FormProps> = ({
       isView: isItemView = isView,
       isHidden,
       layoutCol: itemLlayoutCol = layoutCol,
+      label,
+      tip,
       ...itemProps
     }: FormItemProps,
     index: number
@@ -195,7 +212,7 @@ const Form: FC<FormProps> = ({
     const { name } = itemProps
     const { getFieldsValue } = formInsatce
     const fieldsValue = getFieldsValue()
-    const fieldValue = get(fieldsValue, name as string)
+    const fieldValue: StoreValue = get(fieldsValue, name as string)
 
     if (isFunc(isHidden) && isHidden(fieldValue, fieldsValue)) {
       return null
@@ -203,15 +220,34 @@ const Form: FC<FormProps> = ({
 
     const key = `form-item-${(name || index).toString()}`
 
+    const LabelWrap = tip ? (
+      <>
+        {label}
+        <Popover
+          content={
+            isFunc(tip) ? () => tip(fieldValue, fieldsValue, formInsatce) : tip
+          }
+        >
+          <QuestionCircleOutlined
+            style={{
+              marginLeft: 4,
+            }}
+          />
+        </Popover>
+      </>
+    ) : (
+      label
+    )
+
     if (isItemView) {
       Comp =
         renderView && isFunc(renderView)
-          ? renderView(fieldValue, fieldsValue)
+          ? renderView(fieldValue, fieldsValue, formInsatce)
           : fieldValue
     } else {
       Comp =
         render && isFunc(render) ? (
-          render(fieldValue, fieldsValue)
+          render(fieldValue, fieldsValue, formInsatce)
         ) : (
           <Input allowClear />
         )
@@ -219,7 +255,7 @@ const Form: FC<FormProps> = ({
 
     return (
       <Col {...itemLlayoutCol}>
-        <Item key={key} {...itemProps}>
+        <Item key={key} label={LabelWrap} {...itemProps}>
           {Comp}
         </Item>
       </Col>
