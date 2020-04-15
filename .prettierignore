@@ -8,3 +8,7 @@
 .editorconfig
 .gitignore
 .prettierignore
+/lib
+/es
+/dist
+/stats.html
