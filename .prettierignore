@@ -8,7 +8,7 @@
 .editorconfig
 .gitignore
 .prettierignore
-.DS_Stor
+.DS_Store
 .eslintignore
 /lib
 /es
