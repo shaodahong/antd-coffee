@@ -9,6 +9,9 @@ import {
   SorterResult,
   TableCurrentDataSource,
   Key,
+  ColumnsType,
+  ColumnGroupType,
+  ColumnType,
 } from 'antd/lib/table/interface'
 import Form, { FormProps } from '../form'
 import AsyncButton from '../async-button'
@@ -16,7 +19,21 @@ import { isFunc } from '../utils/is'
 
 const { useForm } = AntdForm
 
-// export interface TableSearchProps extends FormProps {}
+interface TableCommonProps {
+  /**
+   * If show when data nullish
+   * @default -
+   */
+  placeholder?: string
+}
+
+export interface TableSearchProps extends FormProps {
+  /**
+   * Show search form item count
+   * @default 3
+   */
+  initialCount?: number
+}
 
 interface TablePaginationName {
   /**
@@ -42,13 +59,20 @@ export interface TableData<RecordType> {
   [key: string]: any
 }
 
+// interface TableColumnsProps extends TableCommonProps {}
+
+export type TableColumnsType<RecordType> = TableCommonProps &
+  (ColumnGroupType<RecordType> | ColumnType<RecordType>)
+
 export interface TableProps<RecordType>
   extends AntdTableProps<RecordType>,
-    TablePaginationName {
+    TablePaginationName,
+    TableCommonProps {
   searchProps?: FormProps
   onSearch: (
     params: any
   ) => TableData<RecordType> | Promise<TableData<RecordType>>
+  columns?: TableColumnsType<RecordType>[]
 }
 
 export default function Table<RecordType extends object>({
@@ -60,6 +84,8 @@ export default function Table<RecordType extends object>({
   pageNumName = 'pageNum',
   dataName = 'data',
   onChange: onTableChange,
+  columns,
+  placeholder: tablePlaceholder = '-',
   ...props
 }: TableProps<RecordType>) {
   const [form] = useForm()
@@ -104,6 +130,22 @@ export default function Table<RecordType extends object>({
     }
   }
 
+  const renderColumns: () => ColumnsType<RecordType> | undefined = () => {
+    return columns?.map(
+      ({ placeholder = tablePlaceholder, render, ...columnProps }) => ({
+        ...columnProps,
+        render: (text, record, index) => {
+          if (isFunc(render)) {
+            const result = render(text, record, index)
+            return result ?? placeholder
+          }
+
+          return text ?? placeholder
+        },
+      })
+    )
+  }
+
   useEffect(() => {
     onSearch()
   }, [])
@@ -131,6 +173,7 @@ export default function Table<RecordType extends object>({
       )}
       <AntdTable<RecordType>
         {...props}
+        columns={renderColumns()}
         onChange={onChange}
         loading={loading}
         dataSource={get(data, dataName)}

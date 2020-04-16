@@ -1,9 +1,9 @@
 import React from 'react'
-import { ColumnsType } from 'antd/lib/table'
 import { Table } from 'antd-coffee'
 import { DatePicker } from 'antd'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mock } from 'mockjs'
+import { TableColumnsType } from '..'
 
 interface User {
   key: number
@@ -15,7 +15,7 @@ interface User {
 }
 
 export default function BaseDemo() {
-  const columns: ColumnsType<User> = [
+  const columns: TableColumnsType<User>[] = [
     {
       title: '序号',
       dataIndex: 'index',
@@ -42,20 +42,6 @@ export default function BaseDemo() {
       dataIndex: 'grade',
     },
   ]
-
-  console.log(
-    mock({
-      'array|1-10': [
-        {
-          'name|+1': ['Jack', 'Bob'],
-          'age|10-30': 10,
-          'birthday|1-10': '*',
-          'hobby|1-10': '篮球',
-          'grade|+1': ['初一', '初二', '初三'],
-        },
-      ],
-    })
-  )
 
   const data = mock({
     'data|10-100': [
