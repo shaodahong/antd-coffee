@@ -28,6 +28,7 @@ export default function BaseDemo() {
     {
       title: '年龄',
       dataIndex: 'age',
+      sorter: true,
     },
     {
       title: '生日',

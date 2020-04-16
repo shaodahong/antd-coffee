@@ -35,7 +35,7 @@ export default {
   plugins: [
     babel({
       exclude: 'node_modules/**',
-      configFile: './babel.config.js',
+      configFile: './.babelrc.js',
     }),
     resolve(),
     typescript(),

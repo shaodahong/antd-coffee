@@ -7,8 +7,8 @@
   "license": "MIT",
   "scripts": {
     "build": "yarn clean && yarn dist && yarn build:lib && yarn build:es",
-    "build:es": "cross-env NODE_ENV=production BABEL_ENV=es babel --config-file ./babel.config.js components --out-dir es --ignore \"**/*.test.tsx\" --extensions \".ts,.tsx\"",
-    "build:lib": "cross-env NODE_ENV=production babel --config-file ./babel.config.js components --out-dir lib --ignore **/*.test.tsx,**/demo/* --extensions \".ts,.tsx\"",
+    "build:es": "cross-env NODE_ENV=production BABEL_ENV=es babel --config-file ./.babelrc.js components --out-dir es --ignore **/*.test.tsx,**/demo/* --extensions \".ts,.tsx\"",
+    "build:lib": "cross-env NODE_ENV=production babel --config-file ./.babelrc.js components --out-dir lib --ignore **/*.test.tsx,**/demo/* --extensions \".ts,.tsx\"",
     "dist": "cross-env NODE_ENV=production rollup -c",
     "clean": "rimraf es && rimraf lib && rimraf dist",
     "deploy": "dumi build",
@@ -54,6 +54,8 @@
   "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.8.3",
+    "@babel/plugin-proposal-optional-chaining": "^7.9.0",
     "@babel/plugin-transform-runtime": "^7.9.0",
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-react": "^7.9.1",

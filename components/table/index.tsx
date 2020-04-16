@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Table as AntdTable, Space, Row, Divider, Form as AntdForm } from 'antd'
 import { TableProps as AntdTableProps } from 'antd/lib/table'
 import SearchOutlined from '@ant-design/icons/SearchOutlined'
+import DownOutlined from '@ant-design/icons/DownOutlined'
 import get from 'lodash/get'
 import { PaginationConfig } from 'antd/lib/pagination'
 import { Store } from 'antd/lib/form/interface'
@@ -68,7 +69,7 @@ export interface TableProps<RecordType>
   extends AntdTableProps<RecordType>,
     TablePaginationName,
     TableCommonProps {
-  searchProps?: FormProps
+  searchProps?: TableSearchProps
   onSearch: (
     params: any
   ) => TableData<RecordType> | Promise<TableData<RecordType>>
@@ -76,7 +77,7 @@ export interface TableProps<RecordType>
 }
 
 export default function Table<RecordType extends object>({
-  searchProps,
+  searchProps: tableSearchProps,
   onSearch: onTableSearch,
   pagination,
   totalName = 'total',
@@ -90,6 +91,7 @@ export default function Table<RecordType extends object>({
 }: TableProps<RecordType>) {
   const [form] = useForm()
   const [loading, setLoading] = useState(false)
+  const [isExpand, setIsExpand] = useState(false)
   const [data, setData] = useState<TableData<RecordType>>()
 
   // get data source
@@ -146,31 +148,54 @@ export default function Table<RecordType extends object>({
     )
   }
 
+  const renderSearchColumns = () => {
+    if (!tableSearchProps) {
+      return null
+    }
+    const { initialCount = 3, items, ...searchProps } = tableSearchProps
+
+    return (
+      <>
+        <Form
+          items={isExpand ? items : items.slice(0, initialCount)}
+          form={form}
+          layoutCol={{ span: 6 }}
+          {...searchProps}
+        >
+          <Row justify="end">
+            <Space>
+              <AsyncButton
+                onClick={onClickSearch}
+                type="primary"
+                icon={<SearchOutlined />}
+              >
+                搜索
+              </AsyncButton>
+              <AsyncButton onClick={onTableReset}>重置</AsyncButton>
+              <AsyncButton
+                type="link"
+                onClick={() => {
+                  setIsExpand((value) => !value)
+                }}
+              >
+                {isExpand ? '收起' : '展开'}
+                <DownOutlined rotate={isExpand ? 180 : 0} />
+              </AsyncButton>
+            </Space>
+          </Row>
+        </Form>
+        <Divider />
+      </>
+    )
+  }
+
   useEffect(() => {
     onSearch()
   }, [])
 
   return (
     <div>
-      {searchProps && (
-        <>
-          <Form form={form} layoutCol={{ span: 6 }} {...searchProps}>
-            <Row justify="end">
-              <Space>
-                <AsyncButton
-                  onClick={onClickSearch}
-                  type="primary"
-                  icon={<SearchOutlined />}
-                >
-                  搜索
-                </AsyncButton>
-                <AsyncButton onClick={onTableReset}>重置</AsyncButton>
-              </Space>
-            </Row>
-          </Form>
-          <Divider />
-        </>
-      )}
+      {renderSearchColumns()}
       <AntdTable<RecordType>
         {...props}
         columns={renderColumns()}
@@ -183,6 +208,7 @@ export default function Table<RecordType extends object>({
             : {
                 // Hide if single page
                 hideOnSinglePage: true,
+                showSizeChanger: false,
                 showTotal: (total) => `共 ${total} 条`,
                 total: get(data, totalName),
                 defaultCurrent: get(data, pageNumName, 1),
