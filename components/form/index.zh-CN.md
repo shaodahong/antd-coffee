@@ -47,21 +47,23 @@ group:
 
 ### 参数
 
-| 属性          | 描述                                                  | 类型                                                | 默认值         |
-| ------------- | ----------------------------------------------------- | --------------------------------------------------- | -------------- |
-| items         | 表单项                                                | `FormItem[]`                                        | -              |
-| isView        | 是否只读                                              | `boolean`                                           | `false`        |
-| layoutCol     | 布局                                                  | [ColProps](https://ant.design/components/grid/#Col) | `{ span: 24 }` |
-| initialValues | 初始化值，只会触发一次，支持 `Promise` 从接口拿到数据 | `Store \| (() => Promise<Store>)`                   | -              |
+| 属性          | 描述                                                         | 类型                                                | 默认值         |
+| ------------- | ------------------------------------------------------------ | --------------------------------------------------- | -------------- |
+| items         | 表单项                                                       | `FormItem[]`                                        | -              |
+| isView        | 是否只读                                                     | `boolean`                                           | `false`        |
+| layoutCol     | 布局                                                         | [ColProps](https://ant.design/components/grid/#Col) | `{ span: 24 }` |
+| initialValues | 初始化值，只会触发一次，支持 `Promise` 从接口拿到数据        | `Store \| (() => Promise<Store>)`                   | -              |
+| placeholder   | 占位符(View 模式下数据为 `null` `undefined` `''` 显示的文字) | `string`                                            | `-`            |
 
 #### FormItem
 
-| 属性       | 描述               | 类型                                                           | 默认值                       |
-| ---------- | ------------------ | -------------------------------------------------------------- | ---------------------------- |
-| render     | 编辑模式下渲染方法 | `(fieldValue: StoreValue, fieldsValue: Store) => ReactElement` | `() => <Input allowClear />` |
-| renderView | 只读模式下渲染方法 | `(fieldValue: StoreValue, fieldsValue: Store) => ReactNode`    | `fieldValue`                 |
-| isView     | 是否只读           | `boolean`                                                      | Form `isView`                |
-| pipeline   | 输入输出过滤       | `OutputPipeline \| [InputPipeline, OutputPipeline]`            | -                            |
-| isHidden   | 是否隐藏           | `(fieldValue: StoreValue, fieldsValue: Store) => boolean`      | -                            |
-| layoutCol  | 布局               | [ColProps](https://ant.design/components/grid/#Col)            | Form `layoutCol`             |
-| extraNames | 额外的 name        | `NamePath[]`                                                   | -                            |
+| 属性        | 描述                                                         | 类型                                                           | 默认值                       |
+| ----------- | ------------------------------------------------------------ | -------------------------------------------------------------- | ---------------------------- |
+| render      | 编辑模式下渲染方法                                           | `(fieldValue: StoreValue, fieldsValue: Store) => ReactElement` | `() => <Input allowClear />` |
+| renderView  | 只读模式下渲染方法                                           | `(fieldValue: StoreValue, fieldsValue: Store) => ReactNode`    | `fieldValue`                 |
+| isView      | 是否只读                                                     | `boolean`                                                      | Form `isView`                |
+| pipeline    | 输入输出过滤                                                 | `OutputPipeline \| [InputPipeline, OutputPipeline]`            | -                            |
+| isHidden    | 是否隐藏                                                     | `(fieldValue: StoreValue, fieldsValue: Store) => boolean`      | -                            |
+| layoutCol   | 布局                                                         | [ColProps](https://ant.design/components/grid/#Col)            | Form `layoutCol`             |
+| extraNames  | 额外的 name                                                  | `NamePath[]`                                                   | -                            |
+| placeholder | 占位符(View 模式下数据为 `null` `undefined` `''` 显示的文字) | `string`                                                       | `-`                          |

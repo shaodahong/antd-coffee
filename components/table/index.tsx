@@ -17,6 +17,7 @@ import {
 import Form, { FormProps } from '../form'
 import AsyncButton from '../async-button'
 import { isFunc } from '../utils/is'
+import showPlaceHolder from '../utils/showPlaceholder'
 
 const { useForm } = AntdForm
 
@@ -139,10 +140,10 @@ export default function Table<RecordType extends object>({
         render: (text, record, index) => {
           if (isFunc(render)) {
             const result = render(text, record, index)
-            return result ?? placeholder
+            return showPlaceHolder(result, placeholder)
           }
 
-          return text ?? placeholder
+          return showPlaceHolder(text, placeholder)
         },
       })
     )

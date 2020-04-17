@@ -16,11 +16,34 @@ import { isFunc } from '../utils/is'
 import useForceUpdate from '../hooks/useForceUpdate'
 import useStates from '../hooks/useStates'
 import useFormRegister from './useFormRegister'
+import showPlaceHolder from '../utils/showPlaceholder'
 
 export type OutputPipeline = (fieldValue: StoreValue) => StoreValue
 export type InputPipeline = (fieldValue: StoreValue) => StoreValue
 
-export interface FormItemProps extends Omit<AntdFormItemProps, 'children'> {
+interface FormCommonProps {
+  /**
+   * If show when data nullish in View mode
+   * @default -
+   */
+  placeholder?: string
+  /**
+   * Priority is greater than Form isView
+   * @default false
+   */
+  isView?: boolean
+  /**
+   * Set form item layout
+   * Priority is greater than Form layoutCol
+   * @default { span: 24 }
+   * @see https://ant.design/components/grid/#Col
+   */
+  layoutCol?: ColProps
+}
+
+export interface FormItemProps
+  extends Omit<AntdFormItemProps, 'children'>,
+    FormCommonProps {
   /**
    * @example () => <Input />
    */
@@ -38,11 +61,6 @@ export interface FormItemProps extends Omit<AntdFormItemProps, 'children'> {
     form: FormInstance
   ) => ReactNode
   /**
-   * Priority is greater than Form isView
-   * @default false
-   */
-  isView?: boolean
-  /**
    * Format initial or onFinish value
    * Like Switch component value onFinish maybe Number(true | false)
    * @example (date) => date.format()
@@ -53,13 +71,6 @@ export interface FormItemProps extends Omit<AntdFormItemProps, 'children'> {
    * @example (fieldValue) => !!fieldValue
    */
   isHidden?: (fieldValue: StoreValue, fieldsValue: Store) => boolean
-  /**
-   * Set form item layout
-   * Priority is greater than Form layoutCol
-   * @default { span: 24 }
-   * @see https://ant.design/components/grid/#Col
-   */
-  layoutCol?: ColProps
   /** Extra names, only registered to form store  */
   extraNames?: NamePath[]
   tip?:
@@ -71,19 +82,9 @@ export interface FormItemProps extends Omit<AntdFormItemProps, 'children'> {
       ) => ReactNode)
 }
 
-export interface FormProps extends AntdFormProps {
+export interface FormProps extends AntdFormProps, FormCommonProps {
   items: FormItemProps[]
   children?: React.ReactNode
-  /**
-   * @default false
-   */
-  isView?: boolean
-  /**
-   * Set form item layout
-   * @default { span: 24 }
-   * @see https://ant.design/components/grid/#Col
-   */
-  layoutCol?: ColProps
   /** Enhance initialValues, but only trigger once  */
   initialValues?: Store | (() => Promise<Store>)
 }
@@ -98,6 +99,7 @@ const Form: FC<FormProps> = ({
   form,
   layoutCol = { span: 24 },
   initialValues: formInitialValues,
+  placeholder: formPlaceholder = '-',
   ...props
 }) => {
   const [formInsatce] = useForm(form)
@@ -204,11 +206,12 @@ const Form: FC<FormProps> = ({
       layoutCol: itemLlayoutCol = layoutCol,
       label,
       tip,
+      placeholder = formPlaceholder,
       ...itemProps
     }: FormItemProps,
     index: number
   ) => {
-    let Comp
+    let Comp: ReactNode
     const { name } = itemProps
     const { getFieldsValue } = formInsatce
     const fieldsValue = getFieldsValue()
@@ -240,10 +243,12 @@ const Form: FC<FormProps> = ({
     )
 
     if (isItemView) {
-      Comp =
+      Comp = showPlaceHolder(
         renderView && isFunc(renderView)
           ? renderView(fieldValue, fieldsValue, formInsatce)
-          : fieldValue
+          : fieldValue,
+        placeholder
+      )
     } else {
       Comp =
         render && isFunc(render) ? (

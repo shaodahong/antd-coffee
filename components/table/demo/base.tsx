@@ -50,7 +50,7 @@ export default function BaseDemo() {
         name: '@first',
         age: '@integer(10, 30)',
         birthday: '@date',
-        'hobby|+1': ['篮球', '乒乓球'],
+        'hobby|+1': ['篮球', '乒乓球', undefined, '', null],
         'grade|+1': ['初一', '初二', '初三'],
       },
     ],

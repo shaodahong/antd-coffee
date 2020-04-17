@@ -17,11 +17,11 @@ module.exports = {
     [
       'import',
       {
-        libraryName: 'lodash-es',
+        libraryName: 'lodash',
         libraryDirectory: '',
         camel2DashComponentName: false,
       },
-      'lodash-es',
+      'lodash',
     ],
   ],
 }
