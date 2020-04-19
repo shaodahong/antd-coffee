@@ -2978,10 +2978,10 @@
     umi-webpack-bundle-analyzer "3.5.0"
     zlib "1.0.5"
 
-"@umijs/preset-dumi@1.0.16":
-  version "1.0.16"
-  resolved "https://registry.yarnpkg.com/@umijs/preset-dumi/-/preset-dumi-1.0.16.tgz#7931eb7858567bdbf76f2b87517007142af7ef38"
-  integrity sha512-q9SKLkVvEUWdjYQ4ai3cbIeABozH/HpKjuj/4MRyday/P4RI38ghaJBcWYPN3cvTQu6ylEDjkZmOlsUD9ArEpQ==
+"@umijs/preset-dumi@1.0.17":
+  version "1.0.17"
+  resolved "https://registry.yarnpkg.com/@umijs/preset-dumi/-/preset-dumi-1.0.17.tgz#b02d0e12175f21405f6951211eb13c102ef74403"
+  integrity sha512-w8YvUbwzY6QhZxVrTDJIlLIEHt/m2NHb96mX20NvPgOL0L1EcZP9Ay/+vM/LyfBrSTs6/jdH7IMG13cNtAbmTQ==
   dependencies:
     "@babel/core" "^7.7.2"
     "@babel/generator" "^7.7.2"
@@ -3005,6 +3005,8 @@
     loader-utils "^1.4.0"
     lz-string "^1.4.4"
     mdast-util-to-hast "^7.0.0"
+    prism-react-renderer "^1.0.2"
+    prismjs "^1.20.0"
     react-clipboard.js "^2.0.16"
     rehype-autolink-headings "^2.0.5"
     rehype-remove-comments "^3.0.0"
@@ -5887,12 +5889,12 @@ dotenv@8.2.0:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
   integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
 
-dumi@^1.0.16:
-  version "1.0.16"
-  resolved "https://registry.yarnpkg.com/dumi/-/dumi-1.0.16.tgz#d938181a7955c4fc17a2f43071d5065a87d4eff9"
-  integrity sha512-m+JI3/sD1t+IFc9IvWWkZykZ4nvdT0Nn7d85FEvomPbw8sRiw154cyxPsnPcgbbIQNBjtApAffjfeFpm+x2XAA==
+dumi@^1.0.17:
+  version "1.0.17"
+  resolved "https://registry.yarnpkg.com/dumi/-/dumi-1.0.17.tgz#df98320c37e0aaac104921727bd5ab039b5ce552"
+  integrity sha512-jGj8O5bNNhyEMTIkLbO/XSFnm6CkZJEUmIh/CAoPs5vk16FPeCz0otiyVa++09hjSeF2zq6f6xIDT9QmH01+FA==
   dependencies:
-    "@umijs/preset-dumi" "1.0.16"
+    "@umijs/preset-dumi" "1.0.17"
     umi "^3.0.0"
 
 duplexer3@^0.1.4:
@@ -12164,6 +12166,18 @@ pretty-time@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/pretty-time/-/pretty-time-1.1.0.tgz#ffb7429afabb8535c346a34e41873adf3d74dd0e"
   integrity sha512-28iF6xPQrP8Oa6uxE6a1biz+lWeTOAPKggvjB8HAs6nVMKZwf5bG++632Dx614hIWgUPkgivRfG+a8uAXGTIbA==
+
+prism-react-renderer@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/prism-react-renderer/-/prism-react-renderer-1.0.2.tgz#3bb9a6a42f76fc049b03266298c7068fdd4b7ea9"
+  integrity sha512-0++pJyRfu4v2OxI/Us/5RLui9ESDkTiLkVCtKuPZYdpB8UQWJpnJQhPrWab053XtsKW3oM0sD69uJ6N9exm1Ag==
+
+prismjs@^1.20.0:
+  version "1.20.0"
+  resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.20.0.tgz#9b685fc480a3514ee7198eac6a3bf5024319ff03"
+  integrity sha512-AEDjSrVNkynnw6A+B1DsFkd6AVdTnp+/WoUixFRULlCLZVRZlVQMVWio/16jv7G1FscUxQxOQhWwApgbnxr6kQ==
+  optionalDependencies:
+    clipboard "^2.0.0"
 
 prismjs@~1.17.0:
   version "1.17.1"
