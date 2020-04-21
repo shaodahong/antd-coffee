@@ -6921,10 +6921,10 @@ fastparse@^1.1.2:
   resolved "https://registry.yarnpkg.com/fastparse/-/fastparse-1.1.2.tgz#91728c5a5942eced8531283c79441ee4122c35a9"
   integrity sha512-483XLLxTVIwWK3QTrMGRqUfUpoOs/0hbQrl2oz4J0pAcm3A3bu84wxTFqGqkJzewCLdME38xJLJAxBABfQT8sQ==
 
-father-build@^1.17.2:
-  version "1.17.2"
-  resolved "https://registry.yarnpkg.com/father-build/-/father-build-1.17.2.tgz#a9a9af3150e777fb4a7789486549efb6cd9a0219"
-  integrity sha512-9o+fgQDIhhhez1XCyWYZQlgwnpGxM6bhmdlR2SWy1BZSBF3ppSoDrEWFRoFeoFsz5uKamcwDASKDoF2PVUNHjQ==
+father-build@^1.18.0:
+  version "1.18.0"
+  resolved "https://registry.yarnpkg.com/father-build/-/father-build-1.18.0.tgz#9854aa6c8f3967358da27c6b004d663b8b48bd53"
+  integrity sha512-NfV2jk6YbIDwxpOUr9AxHO3QxkKV/qjDSGT9xuQcq9s5hd1CBbE2i5lDyzlfmNpZLO+5Sn6fwS3/9v1NARRYFA==
   dependencies:
     "@babel/core" "7.4.5"
     "@babel/plugin-proposal-class-properties" "7.4.4"
@@ -6954,6 +6954,7 @@ father-build@^1.17.2:
     gulp-typescript "5.0.1"
     less "3.9.0"
     less-plugin-npm-import "2.1.0"
+    lodash "4.17.15"
     rimraf "2.6.3"
     rollup "1.27.8"
     rollup-plugin-babel "4.3.3"
