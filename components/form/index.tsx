@@ -12,11 +12,13 @@ import { ColProps } from 'antd/lib/col'
 import get from 'lodash/get'
 import QuestionCircleOutlined from '@ant-design/icons/QuestionCircleOutlined'
 import update from 'lodash/update'
+import isEqual from 'lodash/isEqual'
 import { isFunc } from '../utils/is'
 import useForceUpdate from '../hooks/useForceUpdate'
 import useStates from '../hooks/useStates'
 import useFormRegister from './useFormRegister'
 import showPlaceHolder from '../utils/showPlaceholder'
+import usePrevious from './usePrevious'
 
 export type OutputPipeline = (fieldValue: StoreValue) => StoreValue
 export type InputPipeline = (fieldValue: StoreValue) => StoreValue
@@ -112,6 +114,7 @@ const Form: FC<FormProps> = ({
     isLoadinginitialValues,
     initialValues: isLoadinginitialValues ? {} : formInitialValues,
   })
+  const prevFormInitialValues = usePrevious(formInitialValues)
 
   /**
    * ======== Start ==========
@@ -168,6 +171,16 @@ const Form: FC<FormProps> = ({
   useEffect(() => {
     forceUpdate()
   }, [initialStates])
+
+  useEffect(() => {
+    if (
+      !isLoadinginitialValues &&
+      !isEqual(prevFormInitialValues, formInitialValues)
+    ) {
+      formInsatce.setFieldsValue(formInitialValues as Store)
+      forceUpdate()
+    }
+  }, [formInitialValues])
 
   if (!items || items.length === 0) {
     return null
