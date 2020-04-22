@@ -133,10 +133,6 @@ const Form: FC<FormProps> = ({
   useFormRegister(formInsatce, extraNames)
   // ======== End ==========
 
-  if (!items || items.length === 0) {
-    return null
-  }
-
   const getInitialValues = async () => {
     let values: Store = {}
     try {
@@ -149,8 +145,6 @@ const Form: FC<FormProps> = ({
           const inputer = (pipeline as [InputPipeline, OutputPipeline])[0]
           update(values, name as string, inputer)
         })
-    } catch (error) {
-      return Promise.reject(error)
     } finally {
       setInitialStates({
         isLoadinginitialValues: false,
@@ -174,6 +168,10 @@ const Form: FC<FormProps> = ({
   useEffect(() => {
     forceUpdate()
   }, [initialStates])
+
+  if (!items || items.length === 0) {
+    return null
+  }
 
   if (initialStates.isLoadinginitialValues) {
     return <Skeleton />

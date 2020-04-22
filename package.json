@@ -7,8 +7,8 @@
   "license": "MIT",
   "scripts": {
     "build": "yarn clean && yarn build:lib && yarn build:es",
-    "build:es": "cross-env NODE_ENV=production BABEL_ENV=es babel --config-file ./.babelrc.js components --out-dir es --ignore **/*.test.tsx,**/demo/* --extensions \".ts,.tsx\"",
-    "build:lib": "cross-env NODE_ENV=production babel --config-file ./.babelrc.js components --out-dir lib --ignore **/*.test.tsx,**/demo/* --extensions \".ts,.tsx\"",
+    "build:es": "cross-env NODE_ENV=production BABEL_ENV=es babel --config-file ./.babelrc.js components --out-dir es --ignore **/*.test.tsx,**/demo/* --extensions \".ts,.tsx\" && tsc -p tsconfig.build.json --outDir es",
+    "build:lib": "cross-env NODE_ENV=production babel --config-file ./.babelrc.js components --out-dir lib --ignore **/*.test.tsx,**/demo/* --extensions \".ts,.tsx\" && tsc -p tsconfig.build.json --outDir lib",
     "clean": "rimraf es && rimraf lib",
     "deploy": "dumi build",
     "lint": "yarn lint:eslint & yarn lint:tsc",

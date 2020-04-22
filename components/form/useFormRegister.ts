@@ -14,6 +14,7 @@ export default function useFormRegister(
   names: InternalNamePath[]
 ) {
   const registered = useRef<Func[]>([])
+
   const register = () => {
     registered.current = names.map((name) => {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
