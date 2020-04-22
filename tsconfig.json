@@ -12,15 +12,7 @@
     "paths": {
       "antd-coffee": ["components/index.tsx"]
     },
-    "allowSyntheticDefaultImports": true,
+    "allowSyntheticDefaultImports": true
   },
-  "exclude": [
-    "node_modules",
-    "lib",
-    "es",
-    "dist",
-    "typings",
-    "tests",
-    "**/__tests__/*"
-  ]
+  "exclude": ["node_modules", "lib", "es", "dist", "typings"]
 }
