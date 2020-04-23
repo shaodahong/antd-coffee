@@ -130,12 +130,22 @@ function Table<RecordType extends object>(
   const [data, setData] = useState<TableData<RecordType>>()
   const { height } = useWindowSize()
 
+  const defaultSearchParams = {
+    [pageNumName]: 1,
+    // Default 20 show better
+    [pageSizeName]: 20,
+  }
+
   // get data source
   const onSearch = async (params?: Store) => {
     try {
       setLoading(true)
       const searchValues = form.getFieldsValue()
-      const result = await onTableSearch({ ...params, ...searchValues })
+      const result = await onTableSearch({
+        ...(pagination === false ? {} : defaultSearchParams),
+        ...params,
+        ...searchValues,
+      })
       setData(result)
     } finally {
       setLoading(false)
@@ -285,9 +295,16 @@ function Table<RecordType extends object>(
                 showSizeChanger: false,
                 showTotal: (total) => `共 ${total} 条`,
                 total: get(data, totalName),
-                defaultCurrent: get(data, pageNumName, 1),
-                // Default 20 show better
-                pageSize: get(data, pageSizeName, 20),
+                defaultCurrent: get(
+                  data,
+                  pageNumName,
+                  defaultSearchParams[pageNumName]
+                ),
+                pageSize: get(
+                  data,
+                  pageSizeName,
+                  defaultSearchParams[pageSizeName]
+                ),
                 ...pagination,
               }
         }
