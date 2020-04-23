@@ -159,7 +159,7 @@ function Table<RecordType extends object>(
         ...(pagination === false
           ? {}
           : {
-              [pageNumName]: pageNum,
+              [pageNumName]: state.pageNum,
               [pageSizeName]: pageSize,
             }),
         ...params,
