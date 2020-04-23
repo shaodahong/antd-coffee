@@ -306,12 +306,8 @@ const InternalForm: FC<FormProps> = ({
 
 type InternalForm = typeof InternalForm
 
-interface Form extends InternalForm {
-  useForm: typeof useForm
-  Item: typeof Item
-  List: typeof List
-  Provider: typeof Provider
-}
+type Form = InternalForm &
+  Pick<typeof AntdForm, 'Item' | 'List' | 'useForm' | 'Provider'>
 
 const Form: Form = InternalForm as Form
 
