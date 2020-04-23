@@ -178,14 +178,22 @@ function Table<RecordType extends object>(
   const refresh = () => onSearch()
 
   const onClickSearch = () => {
+    setState({
+      pageNum: 1,
+    })
     return onSearch({
       [pageNumName]: 1,
     })
   }
 
   const onTableReset = () => {
+    setState({
+      pageNum: 1,
+    })
     form.resetFields()
-    onSearch()
+    onSearch({
+      [pageNumName]: 1,
+    })
   }
 
   const onChange = (
@@ -199,7 +207,7 @@ function Table<RecordType extends object>(
     })
 
     onSearch({
-      pageNum: paginationConfig.current,
+      [pageNumName]: paginationConfig.current,
     })
 
     if (isFunc(onTableChange)) {
