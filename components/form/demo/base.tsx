@@ -1,8 +1,9 @@
 import React from 'react'
-import { DatePicker, Switch, Button, Input } from 'antd'
+import { DatePicker, Switch, Button } from 'antd'
 import { Form } from 'antd-coffee'
-import { useForm } from 'antd/lib/form/util'
 import { Store } from 'antd/lib/form/interface'
+
+const { useForm } = Form
 
 export default function BaseDemo() {
   const [form] = useForm()

@@ -91,9 +91,9 @@ export interface FormProps extends AntdFormProps, FormCommonProps {
   initialValues?: Store | (() => Promise<Store>)
 }
 
-const { Item, useForm } = AntdForm
+const { Item, useForm, List, Provider } = AntdForm
 
-const Form: FC<FormProps> = ({
+const InternalForm: FC<FormProps> = ({
   items,
   children,
   onFinish: antdOnFinish,
@@ -303,5 +303,21 @@ const Form: FC<FormProps> = ({
     </AntdForm>
   )
 }
+
+type InternalForm = typeof InternalForm
+
+interface Form extends InternalForm {
+  useForm: typeof useForm
+  Item: typeof Item
+  List: typeof List
+  Provider: typeof Provider
+}
+
+const Form: Form = InternalForm as Form
+
+Form.Item = Item
+Form.List = List
+Form.useForm = useForm
+Form.Provider = Provider
 
 export default Form
