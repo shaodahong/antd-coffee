@@ -1,8 +1,24 @@
-import React, { useState, useEffect } from 'react'
-import { Table as AntdTable, Space, Row, Divider, Form as AntdForm } from 'antd'
+import React, {
+  useState,
+  useEffect,
+  forwardRef,
+  ReactElement,
+  Ref,
+  useImperativeHandle,
+} from 'react'
+import {
+  Table as AntdTable,
+  Space,
+  Row,
+  Divider,
+  Form as AntdForm,
+  Col,
+  Tooltip,
+} from 'antd'
 import { TableProps as AntdTableProps } from 'antd/lib/table'
 import SearchOutlined from '@ant-design/icons/SearchOutlined'
 import DownOutlined from '@ant-design/icons/DownOutlined'
+import RedoOutlined from '@ant-design/icons/RedoOutlined'
 import get from 'lodash/get'
 import { PaginationConfig } from 'antd/lib/pagination'
 import { Store } from 'antd/lib/form/interface'
@@ -18,6 +34,7 @@ import Form, { FormProps } from '../form'
 import AsyncButton from '../async-button'
 import { isFunc } from '../utils/is'
 import showPlaceHolder from '../utils/showPlaceholder'
+import useWindowSize from './useWindowSize'
 
 const { useForm } = AntdForm
 
@@ -75,25 +92,43 @@ export interface TableProps<RecordType>
     params: any
   ) => TableData<RecordType> | Promise<TableData<RecordType>>
   columns?: TableColumnsType<RecordType>[]
+  /**
+   * Show Table quick tools (refresh ...)
+   */
+  showTools?: boolean
 }
 
-export default function Table<RecordType extends object>({
-  searchProps: tableSearchProps,
-  onSearch: onTableSearch,
-  pagination,
-  totalName = 'total',
-  pageSizeName = 'pageSize',
-  pageNumName = 'pageNum',
-  dataName = 'data',
-  onChange: onTableChange,
-  columns,
-  placeholder: tablePlaceholder = '-',
-  ...props
-}: TableProps<RecordType>) {
+export interface TableRef {
+  /**
+   * Refresh Table data with existing search params
+   */
+  refresh: () => Promise<any>
+}
+
+function Table<RecordType extends object>(
+  {
+    searchProps: tableSearchProps,
+    onSearch: onTableSearch,
+    pagination,
+    totalName = 'total',
+    pageSizeName = 'pageSize',
+    pageNumName = 'pageNum',
+    dataName = 'data',
+    onChange: onTableChange,
+    columns,
+    placeholder: tablePlaceholder = '-',
+    title,
+    showTools,
+    scroll,
+    ...props
+  }: TableProps<RecordType>,
+  ref: Ref<TableRef>
+) {
   const [form] = useForm()
   const [loading, setLoading] = useState(false)
   const [isExpand, setIsExpand] = useState(false)
   const [data, setData] = useState<TableData<RecordType>>()
+  const { height } = useWindowSize()
 
   // get data source
   const onSearch = async (params?: Store) => {
@@ -106,6 +141,8 @@ export default function Table<RecordType extends object>({
       setLoading(false)
     }
   }
+
+  const refresh = () => onSearch()
 
   const onClickSearch = () => {
     return onSearch({
@@ -185,8 +222,33 @@ export default function Table<RecordType extends object>({
             </Space>
           </Row>
         </Form>
-        <Divider />
+        <Divider style={{ margin: 0 }} />
       </>
+    )
+  }
+
+  const renderTitle = (titleData: RecordType[]) => {
+    if (!title && !showTools) {
+      return null
+    }
+
+    return (
+      <Row justify="space-between">
+        <Col>{title && title(titleData)}</Col>
+        {showTools && (
+          <Col>
+            <Tooltip title="刷新">
+              <RedoOutlined
+                onClick={() => refresh()}
+                spin={loading}
+                style={{
+                  fontSize: 18,
+                }}
+              />
+            </Tooltip>
+          </Col>
+        )}
+      </Row>
     )
   }
 
@@ -194,11 +256,22 @@ export default function Table<RecordType extends object>({
     onSearch()
   }, [])
 
+  useImperativeHandle(ref, () => ({
+    refresh,
+  }))
+
   return (
     <div>
       {renderSearchColumns()}
       <AntdTable<RecordType>
         {...props}
+        tableLayout="auto"
+        scroll={{
+          scrollToFirstRowOnChange: true,
+          x: 'max-content',
+          y: height,
+          ...scroll,
+        }}
         columns={renderColumns()}
         onChange={onChange}
         loading={loading}
@@ -218,7 +291,12 @@ export default function Table<RecordType extends object>({
                 ...pagination,
               }
         }
+        title={renderTitle}
       />
     </div>
   )
 }
+
+export default forwardRef(Table) as <RecordType extends object>(
+  p: TableProps<RecordType> & { ref?: Ref<TableRef> }
+) => ReactElement

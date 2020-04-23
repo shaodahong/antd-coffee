@@ -1,9 +1,8 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Table } from 'antd-coffee'
 import { DatePicker } from 'antd'
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { mock } from 'mockjs'
-import { TableColumnsType } from '..'
+import { TableColumnsType, TableRef } from '..'
 
 interface User {
   key: number
@@ -15,6 +14,7 @@ interface User {
 }
 
 export default function BaseDemo() {
+  const table = useRef<TableRef>(null)
   const columns: TableColumnsType<User>[] = [
     {
       title: '序号',
@@ -81,6 +81,8 @@ export default function BaseDemo() {
       searchProps={{
         items,
       }}
+      ref={table}
+      showTools
     />
   )
 }
