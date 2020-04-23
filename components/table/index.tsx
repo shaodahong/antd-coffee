@@ -1,5 +1,4 @@
 import React, {
-  useState,
   useEffect,
   forwardRef,
   ReactElement,
@@ -35,6 +34,7 @@ import AsyncButton from '../async-button'
 import { isFunc } from '../utils/is'
 import showPlaceHolder from '../utils/showPlaceholder'
 import useWindowSize from './useWindowSize'
+import useStates from '../hooks/useStates'
 
 const { useForm } = AntdForm
 
@@ -71,6 +71,14 @@ interface TablePaginationName {
    * @default data
    */
   dataName?: string
+  /**
+   * @default 20
+   */
+  pageSize?: number
+  /**
+   * @default 1
+   */
+  pageNum?: number
 }
 
 export interface TableData<RecordType> {
@@ -111,7 +119,9 @@ function Table<RecordType extends object>(
     onSearch: onTableSearch,
     pagination,
     totalName = 'total',
+    pageSize = 20,
     pageSizeName = 'pageSize',
+    pageNum = 1,
     pageNumName = 'pageNum',
     dataName = 'data',
     onChange: onTableChange,
@@ -125,30 +135,43 @@ function Table<RecordType extends object>(
   ref: Ref<TableRef>
 ) {
   const [form] = useForm()
-  const [loading, setLoading] = useState(false)
-  const [isExpand, setIsExpand] = useState(false)
-  const [data, setData] = useState<TableData<RecordType>>()
   const { height } = useWindowSize()
-
-  const defaultSearchParams = {
-    [pageNumName]: 1,
-    // Default 20 show better
-    [pageSizeName]: 20,
-  }
+  const [state, setState] = useStates<{
+    loading: boolean
+    isExpand: boolean
+    data: TableData<RecordType>
+    pageNum: number
+  }>({
+    loading: false,
+    isExpand: false,
+    data: { data: [] },
+    pageNum,
+  })
 
   // get data source
   const onSearch = async (params?: Store) => {
     try {
-      setLoading(true)
+      setState({
+        loading: true,
+      })
       const searchValues = form.getFieldsValue()
       const result = await onTableSearch({
-        ...(pagination === false ? {} : defaultSearchParams),
+        ...(pagination === false
+          ? {}
+          : {
+              [pageNumName]: pageNum,
+              [pageSizeName]: pageSize,
+            }),
         ...params,
         ...searchValues,
       })
-      setData(result)
+      setState({
+        data: result,
+      })
     } finally {
-      setLoading(false)
+      setState({
+        loading: false,
+      })
     }
   }
 
@@ -171,8 +194,12 @@ function Table<RecordType extends object>(
     sorter: SorterResult<RecordType> | SorterResult<RecordType>[],
     extra: TableCurrentDataSource<RecordType>
   ) => {
+    setState({
+      pageNum: paginationConfig.current,
+    })
+
     onSearch({
-      [pageNumName]: paginationConfig.current,
+      pageNum: paginationConfig.current,
     })
 
     if (isFunc(onTableChange)) {
@@ -205,7 +232,7 @@ function Table<RecordType extends object>(
     return (
       <>
         <Form
-          items={isExpand ? items : items.slice(0, initialCount)}
+          items={state.isExpand ? items : items.slice(0, initialCount)}
           form={form}
           layoutCol={{ span: 6 }}
           {...searchProps}
@@ -223,11 +250,13 @@ function Table<RecordType extends object>(
               <AsyncButton
                 type="link"
                 onClick={() => {
-                  setIsExpand((value) => !value)
+                  setState({
+                    isExpand: !state.isExpand,
+                  })
                 }}
               >
-                {isExpand ? '收起' : '展开'}
-                <DownOutlined rotate={isExpand ? 180 : 0} />
+                {state.isExpand ? '收起' : '展开'}
+                <DownOutlined rotate={state.isExpand ? 180 : 0} />
               </AsyncButton>
             </Space>
           </Row>
@@ -250,7 +279,7 @@ function Table<RecordType extends object>(
             <Tooltip title="刷新">
               <RedoOutlined
                 onClick={() => refresh()}
-                spin={loading}
+                spin={state.loading}
                 style={{
                   fontSize: 18,
                 }}
@@ -284,8 +313,8 @@ function Table<RecordType extends object>(
         }}
         columns={renderColumns()}
         onChange={onChange}
-        loading={loading}
-        dataSource={get(data, dataName)}
+        loading={state.loading}
+        dataSource={get(state.data, dataName)}
         pagination={
           pagination === false
             ? pagination
@@ -294,17 +323,9 @@ function Table<RecordType extends object>(
                 hideOnSinglePage: true,
                 showSizeChanger: false,
                 showTotal: (total) => `共 ${total} 条`,
-                total: get(data, totalName),
-                defaultCurrent: get(
-                  data,
-                  pageNumName,
-                  defaultSearchParams[pageNumName]
-                ),
-                pageSize: get(
-                  data,
-                  pageSizeName,
-                  defaultSearchParams[pageSizeName]
-                ),
+                total: get(state.data, totalName),
+                current: state.pageNum,
+                pageSize,
                 ...pagination,
               }
         }
