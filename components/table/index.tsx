@@ -104,6 +104,11 @@ export interface TableProps<RecordType>
    * Show Table quick tools (refresh ...)
    */
   showTools?: boolean
+  /**
+   * If mutiple page use same Table
+   * @example location.pathname
+   */
+  forceUpdate?: string
 }
 
 export interface TableRef {
@@ -130,6 +135,7 @@ function Table<RecordType extends object>(
     title,
     showTools,
     scroll,
+    forceUpdate,
     ...props
   }: TableProps<RecordType>,
   ref: Ref<TableRef>
@@ -300,8 +306,13 @@ function Table<RecordType extends object>(
   }
 
   useEffect(() => {
-    onSearch()
-  }, [])
+    setState({
+      pageNum: 1,
+    })
+    onSearch({
+      [pageNumName]: 1,
+    })
+  }, [forceUpdate])
 
   useImperativeHandle(ref, () => ({
     refresh,
