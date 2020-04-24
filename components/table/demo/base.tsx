@@ -33,6 +33,7 @@ export default function BaseDemo() {
     {
       title: '生日',
       dataIndex: 'birthday',
+      sorter: true,
     },
     {
       title: '爱好',
@@ -78,11 +79,15 @@ export default function BaseDemo() {
           }, 1000)
         )
       }
+      onChange={(p, f, s) => {
+        console.log(p, f, s)
+      }}
       searchProps={{
         items,
       }}
       ref={table}
       showTools
+      isKeepAlive
     />
   )
 }

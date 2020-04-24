@@ -35,6 +35,7 @@ import { isFunc } from '../utils/is'
 import showPlaceHolder from '../utils/showPlaceholder'
 import useWindowSize from './useWindowSize'
 import useStates from '../hooks/useStates'
+import { getHistoryState, setHistoryState } from './historyState'
 
 const { useForm } = AntdForm
 
@@ -91,19 +92,28 @@ export interface TableData<RecordType> {
 export type TableColumnsType<RecordType> = TableCommonProps &
   (ColumnGroupType<RecordType> | ColumnType<RecordType>)
 
+export interface TableOnSearchChangeState<RecordType> {
+  paginationConfig?: PaginationConfig
+  filters?: Record<string, Key[] | null>
+  sorter?: SorterResult<RecordType> | SorterResult<RecordType>[]
+  extra?: TableCurrentDataSource<RecordType>
+  isInit?: boolean
+}
 export interface TableProps<RecordType>
   extends AntdTableProps<RecordType>,
     TablePaginationName,
     TableCommonProps {
   searchProps?: TableSearchProps
   onSearch: (
-    params: any
+    params: any,
+    changeState?: TableOnSearchChangeState<RecordType>
   ) => TableData<RecordType> | Promise<TableData<RecordType>>
   columns?: TableColumnsType<RecordType>[]
   /**
    * Show Table quick tools (refresh ...)
    */
   showTools?: boolean
+  isKeepAlive?: boolean
 }
 
 export interface TableRef {
@@ -130,6 +140,7 @@ function Table<RecordType extends object>(
     title,
     showTools,
     scroll,
+    isKeepAlive = false,
     ...props
   }: TableProps<RecordType>,
   ref: Ref<TableRef>
@@ -149,25 +160,31 @@ function Table<RecordType extends object>(
   })
 
   // get data source
-  const onSearch = async (params?: Store) => {
+  const onSearch = async (
+    params?: Store,
+    changeState?: TableOnSearchChangeState<RecordType>
+  ) => {
     try {
       setState({
         loading: true,
       })
       const searchValues = form.getFieldsValue()
-      const result = await onTableSearch({
+
+      const searchParams = {
         ...(pagination === false
           ? {}
           : {
               [pageNumName]: state.pageNum,
               [pageSizeName]: pageSize,
             }),
-        ...params,
         ...searchValues,
-      })
+        ...params,
+      }
+      const result = await onTableSearch(searchParams, changeState)
       setState({
         data: result,
       })
+      isKeepAlive && setHistoryState(searchParams)
     } finally {
       setState({
         loading: false,
@@ -191,6 +208,7 @@ function Table<RecordType extends object>(
       pageNum: 1,
     })
     form.resetFields()
+    isKeepAlive && setHistoryState({})
     onSearch({
       [pageNumName]: 1,
     })
@@ -206,9 +224,17 @@ function Table<RecordType extends object>(
       pageNum: paginationConfig.current,
     })
 
-    onSearch({
-      [pageNumName]: paginationConfig.current,
-    })
+    onSearch(
+      {
+        [pageNumName]: paginationConfig.current,
+      },
+      {
+        paginationConfig,
+        filters,
+        sorter,
+        extra,
+      }
+    )
 
     if (isFunc(onTableChange)) {
       onTableChange(paginationConfig, filters, sorter, extra)
@@ -299,13 +325,28 @@ function Table<RecordType extends object>(
     )
   }
 
-  useEffect(() => {
+  const onInit = () => {
+    const histroyState = isKeepAlive ? getHistoryState() : {}
+    const historyPageNum = histroyState[pageNumName] || 1
+
+    isKeepAlive && form.setFieldsValue(histroyState)
+
     setState({
-      pageNum: 1,
+      pageNum: historyPageNum,
     })
-    onSearch({
-      [pageNumName]: 1,
-    })
+    onSearch(
+      {
+        [pageNumName]: historyPageNum,
+        ...(isKeepAlive ? getHistoryState() : {}),
+      },
+      {
+        isInit: true,
+      }
+    )
+  }
+
+  useEffect(() => {
+    onInit()
   }, [])
 
   useImperativeHandle(ref, () => ({
