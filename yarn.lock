@@ -2943,12 +2943,12 @@
   resolved "https://registry.yarnpkg.com/@umijs/plugin-analytics/-/plugin-analytics-0.2.2.tgz#575fd231d4327ea13413217aa1b5fc6bdd89465e"
   integrity sha512-dVDzUfgIdEwdCC6a5IsMYpIPI+bEZjBEqIhAvw9dic6Vk77w9RxQxyRfW11dDmdXLAwWphp22NntQNt1ejZPtg==
 
-"@umijs/plugin-antd@0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@umijs/plugin-antd/-/plugin-antd-0.5.0.tgz#958538c510a8945edba79973e822e943d33b3118"
-  integrity sha512-t1zrJnzawO2pAbnCa5CqwOlToOEl2JCu4nlYGA9L/Ciey6t5WNQSX+Yod0k1nOX0l0C7fYH5Aqtndnj9+7EwGg==
+"@umijs/plugin-antd@0.5.1":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@umijs/plugin-antd/-/plugin-antd-0.5.1.tgz#b540d4be29b346e648342891d398f723427137cd"
+  integrity sha512-artUWb79OODTsuzAAMXJn3aAyvmyEsyH4/YiycIRImKLmMzrd+BCQpCcDmXVHH6VFM1NYMgmIE05DznySa3Q5A==
   dependencies:
-    antd "^4.1.2"
+    antd "^4.1.3"
     antd-mobile "^2.3.1"
 
 "@umijs/plugin-crossorigin@1.1.0":
@@ -2983,10 +2983,10 @@
     memoize-one "^5.1.1"
     path-to-regexp "1.x"
 
-"@umijs/plugin-locale@0.4.4":
-  version "0.4.4"
-  resolved "https://registry.yarnpkg.com/@umijs/plugin-locale/-/plugin-locale-0.4.4.tgz#bea07f662fe39f57f21d0dc8bdfbd0860a742b23"
-  integrity sha512-8U5lIBxs8MptrbEizGrvlVCz0IN538SL93surpUnlD2hwYNMCFopezMkAjtibOofDdz0YxESUmWdwtvF4FRIeA==
+"@umijs/plugin-locale@0.4.5":
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/@umijs/plugin-locale/-/plugin-locale-0.4.5.tgz#fd612c6276e1543b622662002d789ec18a8f453c"
+  integrity sha512-oypPjEcn/pTff6e64vmIMs9YJqReUDmuzyPRdvoDjRiCm9/9UMJxrHpDNYZ4YRMeTHviEcvlCgUEGX7gcgSc7A==
   dependencies:
     "@formatjs/intl-pluralrules" "^1.5.0"
     "@formatjs/intl-relativetimeformat" "^4.5.7"
@@ -2995,10 +2995,10 @@
     react-intl "3.12.0"
     warning "^4.0.3"
 
-"@umijs/plugin-model@2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@umijs/plugin-model/-/plugin-model-2.2.0.tgz#846a5940c53a2c0d2f02b6ca4ee9e8caca8add7a"
-  integrity sha512-KonUxNn+nUX+QC8vLnE+f1uZj1x8AYejb4nkGbMyxuxfe3NkhXZMtXCr7QmlK3p6zWD7wlyQk6O1xDMasY2feQ==
+"@umijs/plugin-model@2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@umijs/plugin-model/-/plugin-model-2.3.0.tgz#7ce3c1bd8e6b85bf84edc41f8600e990fa5b9bff"
+  integrity sha512-OV0k1bRDJlTrmW5zEoTR8l8DhPhwFdFCRDUstSH9AUEKqYG2z6dS7sany/IDls6z0X6PBgpLNgHUx40MjX0+ow==
   dependencies:
     fast-deep-equal "3.1.1"
 
@@ -3094,19 +3094,19 @@
     unist-util-visit-parents "^3.0.1"
 
 "@umijs/preset-react@1.x":
-  version "1.4.17"
-  resolved "https://registry.yarnpkg.com/@umijs/preset-react/-/preset-react-1.4.17.tgz#9d0cee4549f193f3614810444034af8e9ba4adb5"
-  integrity sha512-pIVDB0NBa/xJjuezACR/KMHBgYoL+p/Lfgw3EZeXnbi/JGUAjyKqkToOE9b5JEiDdc3dYrTzWawpoDQseJqOzg==
+  version "1.4.18"
+  resolved "https://registry.yarnpkg.com/@umijs/preset-react/-/preset-react-1.4.18.tgz#d1c9cc53e0b55579e1c595bf0847fc0774047204"
+  integrity sha512-jRJEhs2biKxTzN8gDRJvFpsBEosWvXm8MYqqKZpufT0JLZ5YhqjWf7qZrRoOjCF+3+NjqDq41Qx/b6Obd1r/JA==
   dependencies:
     "@umijs/plugin-access" "2.3.1"
     "@umijs/plugin-analytics" "0.2.2"
-    "@umijs/plugin-antd" "0.5.0"
+    "@umijs/plugin-antd" "0.5.1"
     "@umijs/plugin-crossorigin" "1.1.0"
     "@umijs/plugin-dva" "0.6.5"
     "@umijs/plugin-initial-state" "2.2.1"
     "@umijs/plugin-layout" "0.9.2"
-    "@umijs/plugin-locale" "0.4.4"
-    "@umijs/plugin-model" "2.2.0"
+    "@umijs/plugin-locale" "0.4.5"
+    "@umijs/plugin-model" "2.3.0"
     "@umijs/plugin-request" "2.3.2"
     "@umijs/plugin-test" "1.0.0"
 
@@ -3741,7 +3741,7 @@ antd-mobile@^2.3.1:
     rmc-tabs "~1.2.0"
     rmc-tooltip "~1.0.0"
 
-antd@^4.1.2, antd@^4.1.4:
+antd@^4.1.2, antd@^4.1.3, antd@^4.1.4:
   version "4.1.4"
   resolved "https://registry.yarnpkg.com/antd/-/antd-4.1.4.tgz#ea86d9e6742d8d01c7e84e423bb4d31403bec02e"
   integrity sha512-YRF/nrAq4R+olKRJxEDqeO4xkTvx+U6ovIQjGew1JDiEHMMhSftpvpYg2Iu5hRdFL66uxQk6VYngMttBpuYm9Q==
