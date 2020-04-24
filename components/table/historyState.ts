@@ -8,10 +8,12 @@ const { history, location } = window
 const handler = (values: any, isSet?: boolean): any => {
   return mapValues(values, (value) => {
     if (value && value._isAMomentObject) {
-      return {
-        _isAMomentObject: true,
-        value: isSet ? value.format() : moment(value),
-      }
+      return isSet
+        ? {
+            _isAMomentObject: true,
+            value: value.format(),
+          }
+        : moment(value.value)
     }
     if (
       Array.isArray(value) &&
@@ -19,14 +21,18 @@ const handler = (values: any, isSet?: boolean): any => {
       (value[0]._isAMomentObject || value[1]._isAMomentObject)
     ) {
       return [
-        {
-          _isAMomentObject: true,
-          value: isSet ? value[0]?.format() : moment(value[0]?.value),
-        },
-        {
-          _isAMomentObject: true,
-          value: isSet ? value[1]?.format() : moment(value[1]?.value),
-        },
+        isSet
+          ? {
+              _isAMomentObject: true,
+              value: value[0]?.format(),
+            }
+          : moment(value[0]?.value),
+        isSet
+          ? {
+              _isAMomentObject: true,
+              value: value[1]?.format(),
+            }
+          : moment(value[1]?.value),
       ]
     }
 

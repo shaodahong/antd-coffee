@@ -177,8 +177,8 @@ function Table<RecordType extends object>(
               [pageNumName]: state.pageNum,
               [pageSizeName]: pageSize,
             }),
-        ...searchValues,
         ...params,
+        ...searchValues,
       }
       const result = await onTableSearch(searchParams, changeState)
       setState({
