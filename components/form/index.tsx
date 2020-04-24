@@ -225,7 +225,11 @@ const InternalForm: FC<FormProps> = ({
     let Comp: ReactNode
     const { name } = itemProps
     const { getFieldsValue } = formInsatce
-    const fieldsValue = getFieldsValue()
+    const fieldsValue = {
+      ...formInitialValues,
+      ...initialStates.initialValues,
+      ...getFieldsValue(),
+    }
     const fieldValue: StoreValue = get(fieldsValue, name as string)
 
     if (isFunc(isHidden) && isHidden(fieldValue, fieldsValue)) {
