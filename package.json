@@ -11,7 +11,7 @@
     "build:lib": "cross-env NODE_ENV=production babel --config-file ./.babelrc.js components --out-dir lib --ignore **/*.test.tsx,**/demo/* --extensions \".ts,.tsx\" && tsc -p tsconfig.build.json --outDir lib",
     "clean": "rimraf es && rimraf lib",
     "deploy": "dumi build",
-    "lint": "yarn lint:eslint & yarn lint:tsc",
+    "lint": "yarn lint:eslint && yarn lint:tsc",
     "lint:eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:tsc": "tsc --noEmit",
     "now-build": "npm run deploy",

@@ -6,8 +6,6 @@ import {
   FormInstance,
 } from 'antd/lib/form'
 import { StoreValue, Store } from 'antd/lib/form/interface'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { NamePath } from 'rc-field-form/lib/interface'
 import { ColProps } from 'antd/lib/col'
 import get from 'lodash/get'
 import QuestionCircleOutlined from '@ant-design/icons/QuestionCircleOutlined'
@@ -16,7 +14,6 @@ import isEqual from 'lodash/isEqual'
 import { isFunc } from '../utils/is'
 import useForceUpdate from '../hooks/useForceUpdate'
 import useStates from '../hooks/useStates'
-import useFormRegister from './useFormRegister'
 import showPlaceHolder from '../utils/showPlaceholder'
 import usePrevious from './usePrevious'
 
@@ -73,8 +70,6 @@ export interface FormItemProps
    * @example (fieldValue) => !!fieldValue
    */
   isHidden?: (fieldValue: StoreValue, fieldsValue: Store) => boolean
-  /** Extra names, only registered to form store  */
-  extraNames?: NamePath[]
   tip?:
     | ReactNode
     | ((
@@ -115,26 +110,6 @@ const InternalForm: FC<FormProps> = ({
     initialValues: isLoadinginitialValues ? {} : formInitialValues,
   })
   const prevFormInitialValues = usePrevious(formInitialValues)
-
-  /**
-   * ======== Start ==========
-   * Collect extraNames
-   */
-  const extraNames = items
-    .filter((item) => item.extraNames)
-    .reduce(
-      (prev: NamePath[], curr) => prev.concat(curr.extraNames as NamePath[]),
-      []
-    )
-    .map((item) => {
-      if (Array.isArray(item)) {
-        return item
-      }
-      return [item]
-    })
-
-  useFormRegister(formInsatce, extraNames)
-  // ======== End ==========
 
   const getInitialValues = async () => {
     let values: Store = {}
