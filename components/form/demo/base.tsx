@@ -24,6 +24,7 @@ export default function BaseDemo() {
     <Form
       items={baseItems}
       form={form}
+      // eslint-disable-next-line no-console
       onFinish={(values: Store) => console.log('BaseDemo', values)}
     >
       <Button type="primary" htmlType="submit">

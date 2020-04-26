@@ -5,6 +5,7 @@ import moment from 'moment'
 const key = '_query'
 const { history, location } = window
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const handler = (values: any, isSet?: boolean): any => {
   return mapValues(values, (value) => {
     if (value && value._isAMomentObject) {
@@ -53,6 +54,7 @@ export function getHistoryState() {
   return handler(state[key])
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function setHistoryState(query: { [key: string]: any }) {
   if (!query || !isPlainObject(query)) {
     return

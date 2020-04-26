@@ -37,6 +37,9 @@ module.exports = {
     'import/no-unresolved': [2, { ignore: ['antd-coffee'] }],
     'no-unused-expressions': [2, { allowShortCircuit: true }],
     'import/no-extraneous-dependencies': 0,
+    '@typescript-eslint/no-explicit-any': [2, { ignoreRestArgs: true }],
+    '@typescript-eslint/no-unused-vars': 2,
+    'no-console': 2,
     'prettier/prettier': 'error',
   },
 }

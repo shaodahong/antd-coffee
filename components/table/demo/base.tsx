@@ -80,6 +80,7 @@ export default function BaseDemo() {
         )
       }
       onChange={(p, f, s) => {
+        // eslint-disable-next-line no-console
         console.log(p, f, s)
       }}
       searchProps={{

@@ -1,6 +1,8 @@
 import React from 'react'
-import { DatePicker, Switch, Button } from 'antd'
+import { DatePicker, Button } from 'antd'
 import { Form } from 'antd-coffee'
+import { Moment } from 'moment'
+import { Store } from 'antd/lib/form/interface'
 
 export default function PipelineDemo() {
   const baseItems = [
@@ -9,14 +11,15 @@ export default function PipelineDemo() {
       label: '出生年月',
       rules: [{ required: true }],
       render: () => <DatePicker />,
-      pipeline: (date: any) => date.format('YYYY-MM-DD HH:mm:ss'),
+      pipeline: (date: Moment) => date.format('YYYY-MM-DD HH:mm:ss'),
     },
   ]
 
   return (
     <Form
       items={baseItems}
-      onFinish={(values: any) => console.log('PipelineDemo', values)}
+      // eslint-disable-next-line no-console
+      onFinish={(values: Store) => console.log('PipelineDemo', values)}
     >
       <Button type="primary" htmlType="submit">
         提交

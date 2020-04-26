@@ -1,6 +1,7 @@
 import React from 'react'
-import { DatePicker, Switch, Button, Select } from 'antd'
+import { Button, Select } from 'antd'
 import { Form } from 'antd-coffee'
+import { StoreValue, Store } from 'antd/lib/form/interface'
 
 export default function IsHiddenDemo() {
   const baseItems = [
@@ -18,7 +19,7 @@ export default function IsHiddenDemo() {
       name: 'age',
       label: '年龄',
       extra: '姓名为 bob 时隐藏',
-      isHidden: (value: any, values: any) => {
+      isHidden: (value: StoreValue, values: Store) => {
         return values.name === 'bob'
       },
     },
@@ -27,7 +28,8 @@ export default function IsHiddenDemo() {
   return (
     <Form
       items={baseItems}
-      onFinish={(values: any) => console.log('IsHiddenDemo', values)}
+      // eslint-disable-next-line no-console
+      onFinish={(values: Store) => console.log('IsHiddenDemo', values)}
     >
       <Button type="primary" htmlType="submit">
         提交

@@ -14,7 +14,7 @@ export interface ModalFormProps extends ModalProps {
    * @default false
    */
   isKeepAlive?: boolean
-  onOk?: (values: Store) => Promise<any> | false | void
+  onOk?: (values: Store) => Promise<unknown> | false | void
   onCancel?: () => void
 }
 

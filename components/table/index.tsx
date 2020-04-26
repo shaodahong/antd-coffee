@@ -84,6 +84,7 @@ interface TablePaginationName {
 
 export interface TableData<RecordType> {
   data: RecordType[]
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any
 }
 
@@ -105,7 +106,7 @@ export interface TableProps<RecordType>
     TableCommonProps {
   searchProps?: TableSearchProps
   onSearch: (
-    params: any,
+    params: Store,
     changeState?: TableOnSearchChangeState<RecordType>
   ) => TableData<RecordType> | Promise<TableData<RecordType>>
   columns?: TableColumnsType<RecordType>[]
@@ -120,7 +121,7 @@ export interface TableRef {
   /**
    * Refresh Table data with existing search params
    */
-  refresh: () => Promise<any>
+  refresh: () => Promise<unknown>
 }
 
 function Table<RecordType extends object>(
