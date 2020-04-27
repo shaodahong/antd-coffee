@@ -285,7 +285,7 @@ function Table<RecordType extends object>(
               <AsyncButton
                 type="link"
                 style={{
-                  padding: '0 0 0 10px',
+                  padding: '0 0 0 4px',
                 }}
                 onClick={() => {
                   setState({
