@@ -91,30 +91,31 @@ const { Item, useForm, List, Provider } = AntdForm
 const InternalForm: FC<FormProps> = ({
   items,
   children,
-  onFinish: antdOnFinish,
+  onFinish: onFinishInternal,
   isView = false,
   form,
   layoutCol = { span: 24 },
-  initialValues: formInitialValues,
-  placeholder: formPlaceholder = '-',
+  initialValues: initialValuesInternal,
+  placeholder: placeholderInternal = '-',
+  onValuesChange: onValuesChangeInterNal,
   ...props
 }) => {
   const [formInsatce] = useForm(form)
   const forceUpdate = useForceUpdate()
-  const isLoadinginitialValues = isFunc(formInitialValues)
+  const isLoadinginitialValues = isFunc(initialValuesInternal)
   const [initialStates, setInitialStates] = useStates<{
     isLoadinginitialValues: boolean
     initialValues?: Store
   }>({
     isLoadinginitialValues,
-    initialValues: isLoadinginitialValues ? {} : formInitialValues,
+    initialValues: isLoadinginitialValues ? {} : initialValuesInternal,
   })
-  const prevFormInitialValues = usePrevious(formInitialValues)
+  const prevFormInitialValues = usePrevious(initialValuesInternal)
 
   const getInitialValues = async () => {
     let values: Store = {}
     try {
-      values = await (formInitialValues as () => Promise<Store>)()
+      values = await (initialValuesInternal as () => Promise<Store>)()
       items
         .filter(
           ({ pipeline }) => Array.isArray(pipeline) && pipeline.length === 2
@@ -150,12 +151,12 @@ const InternalForm: FC<FormProps> = ({
   useEffect(() => {
     if (
       !isLoadinginitialValues &&
-      !isEqual(prevFormInitialValues, formInitialValues)
+      !isEqual(prevFormInitialValues, initialValuesInternal)
     ) {
-      formInsatce.setFieldsValue(formInitialValues as Store)
+      formInsatce.setFieldsValue(initialValuesInternal as Store)
       forceUpdate()
     }
-  }, [formInitialValues])
+  }, [initialValuesInternal])
 
   if (!items || items.length === 0) {
     return null
@@ -178,8 +179,8 @@ const InternalForm: FC<FormProps> = ({
 
         update(values, name as string, outputer as OutputPipeline)
       })
-    if (antdOnFinish) {
-      antdOnFinish(values)
+    if (onFinishInternal) {
+      onFinishInternal(values)
     }
   }
 
@@ -192,7 +193,7 @@ const InternalForm: FC<FormProps> = ({
       layoutCol: itemLlayoutCol = layoutCol,
       label,
       tip,
-      placeholder = formPlaceholder,
+      placeholder = placeholderInternal,
       ...itemProps
     }: FormItemProps,
     index: number
@@ -201,7 +202,7 @@ const InternalForm: FC<FormProps> = ({
     const { name } = itemProps
     const { getFieldsValue } = formInsatce
     const fieldsValue = {
-      ...formInitialValues,
+      ...initialValuesInternal,
       ...initialStates.initialValues,
       ...getFieldsValue(),
     }
@@ -257,11 +258,17 @@ const InternalForm: FC<FormProps> = ({
     )
   }
 
+  const onValuesChange = (changeValues: Store, values: Store) => {
+    forceUpdate()
+    isFunc(onValuesChangeInterNal) &&
+      onValuesChangeInterNal(changeValues, values)
+  }
+
   return (
     <AntdForm
       form={formInsatce}
       onFinish={onFinish}
-      onValuesChange={forceUpdate}
+      onValuesChange={onValuesChange}
       initialValues={initialStates.initialValues}
       {...props}
     >
