@@ -284,6 +284,9 @@ function Table<RecordType extends object>(
               <AsyncButton onClick={onTableReset}>重置</AsyncButton>
               <AsyncButton
                 type="link"
+                style={{
+                  padding: '0 0 0 10px',
+                }}
                 onClick={() => {
                   setState({
                     isExpand: !state.isExpand,
