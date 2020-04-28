@@ -77,6 +77,7 @@ export interface FormItemProps
         fieldsValue: Store,
         form: FormInstance
       ) => ReactNode)
+  extra?: ReactNode | ((fieldsValue: Store) => ReactNode)
 }
 
 export interface FormProps extends AntdFormProps, FormCommonProps {
@@ -194,6 +195,7 @@ const InternalForm: FC<FormProps> = ({
       label,
       tip,
       placeholder = placeholderInternal,
+      extra,
       ...itemProps
     }: FormItemProps,
     index: number
@@ -251,7 +253,12 @@ const InternalForm: FC<FormProps> = ({
 
     return (
       <Col {...itemLlayoutCol}>
-        <Item key={key} label={LabelWrap} {...itemProps}>
+        <Item
+          key={key}
+          label={LabelWrap}
+          extra={isFunc(extra) ? extra(fieldsValue) : extra}
+          {...itemProps}
+        >
           {Comp}
         </Item>
       </Col>
