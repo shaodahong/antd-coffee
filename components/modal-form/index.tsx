@@ -1,4 +1,4 @@
-import React, { FC, MouseEventHandler, useState, useEffect } from 'react'
+import React, { FC, MouseEventHandler, useState } from 'react'
 import { Modal, Form as AntdForm } from 'antd'
 import { ModalProps } from 'antd/lib/modal'
 import { Store } from 'antd/lib/form/interface'
@@ -9,11 +9,6 @@ const { useForm } = AntdForm
 
 export interface ModalFormProps extends ModalProps {
   formProps: FormProps
-  /**
-   * Keep form value when Modal reopen
-   * @default false
-   */
-  isKeepAlive?: boolean
   onOk?: (values: Store) => Promise<unknown> | false | void
   onCancel?: () => void
 }
@@ -23,7 +18,6 @@ const ModalForm: FC<ModalFormProps> = ({
   onOk,
   okButtonProps,
   visible,
-  isKeepAlive = false,
   ...props
 }) => {
   const [form] = useForm()
@@ -54,12 +48,6 @@ const ModalForm: FC<ModalFormProps> = ({
     }
   }
 
-  useEffect(() => {
-    if (!visible && !isKeepAlive) {
-      form.resetFields()
-    }
-  }, [visible, isKeepAlive])
-
   return (
     <Modal
       onOk={onModalOk}
@@ -68,6 +56,7 @@ const ModalForm: FC<ModalFormProps> = ({
         loading,
       }}
       visible={visible}
+      destroyOnClose
       {...props}
     >
       <Form {...formProps} form={form} onFinish={onModalFormFinish} />
