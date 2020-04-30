@@ -4,6 +4,7 @@ import React, {
   ReactElement,
   Ref,
   useImperativeHandle,
+  ReactNode,
 } from 'react'
 import {
   Table as AntdTable,
@@ -101,7 +102,7 @@ export interface TableOnSearchChangeState<RecordType> {
   isInit?: boolean
 }
 export interface TableProps<RecordType>
-  extends AntdTableProps<RecordType>,
+  extends Omit<AntdTableProps<RecordType>, 'title'>,
     TablePaginationName,
     TableCommonProps {
   searchProps?: TableSearchProps
@@ -115,6 +116,7 @@ export interface TableProps<RecordType>
    */
   showTools?: boolean
   isKeepAlive?: boolean
+  title?: (data: TableData<RecordType>) => ReactNode
 }
 
 export interface TableRef {
@@ -159,6 +161,7 @@ function Table<RecordType extends object>(
     data: { data: [] },
     pageNum,
   })
+  const isShowTableTitle = !!(title || showTools)
 
   // get data source
   const onSearch = async (
@@ -299,19 +302,15 @@ function Table<RecordType extends object>(
             </Space>
           </Row>
         </Form>
-        <Divider style={{ margin: 0 }} />
+        {isShowTableTitle && <Divider style={{ margin: 0 }} />}
       </>
     )
   }
 
-  const renderTitle = (titleData: RecordType[]) => {
-    if (!title && !showTools) {
-      return null
-    }
-
+  const renderTitle = () => {
     return (
       <Row justify="space-between">
-        <Col>{title && title(titleData)}</Col>
+        <Col>{title && title(state.data)}</Col>
         {showTools && (
           <Col>
             <Tooltip title="刷新">
@@ -387,7 +386,7 @@ function Table<RecordType extends object>(
                 ...pagination,
               }
         }
-        title={renderTitle}
+        title={isShowTableTitle ? renderTitle : undefined}
       />
     </div>
   )
