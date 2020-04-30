@@ -45,6 +45,10 @@ group:
 
 <code src="./demo/tip.tsx" />
 
+#### Card 模式
+
+<code src="./demo/cardMode.tsx" />
+
 ### 参数
 
 | 属性          | 描述                                                         | 类型                                                | 默认值         |

@@ -1,5 +1,13 @@
 import React, { ReactElement, FC, ReactNode, useEffect } from 'react'
-import { Form as AntdForm, Input, Row, Col, Skeleton, Popover } from 'antd'
+import {
+  Form as AntdForm,
+  Input,
+  Row,
+  Col,
+  Skeleton,
+  Popover,
+  Card,
+} from 'antd'
 import {
   FormProps as AntdFormProps,
   FormItemProps as AntdFormItemProps,
@@ -7,6 +15,7 @@ import {
 } from 'antd/lib/form'
 import { StoreValue, Store } from 'antd/lib/form/interface'
 import { ColProps } from 'antd/lib/col'
+import { CardProps } from 'antd/lib/card'
 import get from 'lodash/get'
 import QuestionCircleOutlined from '@ant-design/icons/QuestionCircleOutlined'
 import update from 'lodash/update'
@@ -85,6 +94,10 @@ export interface FormProps extends AntdFormProps, FormCommonProps {
   children?: React.ReactNode
   /** Enhance initialValues, but only trigger once  */
   initialValues?: Store | (() => Promise<Store>)
+  /** Show mode */
+  mode?: 'card'
+  /** Effective in card mode */
+  cardProps?: CardProps
 }
 
 const { Item, useForm, List, Provider } = AntdForm
@@ -99,6 +112,8 @@ const InternalForm: FC<FormProps> = ({
   initialValues: initialValuesInternal,
   placeholder: placeholderInternal = '-',
   onValuesChange: onValuesChangeInternal,
+  mode,
+  cardProps,
   ...props
 }) => {
   const [formInsatce] = useForm(form)
@@ -143,7 +158,7 @@ const InternalForm: FC<FormProps> = ({
     }
   }, [])
 
-  // If initialValues update need rerenader?
+  // If promise initialValues update need rerenader?
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     forceUpdate()
@@ -271,6 +286,23 @@ const InternalForm: FC<FormProps> = ({
       onValuesChangeInternal(changeValues, values)
   }
 
+  const FormChildren = (
+    <Row gutter={24}>
+      {items.map((item, index) => renderItems(item, index))}
+      {children && (
+        <Col
+          style={{
+            flex: '1',
+          }}
+        >
+          <Item label={<span />} colon={false}>
+            {children as ReactElement}
+          </Item>
+        </Col>
+      )}
+    </Row>
+  )
+
   return (
     <AntdForm
       form={formInsatce}
@@ -279,20 +311,18 @@ const InternalForm: FC<FormProps> = ({
       initialValues={initialStates.initialValues}
       {...props}
     >
-      <Row gutter={24}>
-        {items.map((item, index) => renderItems(item, index))}
-        {children && (
-          <Col
-            style={{
-              flex: '1',
-            }}
-          >
-            <Item label={<span />} colon={false}>
-              {children as ReactElement}
-            </Item>
-          </Col>
-        )}
-      </Row>
+      {mode === 'card' ? (
+        <Card
+          headStyle={{
+            backgroundColor: '#fafafa',
+          }}
+          {...cardProps}
+        >
+          {FormChildren}
+        </Card>
+      ) : (
+        FormChildren
+      )}
     </AntdForm>
   )
 }
