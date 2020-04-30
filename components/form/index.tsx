@@ -98,7 +98,7 @@ const InternalForm: FC<FormProps> = ({
   layoutCol = { span: 24 },
   initialValues: initialValuesInternal,
   placeholder: placeholderInternal = '-',
-  onValuesChange: onValuesChangeInterNal,
+  onValuesChange: onValuesChangeInternal,
   ...props
 }) => {
   const [formInsatce] = useForm(form)
@@ -267,8 +267,8 @@ const InternalForm: FC<FormProps> = ({
 
   const onValuesChange = (changeValues: Store, values: Store) => {
     forceUpdate()
-    isFunc(onValuesChangeInterNal) &&
-      onValuesChangeInterNal(changeValues, values)
+    isFunc(onValuesChangeInternal) &&
+      onValuesChangeInternal(changeValues, values)
   }
 
   return (
