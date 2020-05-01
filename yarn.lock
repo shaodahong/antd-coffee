@@ -3134,16 +3134,15 @@
   resolved "https://registry.yarnpkg.com/@umijs/plugin-initial-state/-/plugin-initial-state-2.2.1.tgz#cd7592aa90b6b369bd0df297254320088397ff67"
   integrity sha512-qDtWguduISeG+EObgKbImuRX3FyLrNcj3yQtY24HdYkDTGmtsmA4ZKB7Q/N+V/O0Yxep06bCotTK3jFV9KXuEA==
 
-"@umijs/plugin-layout@0.9.2":
-  version "0.9.2"
-  resolved "https://registry.yarnpkg.com/@umijs/plugin-layout/-/plugin-layout-0.9.2.tgz#0680d201430611ab633ab3026259bdb9e5527153"
-  integrity sha512-Rdu9XGm6z7wun3gZprTmmToDX/ijdotqoPqB44rp4GRKIoxIfCkg5oI26dvkp1TQntQkuDXxsSNPTldydqSJKg==
+"@umijs/plugin-layout@0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@umijs/plugin-layout/-/plugin-layout-0.10.0.tgz#23a831f08be5834ddd8b169643eaf6164fed9790"
+  integrity sha512-TPMfCBe7efmdRIIbvcafGmX3e/4OgxOrU5dk69bkY8lQ5+tgWVnWlhR/vLlnfSZDo4iCI3ny4nF2k9j0na3dQA==
   dependencies:
     "@ant-design/icons" "^4.0.0"
     "@ant-design/pro-layout" "^5.0.0"
     antd "^4.1.2"
     lodash "^4.17.15"
-    memoize-one "^5.1.1"
     path-to-regexp "1.x"
 
 "@umijs/plugin-locale@0.4.5":
@@ -3158,10 +3157,10 @@
     react-intl "3.12.0"
     warning "^4.0.3"
 
-"@umijs/plugin-model@2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@umijs/plugin-model/-/plugin-model-2.3.0.tgz#7ce3c1bd8e6b85bf84edc41f8600e990fa5b9bff"
-  integrity sha512-OV0k1bRDJlTrmW5zEoTR8l8DhPhwFdFCRDUstSH9AUEKqYG2z6dS7sany/IDls6z0X6PBgpLNgHUx40MjX0+ow==
+"@umijs/plugin-model@2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@umijs/plugin-model/-/plugin-model-2.3.1.tgz#a485e521656e829fb4845274f86f89f170fb6a96"
+  integrity sha512-6Y6mIfET8Xl+lFO6AtBWi45SeZUU5M057pCS3qy7vhUeNbbBzjg+IRAvw2T3mJ6T/riYGnWRoayEKQ5eyN5c/g==
   dependencies:
     fast-deep-equal "3.1.1"
 
@@ -3257,9 +3256,9 @@
     unist-util-visit-parents "^3.0.1"
 
 "@umijs/preset-react@1.x":
-  version "1.4.18"
-  resolved "https://registry.yarnpkg.com/@umijs/preset-react/-/preset-react-1.4.18.tgz#d1c9cc53e0b55579e1c595bf0847fc0774047204"
-  integrity sha512-jRJEhs2biKxTzN8gDRJvFpsBEosWvXm8MYqqKZpufT0JLZ5YhqjWf7qZrRoOjCF+3+NjqDq41Qx/b6Obd1r/JA==
+  version "1.4.19"
+  resolved "https://registry.yarnpkg.com/@umijs/preset-react/-/preset-react-1.4.19.tgz#5e754a575fac4cbe52405d9900c927c7726b3feb"
+  integrity sha512-LW0s/U2ssmAmJQIuvX7NT74b1MT+Vu0wZn725tjEHYa+gYdrNiZ8togKa9FhqamJO7Zx1TmOIwAaIbgEd1/VCA==
   dependencies:
     "@umijs/plugin-access" "2.3.1"
     "@umijs/plugin-analytics" "0.2.2"
@@ -3267,9 +3266,9 @@
     "@umijs/plugin-crossorigin" "1.1.0"
     "@umijs/plugin-dva" "0.6.5"
     "@umijs/plugin-initial-state" "2.2.1"
-    "@umijs/plugin-layout" "0.9.2"
+    "@umijs/plugin-layout" "0.10.0"
     "@umijs/plugin-locale" "0.4.5"
-    "@umijs/plugin-model" "2.3.0"
+    "@umijs/plugin-model" "2.3.1"
     "@umijs/plugin-request" "2.3.2"
     "@umijs/plugin-test" "1.0.0"
 
