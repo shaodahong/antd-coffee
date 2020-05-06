@@ -2768,16 +2768,6 @@
     "@typescript-eslint/typescript-estree" "1.13.0"
     eslint-scope "^4.0.0"
 
-"@typescript-eslint/experimental-utils@2.30.0":
-  version "2.30.0"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/experimental-utils/-/experimental-utils-2.30.0.tgz#9845e868c01f3aed66472c561d4b6bac44809dd0"
-  integrity sha512-L3/tS9t+hAHksy8xuorhOzhdefN0ERPDWmR9CclsIGOUqGKy6tqc/P+SoXeJRye5gazkuPO0cK9MQRnolykzkA==
-  dependencies:
-    "@types/json-schema" "^7.0.3"
-    "@typescript-eslint/typescript-estree" "2.30.0"
-    eslint-scope "^5.0.0"
-    eslint-utils "^2.0.0"
-
 "@typescript-eslint/experimental-utils@2.31.0", "@typescript-eslint/experimental-utils@^2.5.0":
   version "2.31.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/experimental-utils/-/experimental-utils-2.31.0.tgz#a9ec514bf7fd5e5e82bc10dcb6a86d58baae9508"
@@ -2815,19 +2805,6 @@
   dependencies:
     lodash.unescape "4.0.1"
     semver "5.5.0"
-
-"@typescript-eslint/typescript-estree@2.30.0":
-  version "2.30.0"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/typescript-estree/-/typescript-estree-2.30.0.tgz#1b8e848b55144270255ffbfe4c63291f8f766615"
-  integrity sha512-nI5WOechrA0qAhnr+DzqwmqHsx7Ulr/+0H7bWCcClDhhWkSyZR5BmTvnBEyONwJCTWHfc5PAQExX24VD26IAVw==
-  dependencies:
-    debug "^4.1.1"
-    eslint-visitor-keys "^1.1.0"
-    glob "^7.1.6"
-    is-glob "^4.0.1"
-    lodash "^4.17.15"
-    semver "^6.3.0"
-    tsutils "^3.17.1"
 
 "@typescript-eslint/typescript-estree@2.31.0":
   version "2.31.0"
@@ -3230,10 +3207,10 @@
     umi-webpack-bundle-analyzer "3.5.0"
     zlib "1.0.5"
 
-"@umijs/preset-dumi@1.0.20":
-  version "1.0.20"
-  resolved "https://registry.yarnpkg.com/@umijs/preset-dumi/-/preset-dumi-1.0.20.tgz#384648809d93557cd88f5f5a77605a586a786e8b"
-  integrity sha512-bNCxAQ6b04ioMD6eM0FMmd/ouMvVISZXRFLMJU1t5aKnYcsDs36tqu/lgxsOwcLKtLvjPLClUZfpsK+Nx4uP1g==
+"@umijs/preset-dumi@1.0.21":
+  version "1.0.21"
+  resolved "https://registry.yarnpkg.com/@umijs/preset-dumi/-/preset-dumi-1.0.21.tgz#aaaa3e44938533ead00650294dfc3a72d387ceac"
+  integrity sha512-rUB4Mn19Q4wMaAlh6n44td6hpZj804qCWIqKpGm6rZsHtFIP/NbnxSSw6rktKXAB2XzQrgj3cTm0jgdYNd2Lug==
   dependencies:
     "@babel/core" "^7.7.2"
     "@babel/generator" "^7.7.2"
@@ -6337,11 +6314,11 @@ dotenv@8.2.0:
   integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
 
 dumi@^1.0.18:
-  version "1.0.20"
-  resolved "https://registry.yarnpkg.com/dumi/-/dumi-1.0.20.tgz#dc9c803e552de3b2fd2288e4ebdf3259ef107650"
-  integrity sha512-CDLzfMkgzWPeTOd/yhMwxr9+B8iNnHjUsj6i6mmvuhkjjbj3UZ0ddV7rnMQvsn1aC48pbxs0EEsqo+fH53b7gA==
+  version "1.0.21"
+  resolved "https://registry.yarnpkg.com/dumi/-/dumi-1.0.21.tgz#1dc913c00a8e1b17ea9fa6ec44a1cc5fa744ce13"
+  integrity sha512-Y6kBBaJ2RYPAPNcQ3kXDDQfyu7YXdoWMpB5CoFIoogAD0QnzxIKi9wURPUNK2UiGLEXkm17bU6od0j4bXGXNyQ==
   dependencies:
-    "@umijs/preset-dumi" "1.0.20"
+    "@umijs/preset-dumi" "1.0.21"
     umi "^3.0.0"
 
 duplexer3@^0.1.4:
