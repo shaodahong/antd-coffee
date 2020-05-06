@@ -314,6 +314,7 @@ const InternalForm: FC<FormProps> = ({
     </Row>
   )
 
+  // Better use Button loading when submit, but we can't control button
   return (
     <Spin spinning={loading}>
       <AntdForm
