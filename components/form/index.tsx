@@ -1,4 +1,4 @@
-import React, { ReactElement, FC, ReactNode, useEffect } from 'react'
+import React, { ReactElement, FC, ReactNode, useEffect, useState } from 'react'
 import {
   Form as AntdForm,
   Input,
@@ -7,6 +7,7 @@ import {
   Skeleton,
   Popover,
   Card,
+  Spin,
 } from 'antd'
 import {
   FormProps as AntdFormProps,
@@ -98,6 +99,7 @@ export interface FormProps extends AntdFormProps, FormCommonProps {
   mode?: 'card'
   /** Effective in card mode */
   cardProps?: CardProps
+  onFinish?: (values: Store) => void | Promise<unknown>
 }
 
 const { Item, useForm, List, Provider } = AntdForm
@@ -127,6 +129,7 @@ const InternalForm: FC<FormProps> = ({
     initialValues: isLoadinginitialValues ? {} : initialValuesInternal,
   })
   const prevFormInitialValues = usePrevious(initialValuesInternal)
+  const [loading, setLoading] = useState(false)
 
   const getInitialValues = async () => {
     let values: Store = {}
@@ -184,21 +187,27 @@ const InternalForm: FC<FormProps> = ({
     return <Skeleton />
   }
 
-  const onFinish = (values: Store) => {
-    items
-      .filter(
-        ({ pipeline }) =>
-          isFunc(pipeline) || (Array.isArray(pipeline) && pipeline.length === 2)
-      )
-      .forEach(({ pipeline, name }) => {
-        const outputer = isFunc(pipeline)
-          ? pipeline
-          : (pipeline as [InputPipeline, OutputPipeline])[1]
+  const onFinish = async (values: Store) => {
+    try {
+      setLoading(true)
+      items
+        .filter(
+          ({ pipeline }) =>
+            isFunc(pipeline) ||
+            (Array.isArray(pipeline) && pipeline.length === 2)
+        )
+        .forEach(({ pipeline, name }) => {
+          const outputer = isFunc(pipeline)
+            ? pipeline
+            : (pipeline as [InputPipeline, OutputPipeline])[1]
 
-        update(values, name as string, outputer as OutputPipeline)
-      })
-    if (onFinishInternal) {
-      onFinishInternal(values)
+          update(values, name as string, outputer as OutputPipeline)
+        })
+      if (onFinishInternal) {
+        await onFinishInternal(values)
+      }
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -306,26 +315,28 @@ const InternalForm: FC<FormProps> = ({
   )
 
   return (
-    <AntdForm
-      form={formInsatce}
-      onFinish={onFinish}
-      onValuesChange={onValuesChange}
-      initialValues={initialStates.initialValues}
-      {...props}
-    >
-      {mode === 'card' ? (
-        <Card
-          headStyle={{
-            backgroundColor: '#fafafa',
-          }}
-          {...cardProps}
-        >
-          {FormChildren}
-        </Card>
-      ) : (
-        FormChildren
-      )}
-    </AntdForm>
+    <Spin spinning={loading}>
+      <AntdForm
+        form={formInsatce}
+        onFinish={onFinish}
+        onValuesChange={onValuesChange}
+        initialValues={initialStates.initialValues}
+        {...props}
+      >
+        {mode === 'card' ? (
+          <Card
+            headStyle={{
+              backgroundColor: '#fafafa',
+            }}
+            {...cardProps}
+          >
+            {FormChildren}
+          </Card>
+        ) : (
+          FormChildren
+        )}
+      </AntdForm>
+    </Spin>
   )
 }
 
