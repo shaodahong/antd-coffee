@@ -16,7 +16,6 @@ export interface ModalFormProps extends ModalProps {
 const ModalForm: FC<ModalFormProps> = ({
   formProps,
   onOk,
-  okButtonProps,
   visible,
   ...props
 }) => {
@@ -51,10 +50,7 @@ const ModalForm: FC<ModalFormProps> = ({
   return (
     <Modal
       onOk={onModalOk}
-      okButtonProps={{
-        ...okButtonProps,
-        loading,
-      }}
+      confirmLoading={loading}
       visible={visible}
       destroyOnClose
       {...props}
