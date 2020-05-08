@@ -285,20 +285,22 @@ function Table<RecordType extends object>(
                 搜索
               </AsyncButton>
               <AsyncButton onClick={onTableReset}>重置</AsyncButton>
-              <AsyncButton
-                type="link"
-                style={{
-                  padding: '0 0 0 4px',
-                }}
-                onClick={() => {
-                  setState({
-                    isExpand: !state.isExpand,
-                  })
-                }}
-              >
-                {state.isExpand ? '收起' : '展开'}
-                <DownOutlined rotate={state.isExpand ? 180 : 0} />
-              </AsyncButton>
+              {items.length > initialCount && (
+                <AsyncButton
+                  type="link"
+                  style={{
+                    padding: '0 0 0 4px',
+                  }}
+                  onClick={() => {
+                    setState({
+                      isExpand: !state.isExpand,
+                    })
+                  }}
+                >
+                  {state.isExpand ? '收起' : '展开'}
+                  <DownOutlined rotate={state.isExpand ? 180 : 0} />
+                </AsyncButton>
+              )}
             </Space>
           </Row>
         </Form>
