@@ -183,7 +183,9 @@ const InternalForm: FC<FormProps> = ({
       !isEqual(prevFormInitialValues, initialValuesInternal)
     ) {
       formInsatce.setFieldsValue(initialValuesInternal as Store)
-      forceUpdate()
+      setInitialStates({
+        initialValues: initialValuesInternal,
+      })
     }
   }, [initialValuesInternal])
 
