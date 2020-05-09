@@ -1,4 +1,11 @@
-import React, { ReactElement, FC, ReactNode, useEffect, useState } from 'react'
+import React, {
+  ReactElement,
+  FC,
+  ReactNode,
+  useEffect,
+  useState,
+  FormEvent,
+} from 'react'
 import {
   Form as AntdForm,
   Input,
@@ -108,6 +115,7 @@ const InternalForm: FC<FormProps> = ({
   items,
   children,
   onFinish: onFinishInternal,
+  onReset: onResetInternal,
   isView = false,
   form,
   layoutCol = { span: 24 },
@@ -211,6 +219,15 @@ const InternalForm: FC<FormProps> = ({
     }
   }
 
+  const onReset = (e: FormEvent<HTMLFormElement>) => {
+    if (initialStates.initialValues) {
+      formInsatce.setFieldsValue(initialStates.initialValues)
+    } else {
+      formInsatce.resetFields()
+    }
+    isFunc(onResetInternal) && onResetInternal(e)
+  }
+
   const renderItems = (
     {
       render,
@@ -266,7 +283,7 @@ const InternalForm: FC<FormProps> = ({
         renderView && isFunc(renderView)
           ? renderView(fieldValue, fieldsValue, formInsatce)
           : fieldValue,
-        placeholder
+        name ? placeholder : undefined
       )
     } else {
       Comp =
@@ -320,6 +337,7 @@ const InternalForm: FC<FormProps> = ({
       <AntdForm
         form={formInsatce}
         onFinish={onFinish}
+        onReset={onReset}
         onValuesChange={onValuesChange}
         initialValues={initialStates.initialValues}
         {...props}
