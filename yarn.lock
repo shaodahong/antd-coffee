@@ -3207,10 +3207,10 @@
     umi-webpack-bundle-analyzer "3.5.0"
     zlib "1.0.5"
 
-"@umijs/preset-dumi@1.0.21":
-  version "1.0.21"
-  resolved "https://registry.yarnpkg.com/@umijs/preset-dumi/-/preset-dumi-1.0.21.tgz#aaaa3e44938533ead00650294dfc3a72d387ceac"
-  integrity sha512-rUB4Mn19Q4wMaAlh6n44td6hpZj804qCWIqKpGm6rZsHtFIP/NbnxSSw6rktKXAB2XzQrgj3cTm0jgdYNd2Lug==
+"@umijs/preset-dumi@1.0.22":
+  version "1.0.22"
+  resolved "https://registry.yarnpkg.com/@umijs/preset-dumi/-/preset-dumi-1.0.22.tgz#e8edd9834f0232ee7c886e36273048139937fd68"
+  integrity sha512-CDLuIfIu+LDJkXtr9YUrTXFEiCAv9z9DoHdcAA0h87tLXPzOiPnDcVR94EBr5x8YLRn9rsXeWEQdNG3I+G2++A==
   dependencies:
     "@babel/core" "^7.7.2"
     "@babel/generator" "^7.7.2"
@@ -6314,11 +6314,11 @@ dotenv@8.2.0:
   integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
 
 dumi@^1.0.18:
-  version "1.0.21"
-  resolved "https://registry.yarnpkg.com/dumi/-/dumi-1.0.21.tgz#1dc913c00a8e1b17ea9fa6ec44a1cc5fa744ce13"
-  integrity sha512-Y6kBBaJ2RYPAPNcQ3kXDDQfyu7YXdoWMpB5CoFIoogAD0QnzxIKi9wURPUNK2UiGLEXkm17bU6od0j4bXGXNyQ==
+  version "1.0.22"
+  resolved "https://registry.yarnpkg.com/dumi/-/dumi-1.0.22.tgz#2c3627552b55e5fc68d3e9f01caad7139fc6dd52"
+  integrity sha512-b4YnTaO1iU7AAUy9FjysPhcWNlA/dH2GCEnEmjwx9+1xiN+AR1vXXDXLIgeWEmAD0bPbcn0p5hFrFKoPMfdrNQ==
   dependencies:
-    "@umijs/preset-dumi" "1.0.21"
+    "@umijs/preset-dumi" "1.0.22"
     umi "^3.0.0"
 
 duplexer3@^0.1.4:
