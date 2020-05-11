@@ -156,6 +156,8 @@ const InternalForm: FC<FormProps> = ({
         isLoadinginitialValues: false,
         initialValues: values,
       })
+      // Fix if Form instance destory but useForm from external.
+      formInsatce.resetFields()
     }
   }
 
@@ -167,8 +169,6 @@ const InternalForm: FC<FormProps> = ({
       // Todo: Initial value cannot get when first mount
       forceUpdate()
     }
-    // Fix if Form instance destory but useForm from external.
-    return () => formInsatce.resetFields()
   }, [])
 
   // If promise initialValues update need rerenader?
