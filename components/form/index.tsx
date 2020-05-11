@@ -222,11 +222,7 @@ const InternalForm: FC<FormProps> = ({
   }
 
   const onReset = (e: FormEvent<HTMLFormElement>) => {
-    if (initialStates.initialValues) {
-      formInsatce.setFieldsValue(initialStates.initialValues)
-    } else {
-      formInsatce.resetFields()
-    }
+    formInsatce.resetFields()
     isFunc(onResetInternal) && onResetInternal(e)
   }
 
