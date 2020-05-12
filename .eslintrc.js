@@ -1,9 +1,5 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
-  parserOptions: {
-    project: './tsconfig.json',
-    tsconfigRootDir: '.',
-  },
   env: {
     browser: true,
     node: true,
@@ -30,7 +26,6 @@ module.exports = {
     ],
     'react/jsx-props-no-spreading': 0,
     'react/prop-types': 0,
-    'react/jsx-filename-extension': 0,
     '@typescript-eslint/explicit-function-return-type': 0,
     'import/extensions': 0,
     'consistent-return': 0,
