@@ -1948,15 +1948,6 @@
     "@types/yargs" "^15.0.0"
     chalk "^3.0.0"
 
-"@mapbox/rehype-prism@^0.3.1":
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/@mapbox/rehype-prism/-/rehype-prism-0.3.1.tgz#538e38737df0d0d1462beabf9ceae88fce4035a5"
-  integrity sha512-3LVcYjRoyn13yRyAxGdHEOA9k2litvxJU60IbaOlPWStUiNA2GspgwiDSVHzhF+nLOu8Wed6SWFFLh18U/KEQw==
-  dependencies:
-    hast-util-to-string "^1.0.0"
-    refractor "^2.3.0"
-    unist-util-visit "^1.1.3"
-
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -3221,10 +3212,10 @@
     umi-webpack-bundle-analyzer "3.5.0"
     zlib "1.0.5"
 
-"@umijs/preset-dumi@1.0.24":
-  version "1.0.24"
-  resolved "https://registry.yarnpkg.com/@umijs/preset-dumi/-/preset-dumi-1.0.24.tgz#58a0ecccecc84f003ae6cc6c6837d7d4e1613165"
-  integrity sha512-IWJ5zQB3lTfsE/IZw3siTGjfLQ3roHsmeVRUDSoWhNqnuKHhQlhHQvdWP3e4Br1B4y8cAnvotRMTRssELCWT0A==
+"@umijs/preset-dumi@1.0.25":
+  version "1.0.25"
+  resolved "https://registry.yarnpkg.com/@umijs/preset-dumi/-/preset-dumi-1.0.25.tgz#99cbe64a3c21be3fd342cf2ae15e55c4d8fb5aa1"
+  integrity sha512-/RqwrsaUiqRoxLxdZmVL+ZSJ/q9MDQIsjiMIJk8+D0q4XG2WisVNoDGU2MGd6XQolzUS5YT23w3OYLqtBj4/UQ==
   dependencies:
     "@babel/core" "^7.7.2"
     "@babel/generator" "^7.7.2"
@@ -3235,7 +3226,6 @@
     "@babel/preset-react" "^7.7.2"
     "@babel/traverse" "^7.7.2"
     "@babel/types" "^7.7.2"
-    "@mapbox/rehype-prism" "^0.3.1"
     "@umijs/babel-preset-umi" "3.x"
     "@umijs/types" "3.x"
     deepmerge "^4.2.2"
@@ -6328,11 +6318,11 @@ dotenv@8.2.0:
   integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
 
 dumi@^1.0.18:
-  version "1.0.24"
-  resolved "https://registry.yarnpkg.com/dumi/-/dumi-1.0.24.tgz#7c65a11da3e31747290a74e290b0db63bec22551"
-  integrity sha512-exlBVXdUofJwYmKhfDKDU0sP3LJSnUk7Gn1UQ6MK708pVso3xEuwGZkcJ9qCYEibDXDjZD0PDvPumf7m3Ru4MA==
+  version "1.0.25"
+  resolved "https://registry.yarnpkg.com/dumi/-/dumi-1.0.25.tgz#eef0cd795c6f87557fc45cd5822899d57b36953b"
+  integrity sha512-Uh71O6BO9TNz4ATLUcltxH+iWpWRpu9o6hsuoLzqUYvnzZbDsUmGeMRkx3ElRGuVfKLcKdRR1rGKQZQS9DcanQ==
   dependencies:
-    "@umijs/preset-dumi" "1.0.24"
+    "@umijs/preset-dumi" "1.0.25"
     umi "^3.0.0"
 
 duplexer3@^0.1.4:
@@ -11974,7 +11964,7 @@ parse-asn1@^5.0.0:
     pbkdf2 "^3.0.3"
     safe-buffer "^5.1.1"
 
-parse-entities@^1.1.0, parse-entities@^1.1.2:
+parse-entities@^1.1.0:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/parse-entities/-/parse-entities-1.2.2.tgz#c31bf0f653b6661354f8973559cb86dd1d5edf50"
   integrity sha512-NzfpbxW/NPrzZ/yYSoQxyqUZMZXIdCfE0OIN4ESsnptHJECoUk3FZktxNuzQf4tjt5UEopnxpYJbvYuxIFDdsg==
@@ -13146,13 +13136,6 @@ prismjs@^1.20.0:
   optionalDependencies:
     clipboard "^2.0.0"
 
-prismjs@~1.17.0:
-  version "1.17.1"
-  resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.17.1.tgz#e669fcbd4cdd873c35102881c33b14d0d68519be"
-  integrity sha512-PrEDJAFdUGbOP6xK/UsfkC5ghJsPJviKgnQOoxaDbBjwc8op68Quupwt1DeAFoG8GImPhiKXAvvsH7wDSLsu1Q==
-  optionalDependencies:
-    clipboard "^2.0.0"
-
 private@^0.1.8:
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/private/-/private-0.1.8.tgz#2381edb3689f7a53d653190060fcf822d2f368ff"
@@ -14167,15 +14150,6 @@ reflect.ownkeys@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/reflect.ownkeys/-/reflect.ownkeys-0.2.0.tgz#749aceec7f3fdf8b63f927a04809e90c5c0b3460"
   integrity sha1-dJrO7H8/34tj+SegSAnpDFwLNGA=
-
-refractor@^2.3.0:
-  version "2.10.1"
-  resolved "https://registry.yarnpkg.com/refractor/-/refractor-2.10.1.tgz#166c32f114ed16fd96190ad21d5193d3afc7d34e"
-  integrity sha512-Xh9o7hQiQlDbxo5/XkOX6H+x/q8rmlmZKr97Ie1Q8ZM32IRRd3B/UxuA/yXDW79DBSXGWxm2yRTbcTVmAciJRw==
-  dependencies:
-    hastscript "^5.0.0"
-    parse-entities "^1.1.2"
-    prismjs "~1.17.0"
 
 regenerate-unicode-properties@^8.2.0:
   version "8.2.0"
@@ -16931,7 +16905,7 @@ unist-util-visit-parents@^3.0.0, unist-util-visit-parents@^3.0.1:
     "@types/unist" "^2.0.0"
     unist-util-is "^4.0.0"
 
-unist-util-visit@^1.0.0, unist-util-visit@^1.1.0, unist-util-visit@^1.1.3:
+unist-util-visit@^1.0.0, unist-util-visit@^1.1.0:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/unist-util-visit/-/unist-util-visit-1.4.1.tgz#4724aaa8486e6ee6e26d7ff3c8685960d560b1e3"
   integrity sha512-AvGNk7Bb//EmJZyhtRUnNMEpId/AZ5Ph/KUpTI09WHQuDZHKovQ1oEv3mfmKpWKtoMzyMC4GLBm1Zy5k12fjIw==
