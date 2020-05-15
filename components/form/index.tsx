@@ -288,7 +288,7 @@ const InternalForm: FC<FormProps> = ({
         render && isFunc(render) ? (
           render(fieldValue, fieldsValue, formInsatce)
         ) : (
-          <Input allowClear />
+          <Input allowClear placeholder={`请输入${label}`} />
         )
     }
 
