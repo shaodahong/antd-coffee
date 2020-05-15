@@ -47,7 +47,7 @@ const handler = (values: any, isSet?: boolean): any => {
 export function getHistoryState() {
   const { state = {} } = history
 
-  if (!state[key] || !isPlainObject(state[key])) {
+  if (!state || !state[key] || !isPlainObject(state[key])) {
     return {}
   }
 
