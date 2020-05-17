@@ -20,7 +20,6 @@ import SearchOutlined from '@ant-design/icons/SearchOutlined'
 import DownOutlined from '@ant-design/icons/DownOutlined'
 import RedoOutlined from '@ant-design/icons/RedoOutlined'
 import get from 'lodash/get'
-import { PaginationConfig } from 'antd/lib/pagination'
 import { Store } from 'antd/lib/form/interface'
 import {
   SorterResult,
@@ -29,6 +28,7 @@ import {
   ColumnsType,
   ColumnGroupType,
   ColumnType,
+  TablePaginationConfig,
 } from 'antd/lib/table/interface'
 import Form, { FormProps } from '../form'
 import AsyncButton from '../async-button'
@@ -95,7 +95,7 @@ export type TableColumnsType<RecordType> = TableCommonProps &
   (ColumnGroupType<RecordType> | ColumnType<RecordType>)
 
 export interface TableOnSearchChangeState<RecordType> {
-  paginationConfig?: PaginationConfig
+  paginationConfig?: TablePaginationConfig
   filters?: Record<string, Key[] | null>
   sorter?: SorterResult<RecordType> | SorterResult<RecordType>[]
   extra?: TableCurrentDataSource<RecordType>
@@ -219,7 +219,7 @@ function Table<RecordType extends object>(
   }
 
   const onChange = (
-    paginationConfig: PaginationConfig,
+    paginationConfig: TablePaginationConfig,
     filters: Record<string, Key[] | null>,
     sorter: SorterResult<RecordType> | SorterResult<RecordType>[],
     extra: TableCurrentDataSource<RecordType>
