@@ -155,11 +155,13 @@ function Table<RecordType extends object>(
     isExpand: boolean
     data: TableData<RecordType>
     pageNum: number
+    pageSize: number
   }>({
     loading: false,
     isExpand: false,
     data: { data: [] },
     pageNum,
+    pageSize,
   })
   const isShowTableTitle = !!(title || showTools)
 
@@ -226,11 +228,13 @@ function Table<RecordType extends object>(
   ) => {
     setState({
       pageNum: paginationConfig.current,
+      pageSize: paginationConfig.pageSize,
     })
 
     onSearch(
       {
         [pageNumName]: paginationConfig.current,
+        [pageSizeName]: paginationConfig.pageSize,
       },
       {
         paginationConfig,
@@ -378,13 +382,10 @@ function Table<RecordType extends object>(
           pagination === false
             ? pagination
             : {
-                // Hide if single page
-                hideOnSinglePage: true,
-                showSizeChanger: false,
                 showTotal: (total) => `共 ${total} 条`,
                 total: get(state.data, totalName),
                 current: state.pageNum,
-                pageSize,
+                pageSize: state.pageSize,
                 ...pagination,
               }
         }
