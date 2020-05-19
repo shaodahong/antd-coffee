@@ -20,6 +20,7 @@ import SearchOutlined from '@ant-design/icons/SearchOutlined'
 import DownOutlined from '@ant-design/icons/DownOutlined'
 import RedoOutlined from '@ant-design/icons/RedoOutlined'
 import get from 'lodash/get'
+import pickBy from 'lodash/pickBy'
 import { Store } from 'antd/lib/form/interface'
 import {
   SorterResult,
@@ -176,16 +177,19 @@ function Table<RecordType extends object>(
       })
       const searchValues = form.getFieldsValue()
 
-      const searchParams = {
-        ...(pagination === false
-          ? {}
-          : {
-              [pageNumName]: state.pageNum,
-              [pageSizeName]: pageSize,
-            }),
-        ...params,
-        ...searchValues,
-      }
+      const searchParams = pickBy(
+        {
+          ...(pagination === false
+            ? {}
+            : {
+                [pageNumName]: state.pageNum,
+                [pageSizeName]: pageSize,
+              }),
+          ...params,
+          ...searchValues,
+        },
+        (param) => param !== '' && param !== undefined && param !== null
+      )
       const result = await onTableSearch(searchParams, changeState)
       setState({
         data: result,
