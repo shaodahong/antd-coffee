@@ -6870,6 +6870,14 @@ eslint-plugin-markdown@^1.0.0:
     remark-parse "^5.0.0"
     unified "^6.1.2"
 
+eslint-plugin-markdown@^2.0.0-alpha.0:
+  version "2.0.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-markdown/-/eslint-plugin-markdown-2.0.0-alpha.0.tgz#4316c3dc32e37cefbae6cd6b6676344a2982e5e8"
+  integrity sha512-NIp6WBiGDRWkGuuG1s5biJ55s4E+B5wbfrIlf3m8cLeTFD2ijkxrP1l3LXx0BexnL7XL2Hz5Ce1e2nOazdaTHg==
+  dependencies:
+    remark-parse "^5.0.0"
+    unified "^6.1.2"
+
 eslint-plugin-prettier@^3.1.3:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-3.1.3.tgz#ae116a0fc0e598fdae48743a4430903de5b4e6ca"

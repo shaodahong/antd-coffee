@@ -5,7 +5,7 @@ module.exports = {
     node: true,
     jest: true,
   },
-  plugins: ['@typescript-eslint', 'react-hooks', 'prettier'],
+  plugins: ['markdown', '@typescript-eslint', 'react-hooks', 'prettier'],
   extends: [
     'airbnb',
     'plugin:@typescript-eslint/recommended',
@@ -13,6 +13,12 @@ module.exports = {
     'prettier',
     'prettier/@typescript-eslint',
     'prettier/react',
+  ],
+  overrides: [
+    {
+      files: ['**/*.md'],
+      processor: 'markdown/markdown',
+    },
   ],
   rules: {
     quotes: ['error', 'single'],
