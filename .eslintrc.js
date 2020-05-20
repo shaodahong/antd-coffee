@@ -17,7 +17,17 @@ module.exports = {
   overrides: [
     {
       files: ['**/*.md'],
-      processor: 'markdown/markdown',
+      globals: {
+        React: true,
+        ReactDOM: true,
+      },
+      rules: {
+        'no-undef': 0,
+        'no-unused-vars': 0,
+        'no-console': 0,
+        'padded-blocks': 0,
+        '@typescript-eslint/no-unused-vars': 0,
+      },
     },
   ],
   rules: {
@@ -27,7 +37,7 @@ module.exports = {
     'react/jsx-filename-extension': [
       'error',
       {
-        extensions: ['.jsx', '.tsx'],
+        extensions: ['.jsx', '.tsx', '.md'],
       },
     ],
     'react/jsx-props-no-spreading': 0,
