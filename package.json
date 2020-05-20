@@ -23,8 +23,12 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn lint && yarn prettier"
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,md}": "eslint --fix",
+    "*.{js,jsx,ts,tsx,md,css}": "prettier --write"
   },
   "main": "./lib/index",
   "module": "./es/index",
@@ -94,6 +98,7 @@
     "father-build": "^1.18.0",
     "husky": "^4.2.5",
     "less": "^3.11.1",
+    "lint-staged": "^10.2.4",
     "mockjs": "^1.1.0",
     "moment": "^2.24.0",
     "np": "^6.2.1",
