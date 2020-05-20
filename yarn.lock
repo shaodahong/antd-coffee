@@ -3113,10 +3113,10 @@
     dva-immer "^0.4.19"
     dva-loading "^3.0.20"
 
-"@umijs/plugin-helmet@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@umijs/plugin-helmet/-/plugin-helmet-1.0.0.tgz#8e580ef71c6e314f385a904cd6ee7dea1d52a03d"
-  integrity sha512-/wVxDCmMYjUDHkhl9RQfqodAbYHxfzpfasc+bjdbToITtY8Z692+ja31OfLj6wlJepp7SIjN5XrYyFUJr0Bbfw==
+"@umijs/plugin-helmet@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@umijs/plugin-helmet/-/plugin-helmet-1.0.1.tgz#8cdf57aad6813f26ebf4000daa922fac80620e9a"
+  integrity sha512-On3oQgIgnnqA5Dk54QJhJNBuOkK5DfQpqOxrJsHZJHrhgVonclaNqFqQP4ScbJFtiweNkdbCN4l2tzZmcKFQTA==
   dependencies:
     "@types/react-helmet" "6.0.0"
     react-helmet "6.0.0"
@@ -3135,10 +3135,10 @@
     lodash "^4.17.15"
     path-to-regexp "1.x"
 
-"@umijs/plugin-locale@0.6.1":
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@umijs/plugin-locale/-/plugin-locale-0.6.1.tgz#37a5fa9c3d244d339914a06a64507a722ad7add4"
-  integrity sha512-GQM8/jLFOYyRN6wEyIr6Vozv618cIDUGk4yCNDwb3nYNi5mDZQinlAkaz2AnXineA+slFE1mqf2XptTnkY5DxA==
+"@umijs/plugin-locale@0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@umijs/plugin-locale/-/plugin-locale-0.7.0.tgz#e82e0a5bf82b24457eb2653144947cba20da2815"
+  integrity sha512-GS7YwCoQJCen82vMMQeoA3ypSl5i/wDLBBvX2/OgfHFuwLIZ/kB04jxABWxxvq1IR1RPkntZiQBGoH534zThNA==
   dependencies:
     "@ant-design/icons" "^4.1.0"
     "@formatjs/intl-pluralrules" "^1.5.0"
@@ -3246,19 +3246,19 @@
     unist-util-visit-parents "^3.0.1"
 
 "@umijs/preset-react@1.x":
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/@umijs/preset-react/-/preset-react-1.5.1.tgz#06e2774b16ad8eb4ce90fa01d87293738e2d04a4"
-  integrity sha512-S+gO3h8ta4lB5app7vS7FEx5nFiIgVH2keOPKxTXgLuoJOAbphbj+X/HNbgLypA1luN5PqR1TXGmpcpS7AoNqg==
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/@umijs/preset-react/-/preset-react-1.5.2.tgz#7bb32f9dda7b865dad73aafdad87154a6c9738c0"
+  integrity sha512-5QKfKjrjmykwdZqQChLoxUZkgfadu/adYu5HG9a/64WoY+RrUuMX21ShFLxc6OvOUR1VKcJpMuq4qJT+DhnZPA==
   dependencies:
     "@umijs/plugin-access" "2.3.1"
     "@umijs/plugin-analytics" "0.2.2"
     "@umijs/plugin-antd" "0.5.1"
     "@umijs/plugin-crossorigin" "1.1.0"
     "@umijs/plugin-dva" "0.7.1"
-    "@umijs/plugin-helmet" "1.0.0"
+    "@umijs/plugin-helmet" "1.0.1"
     "@umijs/plugin-initial-state" "2.2.1"
     "@umijs/plugin-layout" "0.11.4"
-    "@umijs/plugin-locale" "0.6.1"
+    "@umijs/plugin-locale" "0.7.0"
     "@umijs/plugin-model" "2.3.1"
     "@umijs/plugin-request" "2.3.2"
     "@umijs/plugin-test" "1.0.0"
