@@ -14,6 +14,7 @@ import {
   Form as AntdForm,
   Col,
   Tooltip,
+  Button,
 } from 'antd'
 import { TableProps as AntdTableProps } from 'antd/lib/table'
 import SearchOutlined from '@ant-design/icons/SearchOutlined'
@@ -283,34 +284,36 @@ function Table<RecordType extends object>(
           layoutCol={{ span: 6 }}
           {...searchProps}
         >
-          <Row justify="end">
-            <Space>
-              <AsyncButton
-                onClick={onClickSearch}
-                type="primary"
-                icon={<SearchOutlined />}
-              >
-                搜索
-              </AsyncButton>
-              <AsyncButton onClick={onTableReset}>重置</AsyncButton>
-              {items.length > initialCount && (
+          <Form.Item>
+            <Row justify="end">
+              <Space>
                 <AsyncButton
-                  type="link"
-                  style={{
-                    padding: '0 0 0 4px',
-                  }}
-                  onClick={() => {
-                    setState({
-                      isExpand: !state.isExpand,
-                    })
-                  }}
+                  onClick={onClickSearch}
+                  type="primary"
+                  icon={<SearchOutlined />}
                 >
-                  {state.isExpand ? '收起' : '展开'}
-                  <DownOutlined rotate={state.isExpand ? 180 : 0} />
+                  搜索
                 </AsyncButton>
-              )}
-            </Space>
-          </Row>
+                <AsyncButton onClick={onTableReset}>重置</AsyncButton>
+                {items.length > initialCount && (
+                  <Button
+                    type="link"
+                    style={{
+                      padding: '0 0 0 4px',
+                    }}
+                    onClick={() => {
+                      setState({
+                        isExpand: !state.isExpand,
+                      })
+                    }}
+                  >
+                    {state.isExpand ? '收起' : '展开'}
+                    <DownOutlined rotate={state.isExpand ? 180 : 0} />
+                  </Button>
+                )}
+              </Space>
+            </Row>
+          </Form.Item>
         </Form>
         {isShowTableTitle && <Divider style={{ margin: 0 }} />}
       </>
