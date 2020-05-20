@@ -169,8 +169,8 @@ function Table<RecordType extends object>(
 
   // get data source
   const onSearch = async (
-    params?: Store,
-    changeState?: TableOnSearchChangeState<RecordType>
+    params: Store = {},
+    changeState: TableOnSearchChangeState<RecordType> = {}
   ) => {
     try {
       setState({
