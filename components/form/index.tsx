@@ -317,7 +317,10 @@ const InternalForm: FC<FormProps> = ({
           extra={isFunc(extra) ? extra(fieldsValue) : extra}
           {...itemProps}
         >
-          <RenderChild suffix={isFunc(suffix) ? suffix(fieldsValue) : suffix}>
+          <RenderChild
+            {...(isValidElement(Comp) ? Comp.props : {})}
+            suffix={isFunc(suffix) ? suffix(fieldsValue) : suffix}
+          >
             {Comp}
           </RenderChild>
         </Item>
