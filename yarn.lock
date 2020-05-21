@@ -3103,20 +3103,20 @@
   resolved "https://registry.yarnpkg.com/@umijs/plugin-crossorigin/-/plugin-crossorigin-1.1.0.tgz#369a594812276458aa0a9284681349179b73662d"
   integrity sha512-ObkR0fEA19xxvKkzMJlLum3mxzNuXz9TiV/xHSh9L6xZUQYssACgwnKGYJrVyc959k3zhCkROgIUHsXxKGE6uQ==
 
-"@umijs/plugin-dva@0.7.1":
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/@umijs/plugin-dva/-/plugin-dva-0.7.1.tgz#757e854752774cfd5a1dbe504b3665eb2e29dd30"
-  integrity sha512-5MQw39BbwAmnCHKrDA1lve9XgCgq1Asnqgrml83WJ1OINtFgZNol87dYaUJfgAdVhN5CaXqBcVXYzlVMFs0Pqg==
+"@umijs/plugin-dva@0.7.2":
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/@umijs/plugin-dva/-/plugin-dva-0.7.2.tgz#268a6c1d5eaa3f7824496480f4323260bd0d008b"
+  integrity sha512-Ko7tj10I8emtNh9w8aDmdftTT7pBF1edSU5fk5Ab7fXDueecw/BhCgmLfu9mdCMKGuyPxx64ziRu8qiBpfDcYA==
   dependencies:
     babel-plugin-dva-hmr "^0.4.2"
     dva "^2.6.0-beta.20"
     dva-immer "^0.4.19"
     dva-loading "^3.0.20"
 
-"@umijs/plugin-helmet@1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@umijs/plugin-helmet/-/plugin-helmet-1.0.1.tgz#8cdf57aad6813f26ebf4000daa922fac80620e9a"
-  integrity sha512-On3oQgIgnnqA5Dk54QJhJNBuOkK5DfQpqOxrJsHZJHrhgVonclaNqFqQP4ScbJFtiweNkdbCN4l2tzZmcKFQTA==
+"@umijs/plugin-helmet@1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@umijs/plugin-helmet/-/plugin-helmet-1.0.2.tgz#9db9d1d257778f94d12587dd6b717af91970e4c9"
+  integrity sha512-GBGQk8VPqEPj3EQnVGmQfI4iGTlwr/kiQZUWm4zrbfDgXf9ydz8sxrQnHWZ1TDu37EnPvaxFHqIAb6KR547JlQ==
   dependencies:
     "@types/react-helmet" "6.0.0"
     react-helmet "6.0.0"
@@ -3246,16 +3246,16 @@
     unist-util-visit-parents "^3.0.1"
 
 "@umijs/preset-react@1.x":
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/@umijs/preset-react/-/preset-react-1.5.2.tgz#7bb32f9dda7b865dad73aafdad87154a6c9738c0"
-  integrity sha512-5QKfKjrjmykwdZqQChLoxUZkgfadu/adYu5HG9a/64WoY+RrUuMX21ShFLxc6OvOUR1VKcJpMuq4qJT+DhnZPA==
+  version "1.5.3"
+  resolved "https://registry.yarnpkg.com/@umijs/preset-react/-/preset-react-1.5.3.tgz#3ca03139867567aee4876aa07c78d0e05b1ebf54"
+  integrity sha512-V7Iui1WVfus/tiSrGwBhEkkSmo1Lwdte1COSI+37+YAOecR3VoCwZ7tbYOLH6dXyY3+rBeJNs6JusML2uXUC+w==
   dependencies:
     "@umijs/plugin-access" "2.3.1"
     "@umijs/plugin-analytics" "0.2.2"
     "@umijs/plugin-antd" "0.5.1"
     "@umijs/plugin-crossorigin" "1.1.0"
-    "@umijs/plugin-dva" "0.7.1"
-    "@umijs/plugin-helmet" "1.0.1"
+    "@umijs/plugin-dva" "0.7.2"
+    "@umijs/plugin-helmet" "1.0.2"
     "@umijs/plugin-initial-state" "2.2.1"
     "@umijs/plugin-layout" "0.11.4"
     "@umijs/plugin-locale" "0.7.0"
