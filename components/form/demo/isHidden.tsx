@@ -2,9 +2,10 @@ import React from 'react'
 import { Button, Select } from 'antd'
 import { Form } from 'antd-coffee'
 import { StoreValue, Store } from 'antd/lib/form/interface'
+import { FormItemProps } from '..'
 
 export default function IsHiddenDemo() {
-  const baseItems = [
+  const baseItems: FormItemProps[] = [
     {
       name: 'name',
       label: '姓名',
@@ -18,7 +19,7 @@ export default function IsHiddenDemo() {
     {
       name: 'age',
       label: '年龄',
-      extra: '姓名为 bob 时隐藏',
+      suffix: '姓名为 bob 时隐藏',
       isHidden: (value: StoreValue, values: Store) => {
         return values.name === 'bob'
       },

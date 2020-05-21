@@ -7,11 +7,15 @@
 
 ## 使用
 
+### 安装
+
 ```bash
-yarn add antd-coffee
+$ yarn add antd-coffee
 ```
 
-```jsx
+### 组件
+
+```js
 import { AsyncButton } from 'antd-coffee'
 
 function Demo(params) {

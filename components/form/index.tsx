@@ -5,6 +5,8 @@ import React, {
   useEffect,
   useState,
   FormEvent,
+  isValidElement,
+  cloneElement,
 } from 'react'
 import {
   Form as AntdForm,
@@ -95,6 +97,7 @@ export interface FormItemProps
         form: FormInstance
       ) => ReactNode)
   extra?: ReactNode | ((fieldsValue: Store) => ReactNode)
+  suffix?: ReactNode | ((fieldsValue: Store) => ReactNode)
 }
 
 export interface FormProps extends AntdFormProps, FormCommonProps {
@@ -107,6 +110,19 @@ export interface FormProps extends AntdFormProps, FormCommonProps {
   /** Effective in card mode */
   cardProps?: CardProps
   onFinish?: (values: Store) => void | Promise<unknown>
+}
+
+const RenderChild: FC<Pick<FormItemProps, 'suffix'>> = ({
+  suffix,
+  children,
+  ...props
+}) => {
+  return (
+    <>
+      {isValidElement(children) ? cloneElement(children, props) : children}
+      {suffix}
+    </>
+  )
 }
 
 const { Item, useForm, List, Provider } = AntdForm
@@ -237,6 +253,7 @@ const InternalForm: FC<FormProps> = ({
       tip,
       placeholder = placeholderInternal,
       extra,
+      suffix,
       ...itemProps
     }: FormItemProps,
     index: number
@@ -300,7 +317,9 @@ const InternalForm: FC<FormProps> = ({
           extra={isFunc(extra) ? extra(fieldsValue) : extra}
           {...itemProps}
         >
-          {Comp}
+          <RenderChild suffix={isFunc(suffix) ? suffix(fieldsValue) : suffix}>
+            {Comp}
+          </RenderChild>
         </Item>
       </Col>
     )
