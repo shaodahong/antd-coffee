@@ -254,12 +254,12 @@ const InternalForm: FC<FormProps> = ({
       placeholder = placeholderInternal,
       extra,
       suffix,
+      name,
       ...itemProps
     }: FormItemProps,
     index: number
   ) => {
     let Comp: ReactNode
-    const { name } = itemProps
     const { getFieldsValue } = formInsatce
     const fieldsValue = {
       ...initialValuesInternal,
@@ -315,6 +315,7 @@ const InternalForm: FC<FormProps> = ({
           key={key}
           label={LabelWrap}
           extra={isFunc(extra) ? extra(fieldsValue) : extra}
+          name={isItemView ? undefined : name}
           {...itemProps}
         >
           <RenderChild
