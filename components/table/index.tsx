@@ -128,6 +128,7 @@ export interface TableRef {
   refresh: () => Promise<unknown>
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 function Table<RecordType extends object>(
   {
     searchProps: tableSearchProps,
@@ -402,6 +403,7 @@ function Table<RecordType extends object>(
   )
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 export default forwardRef(Table) as <RecordType extends object>(
   p: TableProps<RecordType> & { ref?: Ref<TableRef> }
 ) => ReactElement

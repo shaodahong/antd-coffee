@@ -7,6 +7,7 @@ export interface ModalTablePorps<RecordType> extends ModalProps {
   tableProps: TableProps<RecordType>
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 export default function ModalTable<RecordType extends object>({
   tableProps,
   ...props
