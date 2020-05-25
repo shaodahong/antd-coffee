@@ -185,6 +185,12 @@ const InternalForm: FC<FormProps> = ({
       // Todo: Initial value cannot get when first mount
       forceUpdate()
     }
+    return () => {
+      // Todo: getInitialValues mayby remove formInsatce.resetFields()?
+      if (form) {
+        formInsatce.resetFields()
+      }
+    }
   }, [])
 
   // If promise initialValues update need rerenader?
