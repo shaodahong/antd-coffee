@@ -24,7 +24,10 @@ export default function ModalTable<RecordType extends object>({
         overflow: 'auto',
       }}
     >
-      <Table<RecordType> scroll={{ y: undefined }} {...tableProps} />
+      <Table<RecordType>
+        scroll={{ y: height - 200 - (tableProps?.showTools ? 50 : 0) }}
+        {...tableProps}
+      />
     </Modal>
   )
 }
