@@ -1,7 +1,9 @@
+/* eslint-disable no-console */
 import React, { useRef } from 'react'
 import { Table } from 'antd-coffee'
 import { DatePicker } from 'antd'
 import { mock } from 'mockjs'
+import { Store } from 'antd/lib/form/interface'
 import { TableColumnsType, TableRef } from '..'
 
 interface User {
@@ -72,12 +74,13 @@ export default function BaseDemo() {
   return (
     <Table<User>
       columns={columns}
-      onSearch={() =>
-        new Promise((resolve) =>
+      onSearch={(params: Store) =>
+        new Promise((resolve) => {
+          console.log('params: ', params)
           setTimeout(() => {
             resolve(data)
           }, 1000)
-        )
+        })
       }
       onChange={(p, f, s) => {
         // eslint-disable-next-line no-console

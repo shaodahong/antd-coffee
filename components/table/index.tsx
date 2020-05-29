@@ -33,7 +33,6 @@ import {
   TablePaginationConfig,
 } from 'antd/lib/table/interface'
 import Form, { FormProps } from '../form'
-import AsyncButton from '../async-button'
 import { isFunc } from '../utils/is'
 import showPlaceHolder from '../utils/showPlaceholder'
 import useWindowSize from './useWindowSize'
@@ -177,7 +176,6 @@ function Table<RecordType extends object>(
       setState({
         loading: true,
       })
-      const searchValues = form.getFieldsValue()
 
       const searchParams = pickBy(
         {
@@ -188,7 +186,6 @@ function Table<RecordType extends object>(
                 [pageSizeName]: pageSize,
               }),
           ...params,
-          ...searchValues,
         },
         (param) => param !== '' && param !== undefined && param !== null
       )
@@ -206,20 +203,20 @@ function Table<RecordType extends object>(
 
   const refresh = () => onSearch()
 
-  const onClickSearch = () => {
+  const onFinish = (params: Store) => {
     setState({
       pageNum: 1,
     })
     return onSearch({
       [pageNumName]: 1,
+      ...params,
     })
   }
 
-  const onTableReset = () => {
+  const onReset = () => {
     setState({
       pageNum: 1,
     })
-    form.resetFields()
     isKeepAlive && setHistoryState({})
     onSearch({
       [pageNumName]: 1,
@@ -283,19 +280,21 @@ function Table<RecordType extends object>(
           items={state.isExpand ? items : items.slice(0, initialCount)}
           form={form}
           layoutCol={{ span: 6 }}
+          onFinish={onFinish}
+          onReset={onReset}
           {...searchProps}
         >
           <Form.Item>
             <Row justify="end">
               <Space>
-                <AsyncButton
-                  onClick={onClickSearch}
+                <Button
+                  htmlType="submit"
                   type="primary"
                   icon={<SearchOutlined />}
                 >
                   搜索
-                </AsyncButton>
-                <AsyncButton onClick={onTableReset}>重置</AsyncButton>
+                </Button>
+                <Button htmlType="reset">重置</Button>
                 {items.length > initialCount && (
                   <Button
                     type="link"
