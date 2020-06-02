@@ -22,6 +22,7 @@ import DownOutlined from '@ant-design/icons/DownOutlined'
 import RedoOutlined from '@ant-design/icons/RedoOutlined'
 import get from 'lodash/get'
 import pickBy from 'lodash/pickBy'
+import cloneDeep from 'lodash/cloneDeep'
 import { Store } from 'antd/lib/form/interface'
 import {
   SorterResult,
@@ -33,6 +34,7 @@ import {
   TablePaginationConfig,
 } from 'antd/lib/table/interface'
 import Form, { FormProps } from '../form'
+import AsyncButton from '../async-button'
 import { isFunc } from '../utils/is'
 import showPlaceHolder from '../utils/showPlaceholder'
 import useWindowSize from './useWindowSize'
@@ -176,6 +178,7 @@ function Table<RecordType extends object>(
       setState({
         loading: true,
       })
+      const searchValues = form.getFieldsValue()
 
       const searchParams = pickBy(
         {
@@ -186,10 +189,12 @@ function Table<RecordType extends object>(
                 [pageSizeName]: pageSize,
               }),
           ...params,
+          ...searchValues,
         },
         (param) => param !== '' && param !== undefined && param !== null
       )
-      const result = await onTableSearch(searchParams, changeState)
+
+      const result = await onTableSearch(cloneDeep(searchParams), changeState)
       setState({
         data: result,
       })
@@ -203,13 +208,12 @@ function Table<RecordType extends object>(
 
   const refresh = () => onSearch()
 
-  const onFinish = (params: Store) => {
+  const onClickSearch = () => {
     setState({
       pageNum: 1,
     })
     return onSearch({
       [pageNumName]: 1,
-      ...params,
     })
   }
 
@@ -280,20 +284,19 @@ function Table<RecordType extends object>(
           items={state.isExpand ? items : items.slice(0, initialCount)}
           form={form}
           layoutCol={{ span: 6 }}
-          onFinish={onFinish}
           onReset={onReset}
           {...searchProps}
         >
           <Form.Item>
             <Row justify="end">
               <Space>
-                <Button
-                  htmlType="submit"
+                <AsyncButton
+                  onClick={onClickSearch}
                   type="primary"
                   icon={<SearchOutlined />}
                 >
                   搜索
-                </Button>
+                </AsyncButton>
                 <Button htmlType="reset">重置</Button>
                 {items.length > initialCount && (
                   <Button
