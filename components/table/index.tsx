@@ -183,7 +183,7 @@ function Table<RecordType extends object>(
       setState({
         loading: true,
       })
-      const searchValues = form.getFieldsValue()
+      const searchValues = await form.validateFields()
 
       const searchParams = pickBy(
         {
