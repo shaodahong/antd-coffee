@@ -109,10 +109,12 @@ export interface TableProps<RecordType>
     TablePaginationName,
     TableCommonProps {
   searchProps?: TableSearchProps
-  onSearch: (
-    params: Store,
-    changeState?: TableOnSearchChangeState<RecordType>
-  ) => TableData<RecordType> | Promise<TableData<RecordType>>
+  onSearch?:
+    | RecordType[]
+    | ((
+        params: Store,
+        changeState?: TableOnSearchChangeState<RecordType>
+      ) => TableData<RecordType> | Promise<TableData<RecordType>>)
   columns?: TableColumnsType<RecordType>[]
   /**
    * Show Table quick tools (refresh ...)
@@ -175,6 +177,9 @@ function Table<RecordType extends object>(
     changeState: TableOnSearchChangeState<RecordType> = {}
   ) => {
     try {
+      if (!isFunc(onTableSearch)) {
+        return
+      }
       setState({
         loading: true,
       })
@@ -387,7 +392,9 @@ function Table<RecordType extends object>(
         columns={renderColumns()}
         onChange={onChange}
         loading={state.loading}
-        dataSource={get(state.data, dataName)}
+        dataSource={
+          isFunc(onTableSearch) ? get(state.data, dataName) : onTableSearch
+        }
         pagination={
           pagination === false
             ? pagination
