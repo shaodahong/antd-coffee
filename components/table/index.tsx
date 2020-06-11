@@ -23,6 +23,7 @@ import RedoOutlined from '@ant-design/icons/RedoOutlined'
 import get from 'lodash/get'
 import pickBy from 'lodash/pickBy'
 import cloneDeep from 'lodash/cloneDeep'
+import mapValues from 'lodash/mapValues'
 import { Store } from 'antd/lib/form/interface'
 import {
   SorterResult,
@@ -57,6 +58,10 @@ export interface TableSearchProps extends FormProps {
    * @default 3
    */
   initialCount?: number
+  /**
+   * Support search form string value trim
+   */
+  allowTrim?: boolean
 }
 
 interface TablePaginationName {
@@ -199,10 +204,21 @@ function Table<RecordType extends object>(
         (param) => param !== '' && param !== undefined && param !== null
       )
 
-      const result = await onTableSearch(cloneDeep(searchParams), changeState)
+      const cloneTableSearchParams = cloneDeep(searchParams)
+
+      const result = await onTableSearch(
+        tableSearchProps?.allowTrim
+          ? mapValues(cloneTableSearchParams, (value) =>
+              typeof value === 'string' ? value.trim() : value
+            )
+          : cloneTableSearchParams,
+        changeState
+      )
+
       setState({
         data: result,
       })
+
       isKeepAlive && setHistoryState(searchParams)
     } finally {
       setState({
