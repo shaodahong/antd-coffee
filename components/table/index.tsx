@@ -159,7 +159,7 @@ function Table<RecordType extends object>(
   }: TableProps<RecordType>,
   ref: Ref<TableRef>
 ) {
-  const [form] = useForm()
+  const [form] = useForm(tableSearchProps?.form)
   const { height } = useWindowSize()
   const [state, setState] = useStates<{
     loading: boolean
